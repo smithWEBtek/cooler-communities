@@ -18,13 +18,32 @@ body {
   box-sizing: border-box;
 }
 
- .cc-logo {
-   display: inline-block;
-   /* height: 100px; */
-   width: 150px;
- }
+.cc-logo {
+  display: inline-block;
+  /* height: 100px; */
+  width: 150px;
+}
 
- .privacy-notice {
-   background-color: rgb(219, 241, 222);
-   border: 2px solid green;
- }
+.privacy-notice {
+  background-color: rgb(219, 241, 222);
+  border: 2px solid rgba(255, 28, 28, 0.671);
+}
+
+.survey {
+  border: 2px solid rgb(29, 56, 14);
+  padding: 3rem;
+}
+
+.survey__category-tabs {
+
+}
+
+.survey__category-view {
+  border: 3px solid #556677;
+}
+
+.survey__category-image {
+  display: block;
+  width: 100px;
+  height: auto;
+} 
