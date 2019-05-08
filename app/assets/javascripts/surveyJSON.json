@@ -1,6 +1,7 @@
+
 var surveyJSON = {title: "Cooler Communities",description: "Reduce your carbon footprint.",pages: [
     {name: "Solar Power",elements: [
-        {type: "matrix",name: "solarPower",title: "Solar Power",columns: [
+        {type: "matrix",name: "solar",title: "Solar Power",columns: [
             "Yes",
             "No"
           ],rows: [
@@ -13,7 +14,7 @@ var surveyJSON = {title: "Cooler Communities",description: "Reduce your carbon f
       ]
     },
     {name: "Transportation",elements: [
-        {type: "matrix",name: "transportationCars",title: "Transportation: Cars",columns: [
+        {type: "matrix",name: "transportation-cars",title: "Transportation: Cars",columns: [
             {value: "keep",text: "Keep?"
             },
             {value: "replace",text: "Replace this  year?"
@@ -25,14 +26,14 @@ var surveyJSON = {title: "Cooler Communities",description: "Reduce your carbon f
             }
           ]
         },
-        {type: "multipletext",name: "transportationMileage",title: "Transportation: Reduce Mileage",items: [
+        {type: "multipletext",name: "transportation-mileage",title: "Transportation: Reduce Mileage",items: [
             {name: "Car1",title: "Reduce Car1 mileage by"
             },
             {name: "Car2",title: "Reduce Car2 mileage by"
             }
           ]
         },
-        {type: "checkbox",name: "mileageReductionOptions",title: "Achieve mileage reduction by (check all that apply)",hasOther: true,choices: [
+        {type: "checkbox",name: "transportation-mileage-how",title: "Achieve mileage reduction by (check all that apply)",hasOther: true,choices: [
             {value: "carpooling",text: "Carpooling to/from work"
             },
             {value: "public trans",text: "Train/Bus/Public transportation"
@@ -50,7 +51,7 @@ var surveyJSON = {title: "Cooler Communities",description: "Reduce your carbon f
       ]
     },
     {name: "Eating",elements: [
-        {type: "multipletext",name: "goalMeals",title: "Goal meals per week",items: [
+        {type: "multipletext",name: "eating1",title: "Goal meals per week",items: [
             {name: "goalMealsBeefLambPorkPerWeek",title: "Goal meals per week: Beef/Lamb/Poultry/Pork"
             },
             {name: "goalMealsPoultryCheeseFishSeafood",title: "Goal meals per week: Poultry/Cheese/Fish/Seafood"
@@ -64,7 +65,7 @@ var surveyJSON = {title: "Cooler Communities",description: "Reduce your carbon f
       ],title: "Eating reduced carbon meals"
     },
     {name: "Heating & Cooling Systems",elements: [
-        {type: "matrix",name: "heatingCooling",title: "Heating and Cooling",columns: [
+        {type: "matrix",name: "heating-cooling",title: "Heating and Cooling",columns: [
             "Yes",
             "No"
           ],rows: [
@@ -79,7 +80,7 @@ var surveyJSON = {title: "Cooler Communities",description: "Reduce your carbon f
       ]
     },
     {name: "Home Appliances",elements: [
-        {type: "matrix",name: "homeAppliances",title: "Home Appliances",columns: [
+        {type: "matrix",name: "appliances1",title: "Home Appliances",columns: [
             "Yes",
             "No"
           ],rows: [
@@ -89,7 +90,7 @@ var surveyJSON = {title: "Cooler Communities",description: "Reduce your carbon f
             }
           ]
         },
-        {type: "multipletext",name: "homeLaundry",title: "Home Laundry",items: [
+        {type: "multipletext",name: "appliances2",title: "Home Laundry",items: [
             {name: "goalLaundryColdWashesPerWeek",title: "Goal number of cold water wash loads per week?"
             },
             {name: "goalLaundryLineDryPerWeek",title: "Goal number of clothes line or rack dry loads per week?"
@@ -99,7 +100,7 @@ var surveyJSON = {title: "Cooler Communities",description: "Reduce your carbon f
       ]
     },
     {name: "Lighting",elements: [
-        {type: "matrix",name: "bulbsLeds",title: "Light Bulbs",columns: [
+        {type: "matrix",name: "lighting1",title: "Light Bulbs",columns: [
             "Yes",
             "No"
           ],rows: [
@@ -112,7 +113,7 @@ var surveyJSON = {title: "Cooler Communities",description: "Reduce your carbon f
       ]
     },
     {name: "Reuse and Recycle",elements: [
-        {type: "multipletext",name: "reuseRecycle",title: "Reuse and Recycle",items: [
+        {type: "multipletext",name: "recycle",title: "Reuse and Recycle",items: [
             {name: "refillableContainers",title: "Achieve reduction/recycling by using refillable containers (bags,mugs,bottles)?"
             },
             {name: "buyBulk",title: "Achieve reduction/recycling through buying to minimize packaging (bulk, powders)?"
@@ -126,7 +127,7 @@ var surveyJSON = {title: "Cooler Communities",description: "Reduce your carbon f
       ],title: "Reuse and Recycle",description: "Reuse and Recycle"
     },
     {name: "Water Heating",elements: [
-        {type: "matrix",name: "waterHeating",title: "Water Heating",columns: [
+        {type: "matrix",name: "water-heating",title: "Water Heating",columns: [
             "Yes",
             "No"
           ],rows: [
@@ -139,7 +140,7 @@ var surveyJSON = {title: "Cooler Communities",description: "Reduce your carbon f
       ],title: "Water Heating"
     },
     {name: "Weatherization and Thermostats",elements: [
-        {type: "matrix",name: "weatherizationThermostats",title: "Weatherization and Thermostats",columns: [
+        {type: "matrix",name: "weatherization",title: "Weatherization and Thermostats",columns: [
             "Yes",
             "No"
           ],rows: [
@@ -154,7 +155,7 @@ var surveyJSON = {title: "Cooler Communities",description: "Reduce your carbon f
       ],title: "Weatherization and Thermostats"
     },
     {name: "Yard and Landscaping",elements: [
-        {type: "matrix",name: "yardLandscaping1",title: "Yard and Landscaping: choices",columns: [
+        {type: "matrix",name: "yard",title: "Yard and Landscaping: choices",columns: [
             "Yes",
             "No"
           ],rows: [
