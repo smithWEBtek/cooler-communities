@@ -21,7 +21,7 @@ body {
 
 .privacy-notice {
   background-color: rgb(219, 241, 222);
-  border: 2px solid rgba(255, 28, 28, 0.671);
+  border: 2px dashed rgba(255, 28, 28, 0.671);
 }
 
 /* main nav *********************************************/
@@ -32,7 +32,6 @@ body {
 }
 
 .main-nav__display-area {
-  border: 2px solid gold;
   grid-column-start: 2;
   grid-column-end: 4;
   grid-row-start: 1;
@@ -50,7 +49,7 @@ body {
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start: 2;
-  border: 2px solid pink;
+  padding-left: 5rem;
 }
 
 .main-nav__user-link {
@@ -66,20 +65,30 @@ body {
 
 /* survey *********************************************/
 .survey {
-  border: 2px solid rgb(29, 56, 14);
-  padding: 3rem;
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 1rem;
 }
 
 .survey__category-tabs {
-  border: 2px solid red;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-row-end: 3;
   width: 5rem;
+  margin-right: 2rem;
 }
 
 .survey__category-view {
-  border: 3px solid #556677;
+  grid-column-start: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  border: 3px dashed #556677;
+  display: none;
 }
 
 .survey__category-image {
+  border: 2px dashed rgb(29, 175, 85);
   display: block;
   width: 4rem;
   height: auto;
@@ -89,3 +98,38 @@ body {
 .survey__about {
   background-color: bisque;
 }
+/* survey points *********************************************/
+
+.survey__points {
+  /* border: 2px dashed blue; */
+  display: grid;
+  height: 15rem;
+  grid-template-columns: 20% 40% 40%;
+  grid-template-rows: 10% 45% 45%;
+  padding: 1rem;
+}
+
+.survey__points-user-category {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  border: 2px dashed rgb(0, 255, 13);
+}
+
+.survey__points-user-total {
+  grid-column-start: 3;
+  grid-row-start: 2;
+  border: 2px dashed rgb(255, 136, 0);
+}
+
+.survey__points-community-total {
+  grid-column-start: 2;
+  grid-row-start: 3;
+  border: 2px dashed rgb(25, 99, 89);
+}
+
+.survey__points-group-total {
+  grid-column-start: 3;
+  grid-row-start: 3;
+  border: 2px dashed rgb(255, 0, 0);
+}
+
