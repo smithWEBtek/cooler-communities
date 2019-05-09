@@ -16,12 +16,7 @@
 
 body {
   box-sizing: border-box;
-}
-
-.cc-logo {
-  display: inline-block;
-  /* height: 100px; */
-  width: 150px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .privacy-notice {
@@ -29,13 +24,55 @@ body {
   border: 2px solid rgba(255, 28, 28, 0.671);
 }
 
+/* main nav *********************************************/
+.main-nav {
+  display: grid;
+  grid-template-columns: 10rem auto auto;
+  grid-template-rows: 1fr auto;
+}
+
+.main-nav__display-area {
+  border: 2px solid gold;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+}
+
+.main-nav__cc-logo {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  display: inline-block;
+  height: 7rem;
+  width: auto;
+}
+
+.main-nav__user-links {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  border: 2px solid pink;
+}
+
+.main-nav__user-link {
+  padding-right: 2rem;
+  text-decoration: none;
+}
+
+.main-nav__about {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  background-color: rgb(141, 193, 238);
+}
+
+/* survey *********************************************/
 .survey {
   border: 2px solid rgb(29, 56, 14);
   padding: 3rem;
 }
 
 .survey__category-tabs {
-
+  border: 2px solid red;
+  width: 5rem;
 }
 
 .survey__category-view {
@@ -44,6 +81,11 @@ body {
 
 .survey__category-image {
   display: block;
-  width: 100px;
+  width: 4rem;
   height: auto;
-} 
+  padding: .5rem;
+}
+
+.survey__about {
+  background-color: bisque;
+}

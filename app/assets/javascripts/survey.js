@@ -10,12 +10,13 @@ $(() => {
   surveyJSON.pages.map(page => {
     let categorySurvey = new Survey.Model(page);
     let categorySurveyDiv = $(`#${page.elements[0].name}`)
+    let categoryTabsDiv = $('.survey__category-tabs');
     // debugger;
     categorySurveyDiv.Survey({
       model: categorySurvey,
       onComplete: saveCategoryResults
     });
-    categorySurveyDiv.prepend(`<img src="/assets/images/${page.elements[0].name}.png" class="category__image" />`)
+    categoryTabsDiv.prepend(`<img src="/assets/images/${page.elements[0].name}.png" class="survey__category-image" />`)
   });
 
   function saveCategoryResults(surveyCategory) {
