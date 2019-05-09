@@ -46,7 +46,6 @@ class CategoriesController < ApplicationController
     else
       flash[:message] = @category.errors.full_messages
       render :edit
-      end
     end
   end
 
