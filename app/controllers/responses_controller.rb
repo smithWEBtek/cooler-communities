@@ -1,9 +1,7 @@
 class ResponsesController < ApplicationController
 
   def create
-    @response = Response.new
-
-    
-    binding.pry
+ 
+    render json: params
   end
 end
