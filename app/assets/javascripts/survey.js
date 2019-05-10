@@ -34,6 +34,10 @@ function saveCategoryResults(userResponse) {
     dataType: 'json',
     data: response,
   }).done(function (results) {
+    console.log('results: ', results);
+
+    debugger;
+    $('.survey__points-user-total').text = JSON.stringify(results.data)
 
   })
 
