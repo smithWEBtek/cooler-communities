@@ -38,21 +38,16 @@ function saveCategoryResults(userResponse) {
     data: userResponse.data
   }
 
-  debugger;
-
   $("#surveyContainer").text(JSON.stringify(userResponse));
   $.post({
     url: '/responses',
     dataType: 'json',
     data: responseData,
   }).done(function (results) {
-    console.log('results: ', results);
 
-    debugger;
     $('.survey__points-user-total').text = JSON.stringify(results.data)
 
   })
-
   thankyouMessage(userResponse.category);
 }
 
