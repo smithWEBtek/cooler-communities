@@ -39,7 +39,6 @@ body {
 
 .main-nav__cc-logo{
   grid-column-start: 1;
-  /* grid-column-end: 3; */
   grid-row-start: 1;
   display: inline-block;
   height: 8rem;
@@ -92,7 +91,7 @@ body {
   display: grid;
   grid-template-columns: 4rem 1fr;
   grid-template-rows: 1fr 1fr;
-  padding: 1rem;
+  padding: .5rem;
 }
 
 .survey__category-tabs {
@@ -123,20 +122,16 @@ body {
 }
 
 .survey__category-image-selected {
-  /* border-top: .1rem solid #1ab394;
+  border-top: .1rem solid #1ab394;
   border-left: .2rem solid #1ab394;
-  border-right: .3rem solid #1ab394; */
-  border: .1rem solid #1ab394;
+  border-right: .3rem solid #1ab394;
 }
 
 .survey__about {
-  background-color: bisque;
+  background-color: rgb(216, 245, 207);
 }
 
 .sv_header {
-  /* border-top: .1rem solid #1ab394; */
-  /* border-right: .1rem solid #1ab394; */
-  /* border-radius: 0 50% 50% 0; */
   border-bottom: 0;
 }
 
@@ -147,42 +142,43 @@ body {
 /* survey points *********************************************/
 .survey__points {
   display: grid;
-  height: 15rem;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 10% 45% 45%;
+  grid-template-columns: 3.6rem 1fr 1fr;
+  grid-template-rows: 12rem 12rem;
   padding: 0 1rem 1rem 1rem;
-  margin: 0 4rem;
 }
 
 .survey__points-category-total {
-  grid-column-start: 1;
-  grid-row-start: 2;
-  border: 2px dashed rgb(0, 255, 13);
-  box-shadow: .3rem .3rem .2rem .05rem rgba(161, 161, 167, 0.829);
+  grid-column-start: 2;
+  grid-row-start: 1;
+  border: .09rem solid  rgba(161, 161, 167, 0.829);
+  box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
   margin: 0 1rem 1rem 0;
+  padding: 0 1rem;
 }
 
 .survey__points-community-total {
-  grid-column-start: 2;
-  grid-row-start: 2;
-  border: 2px dashed rgb(25, 99, 89);
-  box-shadow: .3rem .3rem .2rem .05rem rgba(161, 161, 167, 0.829);
+  grid-column-start: 3;
+  grid-row-start: 1;
+  border: .09rem solid  rgba(161, 161, 167, 0.829);
+  box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
   margin-bottom: 1rem;
+  padding: 0 1rem;
 }
 
 .survey__points-user-total {
-  grid-column-start: 1;
-  grid-row-start: 3;
-  border: 2px dashed rgb(255, 136, 0);
-  box-shadow: .3rem .3rem .2rem .05rem rgba(161, 161, 167, 0.829);
+  grid-column-start: 2;
+  grid-row-start: 2;
+  border: .09rem solid  rgba(161, 161, 167, 0.829);
+  box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
   margin-right: 1rem;
+  padding: 0 1rem;
 }
 
 
 .survey__points-group-total {
-  grid-column-start: 2;
-  grid-row-start: 3;
-  border: 2px dashed rgb(255, 0, 0);
-  box-shadow: .3rem .3rem .2rem .05rem rgba(161, 161, 167, 0.829);
+  grid-column-start: 3;
+  grid-row-start: 2;
+  border: .09rem solid  rgba(161, 161, 167, 0.829);
+  box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
+  padding: 0 1rem;
 }
-
