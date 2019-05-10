@@ -110,18 +110,26 @@ body {
   display: none;
 }
 
-.survey__category-image {
+.survey__category-tab {
   display: block;
   width: auto;
-  height: 3.5rem;
+  height: 5rem;
   padding: .5rem 0 .5rem .5rem;
   border-top: .1rem solid #98a3a1;
   border-left: .2rem solid #98a3a1;
   border-right: .3rem solid #98a3a1;
+
   border-radius: 50% 0 0 50%;
 }
 
-.survey__category-image-selected {
+.survey__category-tab-image {
+  display: block;
+   /* width: 30px; */
+   height: 3rem;
+   padding: 10px;
+}
+
+.survey__category-tab-selected {
   border-top: .1rem solid #1ab394;
   border-left: .2rem solid #1ab394;
   border-right: .3rem solid #1ab394;
