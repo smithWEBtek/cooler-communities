@@ -1,15 +1,19 @@
 <div class="main-nav">
-  <img src="/assets/images/cc-logo.png" class="main-nav__cc-logo" alt="cc-logo"></img>
-  <div class="main-nav__user-links">
-    <h2>
-      <%= link_to "Register", new_user_registration_path, class: "main-nav__user-link" %>
-      <%= link_to "Login", user_session_path, class: "main-nav__user-link" %>
-      <%= link_to "Reports", '#', class: "main-nav__user-link" %>
-      <%= link_to "About", '/about', class: "main-nav__user-link" %>
-    </h2>
+  <div>
+    <%= link_to (image_tag("cc-logo.png", class: "main-nav__cc-logo")), root_path %>
+  </div>
+  <div class="main-nav__links">
+    <% if !user_signed_in? %>
+      <%= link_to "About", '/about', class: "main-nav__link" %>
+      <span class="main-nav__link-separator"> | </span>
+      <%= link_to "Login", new_user_session_path, class: "main-nav__link" %>
+    <% else %>
+      <%= link_to "About", '/about', class: "main-nav__link" %>
+      <span class="main-nav__link-separator">|</span>
+      <%= link_to "Confirm EventBrite Registration", eventbrite_path, class: "main-nav__link" %>
+    <% end %>
   </div>
 
   <div class="main-nav__display-area">
-    <h1>Cooler Communities</h1>
   </div>
 </div>
