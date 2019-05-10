@@ -16,7 +16,7 @@
 
 body {
   box-sizing: border-box;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .privacy-notice {
@@ -27,7 +27,7 @@ body {
 /* main nav *********************************************/
 .main-nav {
   display: grid;
-  grid-template-columns: 10rem auto auto;
+  grid-template-columns: 5rem 5rem 1fr 1fr;
   grid-template-rows: 1fr auto;
 }
 
@@ -37,24 +37,35 @@ body {
   grid-row-start: 1;
 }
 
-.main-nav__cc-logo {
+.main-nav__cc-logo{
   grid-column-start: 1;
+  /* grid-column-end: 3; */
   grid-row-start: 1;
   display: inline-block;
-  height: 7rem;
+  height: 8rem;
   width: auto;
+  padding: 0;
+  margin: 0;
 }
 
-.main-nav__user-links {
-  grid-column-start: 1;
-  grid-column-end: 4;
+.main-nav__links {
+  grid-column-start: 4;
   grid-row-start: 2;
-  padding-left: 5rem;
+  align-content: right;
 }
 
-.main-nav__user-link {
-  padding-right: 2rem;
+.main-nav__link {
   text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: rgb(119, 119, 119);
+}
+
+.main-nav__link-separator {
+  font-size: 1.8rem;
+  font-weight: 40;
+  color: rgb(119, 119, 119);
+  padding: 0 1rem;
 }
 
 .main-nav__about {
@@ -63,45 +74,78 @@ body {
   background-color: rgb(141, 193, 238);
 }
 
+/* eventbrite *********************************************/
+.eventbrite {
+  background-color: aliceblue;
+}
+.eventbrite__title {
+  color: red;
+}
+
+.eventbrite__confirmation-link {
+  text-decoration: none;
+  color: green;  
+}
+
 /* survey *********************************************/
 .survey {
   display: grid;
-  grid-template-columns: 5rem 1fr;
+  grid-template-columns: 4rem 1fr;
   grid-template-rows: 1fr 1fr;
   padding: 1rem;
 }
 
 .survey__category-tabs {
   grid-column-start: 1;
+  grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 3;
-  width: 5rem;
-  margin-right: 2rem;
 }
 
 .survey__category-view {
   grid-column-start: 2;
+  grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 3;
-  border: 3px dashed #556677;
+  border-left: .2rem solid #1ab394;
   display: none;
 }
 
 .survey__category-image {
-  border: 2px dashed rgb(29, 175, 85);
   display: block;
-  width: 4rem;
-  height: auto;
-  padding: .5rem;
+  width: auto;
+  height: 3.5rem;
+  padding: .5rem 0 .5rem .5rem;
+  border-top: .1rem solid #98a3a1;
+  border-left: .2rem solid #98a3a1;
+  border-right: .3rem solid #98a3a1;
+  border-radius: 50% 0 0 50%;
+}
+
+.survey__category-image-selected {
+  /* border-top: .1rem solid #1ab394;
+  border-left: .2rem solid #1ab394;
+  border-right: .3rem solid #1ab394; */
+  border: .1rem solid #1ab394;
 }
 
 .survey__about {
   background-color: bisque;
 }
-/* survey points *********************************************/
 
+.sv_header {
+  /* border-top: .1rem solid #1ab394; */
+  /* border-right: .1rem solid #1ab394; */
+  /* border-radius: 0 50% 50% 0; */
+  border-bottom: 0;
+}
+
+.sv_main.sv_body {
+  border-top: 0;
+}
+
+/* survey points *********************************************/
 .survey__points {
-  /* border: 2px dashed blue; */
   display: grid;
   height: 15rem;
   grid-template-columns: 1fr 1fr;

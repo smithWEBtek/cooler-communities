@@ -49,3 +49,12 @@ Selection
   t.integer :selection_points
 
   belongs_to :response
+
+
+
+  
+
+Point
+  t.integer :question_id
+  t.text :question_key
+  t.integer :amount
