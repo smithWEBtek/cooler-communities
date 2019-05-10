@@ -1,0 +1,189 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+
+body {
+  box-sizing: border-box;
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.privacy-notice {
+  background-color: rgb(219, 241, 222);
+  border: 2px dashed rgba(255, 28, 28, 0.671);
+}
+
+/* main nav *********************************************/
+.main-nav {
+  display: grid;
+  grid-template-columns: 5rem 5rem 1fr 1fr;
+  grid-template-rows: 1fr auto;
+}
+
+.main-nav__display-area {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+}
+
+.main-nav__cc-logo{
+  grid-column-start: 1;
+  /* grid-column-end: 3; */
+  grid-row-start: 1;
+  display: inline-block;
+  height: 8rem;
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav__links {
+  grid-column-start: 4;
+  grid-row-start: 2;
+  align-content: right;
+}
+
+.main-nav__link {
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: rgb(119, 119, 119);
+}
+
+.main-nav__link-separator {
+  font-size: 1.8rem;
+  font-weight: 40;
+  color: rgb(119, 119, 119);
+  padding: 0 1rem;
+}
+
+.main-nav__about {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  background-color: rgb(141, 193, 238);
+}
+
+/* eventbrite *********************************************/
+.eventbrite {
+  background-color: aliceblue;
+}
+.eventbrite__title {
+  color: red;
+}
+
+.eventbrite__confirmation-link {
+  text-decoration: none;
+  color: green;  
+}
+
+/* survey *********************************************/
+.survey {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 1rem;
+}
+
+.survey__category-tabs {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.survey__category-view {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  border-left: .2rem solid #1ab394;
+  display: none;
+}
+
+.survey__category-image {
+  display: block;
+  width: auto;
+  height: 3.5rem;
+  padding: .5rem 0 .5rem .5rem;
+  border-top: .1rem solid #98a3a1;
+  border-left: .2rem solid #98a3a1;
+  border-right: .3rem solid #98a3a1;
+  border-radius: 50% 0 0 50%;
+}
+
+.survey__category-image-selected {
+  /* border-top: .1rem solid #1ab394;
+  border-left: .2rem solid #1ab394;
+  border-right: .3rem solid #1ab394; */
+  border: .1rem solid #1ab394;
+}
+
+.survey__about {
+  background-color: bisque;
+}
+
+.sv_header {
+  /* border-top: .1rem solid #1ab394; */
+  /* border-right: .1rem solid #1ab394; */
+  /* border-radius: 0 50% 50% 0; */
+  border-bottom: 0;
+}
+
+.sv_main.sv_body {
+  border-top: 0;
+}
+
+/* survey points *********************************************/
+.survey__points {
+  display: grid;
+  height: 15rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 10% 45% 45%;
+  padding: 0 1rem 1rem 1rem;
+  margin: 0 4rem;
+}
+
+.survey__points-category-total {
+  grid-column-start: 1;
+  grid-row-start: 2;
+  border: 2px dashed rgb(0, 255, 13);
+  box-shadow: .3rem .3rem .2rem .05rem rgba(161, 161, 167, 0.829);
+  margin: 0 1rem 1rem 0;
+}
+
+.survey__points-community-total {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  border: 2px dashed rgb(25, 99, 89);
+  box-shadow: .3rem .3rem .2rem .05rem rgba(161, 161, 167, 0.829);
+  margin-bottom: 1rem;
+}
+
+.survey__points-user-total {
+  grid-column-start: 1;
+  grid-row-start: 3;
+  border: 2px dashed rgb(255, 136, 0);
+  box-shadow: .3rem .3rem .2rem .05rem rgba(161, 161, 167, 0.829);
+  margin-right: 1rem;
+}
+
+
+.survey__points-group-total {
+  grid-column-start: 2;
+  grid-row-start: 3;
+  border: 2px dashed rgb(255, 0, 0);
+  box-shadow: .3rem .3rem .2rem .05rem rgba(161, 161, 167, 0.829);
+}
+
