@@ -1,51 +1,0 @@
-{:uriI"Ñfile://app/assets/javascripts/results.json?type=application/json&id=4f045096bdcdea6850a1c9627afb98bbd3426ce9ab4c0755eed262f97052159a:ET:load_pathI"app/assets/javascripts;T:filenameI"(app/assets/javascripts/results.json;T:	nameI"results;T:logical_pathI"results.json;T:content_typeI"application/json;T:sourceI"à{
-  "meal-goal-beef-lamb-pork": 3,
-  "meal-goal-poultry-cheese-fish-seafood": 4,
-  "meal-goal-vegetarian-cheese-eggs": 5,
-  "meal-goal-vegan": 2,
-  "heating-system-assessment": "No",
-  "upgrade-boiler-furnace": "Yes",
-  "air-source-heat-pump": "Yes",
-  "new-refrigerator": "Yes",
-  "new-clothes-washer": "Yes",
-  "cold-water-wash-loads1": "7",
-  "clothes-line-rack-dry-loads": "4",
-  "bulb-swap": "No",
-  "leds": "Yes",
-  "solar-assessment": "Yes",
-  "solar-panels": "No",
-  "replace-cars": {
-    "Car1": "Keep",
-    "Car2": "Replace"
-  },
-  "reduce-mileage": {
-    "Car1": "2333",
-    "Car2": "1444"
-  },
-  "mileage-reduction-options": [
-    "carpooling",
-    "public trans",
-    "telecommute",
-    "carpool"
-  ],
-  "refillable-containers": "Yes",
-  "bulk-buying": "No",
-  "recycled-materials": "Yes",
-  "buy-used": "No",
-  "water-assessment": "Yes",
-  "replace-water-heater": "No",
-  "energy-audit": "No",
-  "insulate-home": "Yes",
-  "programmable-thermostats": "No",
-  "lawn-assessment": "No",
-  "rake-electric-blower": "Yes",
-  "replace-gas-mower": "Yes",
-  "lower-mowing-frequency": "Yes",
-  "reduce-lawn-by": 333,
-  "reduce-fertilizer-applications": 1
-}
-;T:metadata{	:dependencieso:Set:
-@hash}
-I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"@processors:type=application/json&file_type=application/json;TTI"6file-digest://app/assets/javascripts/results.json;TTF:charsetI"
-utf-8;F:digest"%ï’≥»ê¶¢lbtJc¢aÄ≥M,¿úöÀéëIÛ˚Ç˙:lengthià:dependencies_digest"%ì•†é*â∞:∑&ó.czN‘„-"â≠â˜∑:idI"E4f045096bdcdea6850a1c9627afb98bbd3426ce9ab4c0755eed262f97052159a;F:
-mtimel+ûïœ\
