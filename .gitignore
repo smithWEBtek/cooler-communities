@@ -2,3 +2,5 @@ node_modules
 notes.md
 /.vscode
 /tmp
+tmp
+tmp/cache/bootsnap-load-path-cache
