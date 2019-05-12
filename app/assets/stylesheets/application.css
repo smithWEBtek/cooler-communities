@@ -38,26 +38,26 @@ body {
 }
 
 .main-nav__cc-logo{
+  display: inline-block;
   grid-column-start: 1;
   grid-row-start: 1;
-  display: inline-block;
   height: 8rem;
-  width: auto;
   padding: 0;
   margin: 0;
+  width: auto;
 }
 
 .main-nav__links {
+  align-content: right;
   grid-column-start: 4;
   grid-row-start: 2;
-  align-content: right;
 }
 
 .main-nav__link {
-  text-decoration: none;
+  color: rgb(119, 119, 119);
   font-size: 1.5rem;
   font-weight: 400;
-  color: rgb(119, 119, 119);
+  text-decoration: none;
 }
 
 .main-nav__link-separator {
@@ -68,9 +68,9 @@ body {
 }
 
 .main-nav__about {
+  background-color: rgb(141, 193, 238);
   grid-column-start: 2;
   grid-row-start: 1;
-  background-color: rgb(141, 193, 238);
 }
 
 /* eventbrite *********************************************/
@@ -89,7 +89,7 @@ body {
 /* survey *********************************************/
 .survey {
   display: grid;
-  grid-template-columns: 4rem 1fr;
+  grid-template-columns: 5rem 1fr;
   grid-template-rows: 1fr 1fr;
   padding: .5rem;
 }
@@ -101,36 +101,53 @@ body {
   grid-row-end: 3;
 }
 
-.survey__category-view {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 3;
-  border-left: .2rem solid #1ab394;
-  display: none;
-}
-
 .survey__category-tab {
-  display: block;
-  width: auto;
-  height: 5rem;
-  padding: .5rem 0 .5rem .5rem;
-  border-top: .1rem solid #98a3a1;
-  border-left: .2rem solid #98a3a1;
   border-radius: 50% 0 0 50%;
+  border-left: .2rem solid #98a3a1;
+  border-top: .1rem solid #98a3a1;
+  display: block;
+  height: 5rem;
+  margin-bottom: .3rem; 
+  padding: .5rem 0 .5rem .5rem;
+  width: auto;
 }
 
 .survey__category-tab-image {
   display: block;
-   height: 3rem;
-   padding: 10px;
+  height: 3rem;
+  padding-left: 1.2rem;
+  padding-top: .5rem;
+}
+
+.survey__display {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  /* border-left: .2rem solid #1ab394; */
+  /* border-top: .1rem solid #1ab394; */
+}
+.survey__category-view {
+  /* border-left: .2rem solid #1ab394; */
+  display: none;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
 }
 
 .survey__category-tab-selected {
-  border-top: .1rem solid #1ab394;
-  border-left: .2rem solid #1ab394;
-  border-right: .3rem solid #1ab394;
   background-color: rgb(207, 240, 207);
+  border-left: .2rem solid #1ab394;
+  border-right: .2rem solid #1ab394;
+  border-top: .1rem solid #1ab394;
+}
+
+.survey__category-tab-completed {
+  background-color: #98a3a1;
+  border-left: .2rem solid #616c6a;
+  border-right: .2rem solid #616c6a;
+  border-top: .1rem solid #616c6a;
 }
 
 .survey__about {
@@ -148,43 +165,46 @@ body {
 /* survey points *********************************************/
 .survey__points {
   display: grid;
-  grid-template-columns: 3.6rem 1fr 1fr;
-  grid-template-rows: 12rem 12rem;
-  padding: 0 1rem 1rem 1rem;
+  grid-template-columns: 5rem 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  padding: .5rem;
 }
 
 .survey__points-category-total {
-  grid-column-start: 2;
-  grid-row-start: 1;
   border: .09rem solid  rgba(161, 161, 167, 0.829);
   box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
-  margin: 0 1rem 1rem 0;
-  padding: 0 1rem;
+  grid-column-start: 2;
+  grid-row-start: 1;
+  padding: .5rem;
+  margin-right: .8rem;
+  width: 11rem;
 }
 
 .survey__points-community-total {
-  grid-column-start: 3;
-  grid-row-start: 1;
   border: .09rem solid  rgba(161, 161, 167, 0.829);
   box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
-  margin-bottom: 1rem;
+  grid-column-start: 3;
+  grid-row-start: 1;
   padding: 0 1rem;
+  margin-right: .8rem;
+  width: 11rem;
 }
 
 .survey__points-user-total {
-  grid-column-start: 2;
-  grid-row-start: 2;
   border: .09rem solid  rgba(161, 161, 167, 0.829);
   box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
-  margin-right: 1rem;
-  padding: 0 1rem;
+  grid-column-start: 4;
+  grid-row-start: 1;
+  padding: .5rem;
+  margin-right: .8rem;
+  width: 11rem;
 }
 
-
 .survey__points-group-total {
-  grid-column-start: 3;
-  grid-row-start: 2;
   border: .09rem solid  rgba(161, 161, 167, 0.829);
   box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
-  padding: 0 1rem;
+  grid-column-start: 5;
+  grid-row-start: 1;
+  padding: .5rem;
+  width: 11rem;
 }
