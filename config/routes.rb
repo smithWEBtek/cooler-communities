@@ -13,9 +13,8 @@ Rails.application.routes.draw do
   root 'surveys#survey'
   get '/summary', to: 'surveys#summary'
   get '/user_summary', to: 'users#user_summary'
-  get '/about', to: 'surveys#about'
-  get '/eventbrite', to: 'surveys#eventbrite'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/about', to: 'static#about'
+  get '/eventbrite', to: 'static#eventbrite'
 
   devise_scope :user do
     get '/users/sign_out', to: 'devise/sessions#destroy'
