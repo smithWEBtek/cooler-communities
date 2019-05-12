@@ -294,3 +294,10 @@ Multi-select responses will be identified by `question_type` multi-select
   * text entry
 
 * (not to be used in Cooler Communities survey. All choices are pre-populated)
+
+========================================
+editable table of questions where admin can assign points
+airtable of questions, with placeholders for response options and associated points
+points lookup hash based on reading from questions stored in database
+points editing page
+question_key  |   question_text   |   response_option   |   response_option_points
