@@ -1,5 +1,5 @@
 
-User.create(first_name: "Brad", last_name: "Smith", email: "brad@mapc.org", password: "cooler", city: "Bedford", state: "NH", admin: true)
+User.create(first_name: "Brad", last_name: "Smith", email: "bsmith@mapc.org", password: "cooler", city: "Bedford", state: "NH", admin: true)
 User.create(first_name: "Ryan", last_name: "Kelly", email: "rkelly@mapc.org", password: "cooler", city: "Boston", state: "MA", admin: true)
 User.create(first_name: "Brad", last_name: "Hubbard-Nelson", email: "bradhn@mindspring.com", password: "cooler", city: "Concord", state: "MA", admin: true)
 User.create(first_name: "Gilda", last_name: "Gussin", email: "gildagussin@gmail.com", password: "cooler", city: "Concord", state: "MA", admin: true)

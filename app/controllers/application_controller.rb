@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery prepend: true
   helper_method :user_signed_in?, :admin?
   
-  def self.user_signed_in?
+  def user_signed_in?
     !!current_user
   end
   

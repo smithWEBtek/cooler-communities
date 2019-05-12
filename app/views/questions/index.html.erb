@@ -1,23 +1,46 @@
-<%= @questions.each do |question| %>
-  question_key: <%= question.question_key %>
-  question_text: <%= question.question_text %>
-<% end %>
+<div class="table">
+  <% @categories.each do |category| %>  
+  <h2><%= category.title %></h2>
+  <table class="pretty-table">
+      <tr>
+        <th scope="col">question_key</th>
+        <th scope="col">airtable_id</th>
+        <th scope="col">question_text</th>
+        <th scope="col">question_type</th>
+        <th scope="col">opt1</th>
+        <th scope="col">opt1_pts</th>
+        <th scope="col">opt2</th>
+        <th scope="col">opt2_pts</th>
+        <th scope="col">opt3</th>
+        <th scope="col">opt3_pts</th>
+        <th scope="col">opt4</th>
+        <th scope="col">opt4_pts</th>
+        <th scope="col">opt5</th>
+        <th scope="col">opt5_pts</th>
+        <th scope="col">opt6</th>
+        <th scope="col">opt6_pts</th>
+      </tr>
 
-
-<table style="width:100%">
-  <tr>
-    <th>question_key</th>
-    <th>question_text</th> 
-    <th>airtable_id</th>
-  </tr>
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td> 
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td> 
-    <td>94</td>
-  </tr>
-</table>
+      <% category.questions.each do |q| %>
+        <tr scope="row">
+          <td><%= q.question_key %></td>
+          <td><%= q.airtable_id %></td>
+          <td><%= q.question_text %></td>
+          <td><%= q.question_type %></td>
+          <td><%= q.option1 %></td>
+          <td><%= q.option1_points %></td>
+          <td><%= q.option2 %></td>
+          <td><%= q.option2_points %></td>
+          <td><%= q.option3 %></td>
+          <td><%= q.option3_points %></td>
+          <td><%= q.option4 %></td>
+          <td><%= q.option4_points %></td>
+          <td><%= q.option5 %></td>
+          <td><%= q.option5_points %></td>
+          <td><%= q.option6 %></td>
+          <td><%= q.option6_points %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+</div>
