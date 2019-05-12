@@ -27,18 +27,6 @@ class CreateQuestions < ActiveRecord::Migration[5.2]
     
       t.string :option6
       t.integer :option6_points
-    
-      t.string :option7
-      t.integer :option7_points
-    
-      t.string :option8
-      t.integer :option8_points
-    
-      t.string :option9
-      t.integer :option9_points
-    
-      t.string :option10
-      t.integer :option10_points
 
       t.timestamps
     end

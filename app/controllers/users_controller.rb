@@ -8,8 +8,9 @@ class UsersController < ApplicationController
     authorize_admin
   end
 
-  def export_csv
-    render '/users/user_data.csv.erb'
+  def user_summary
+    @user = current_user
+    render '/users/user_summary.csv.erb'
   end
 
   def show

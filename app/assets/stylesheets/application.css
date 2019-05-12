@@ -19,6 +19,18 @@ body {
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
+table {
+  width: 100%;
+}
+
+th {
+  height: auto;
+}
+
+td {
+  border: .01rem solid #616c6a;
+}
+
 h3 {
   font-size: 1.3rem !important;
   font-weight: 300 !important;

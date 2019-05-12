@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 7) do
+ActiveRecord::Schema.define(version: 8) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string "title"
-    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -43,14 +42,6 @@ ActiveRecord::Schema.define(version: 7) do
     t.integer "option5_points"
     t.string "option6"
     t.integer "option6_points"
-    t.string "option7"
-    t.integer "option7_points"
-    t.string "option8"
-    t.integer "option8_points"
-    t.string "option9"
-    t.integer "option9_points"
-    t.string "option10"
-    t.integer "option10_points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -67,7 +58,13 @@ ActiveRecord::Schema.define(version: 7) do
   create_table "surveys", force: :cascade do |t|
     t.string "title"
     t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_surveys", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "survey_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -75,6 +72,7 @@ ActiveRecord::Schema.define(version: 7) do
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.string "password"
     t.string "city"
     t.string "state"
     t.boolean "admin", default: false

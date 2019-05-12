@@ -16,6 +16,9 @@
 
   <body>
     <%= render partial: 'layouts/main_nav' %>
+    <% if current_user %>
+      Welcome, <%= current_user.first_name %>!
+    <% end %>
       <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>
