@@ -10,7 +10,7 @@ class Survey < ApplicationRecord
 		
 		csv.each do |row|
       binding.pry
-      row["Question"]
+      row[0] = #Question key
       row["Question ID"]
       row["Question Text"]
       row["Category"]
