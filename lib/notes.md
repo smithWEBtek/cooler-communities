@@ -230,10 +230,67 @@ Boxes update upon save of a Survey
 make a lookup table for points
 
 
-import questions from AirTable doc
-
-modify Rails database
-
 [] incorporate multi-selects, booleans, slider value
 [] implement js slider nouslide widget in surveyjs
 [] 
+
+
+=============================================================
+190512
+
+[] refactor database to talk to `airtable_cooler.csv`
+[] refactor database to update surveyJSON based on changes from `airtable_cooler.csv`
+[] however, logic in surveyJSON is best left for editing within <www.surveyjs.io>
+
+[] create an import method to parse `airtable_cooler.csv` into database
+  - creating all the questions in the database
+  - each question has a unique `question_key` matching a value in `surveyJSON`
+
+[] create an import method to parse `surveyJSON.json` into database
+  - creating all the questions in the database
+  - each question has a unique `question_key` matching a value in `surveyJSON`
+ 
+
+In both cases, use `find_or_create_by(question_key: 'asdf')` to determine if the question exists and to update the `question_text` if different.
+
+airtable_cooler.csv headers:
+
+"Question"
+"Question ID"
+"Category"
+"Question Text"
+"Question Type"
+"Responce Option 1"
+"Responce Option 1 Points"
+"Responce Option 2"
+"Responce Option 2 Points"
+"Responce Option 3"
+"Responce Option 3 Points"
+"Responce Option 4"
+"Responce Option 4 Points"
+"Responce Option 5"
+"Responce Option 5 Points"
+"Responce Option 6"
+"Responce Option 6 Points"
+
+A question contains all possible response options and response points.
+
+A user's completed question contains the response option they chose. 
+
+Multi-select responses will be identified by `question_type` multi-select
+ 
+## question types:
+
+## survey_logic_type
+  non-conditional
+  conditional
+  conditional kid
+
+  boolean
+  radio group
+  slider
+  multi-select
+  * number entry
+  * text entry
+
+* (not to be used in Cooler Communities survey. All choices are pre-populated)

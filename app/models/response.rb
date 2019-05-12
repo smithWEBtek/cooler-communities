@@ -1,4 +1,4 @@
 class Response < ApplicationRecord
   belongs_to :question
-  has_many :selections
+  belongs_to :user
 end

@@ -23,28 +23,43 @@ ActiveRecord::Schema.define(version: 7) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string "text"
-    t.integer "category_id"
     t.integer "survey_id"
+    t.string "question_key"
+    t.string "airtable_id"
+    t.integer "category_id"
+    t.string "question_text"
+    t.string "question_type"
+    t.string "survey_logic_type"
+    t.integer "conditional_parent_question_id"
+    t.string "option1"
+    t.integer "option1_points"
+    t.string "option2"
+    t.integer "option2_points"
+    t.string "option3"
+    t.integer "option3_points"
+    t.string "option4"
+    t.integer "option4_points"
+    t.string "option5"
+    t.integer "option5_points"
+    t.string "option6"
+    t.integer "option6_points"
+    t.string "option7"
+    t.integer "option7_points"
+    t.string "option8"
+    t.integer "option8_points"
+    t.string "option9"
+    t.integer "option9_points"
+    t.string "option10"
+    t.integer "option10_points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "responses", force: :cascade do |t|
     t.integer "question_id"
-    t.text "label"
-    t.boolean "choice"
-    t.integer "choice_points"
-    t.integer "amount"
-    t.integer "amount_points"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "selections", force: :cascade do |t|
-    t.integer "response_id"
-    t.string "selection_text"
-    t.integer "selection_points"
+    t.integer "user_id"
+    t.text "answer"
+    t.integer "points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
