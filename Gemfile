@@ -35,7 +35,6 @@ gem 'bcrypt', '~> 3.1.7'
 group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
-  gem 'pry'
 end
 
 group :development do

@@ -9,19 +9,28 @@ User
   t.string :state
   t.boolean :admin, default: false
 
-  has_one :survey
   has_many :responses
   has_many :questions, through: :responses
+  has_many :user_surveys
+  has_many :surveys, through: :user_surveys
   validates :email, uniqueness: true
 
 Survey
   t.string :title
   t.string :description
+
+  has_many :questions
+  has_many :responses, through: :questions
+  has_many :user_surveys
+  has_many :users, through: :user_surveys
+
+UserSurvey
   t.integer :user_id
+  t.integer :survey_id
 
   belongs_to :user
-  has_many :questions
-
+  belongs_to :survey
+  
 Category 
   t.string :title
   t.text :description

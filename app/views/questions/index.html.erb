@@ -1,0 +1,23 @@
+<%= @questions.each do |question| %>
+  question_key: <%= question.question_key %>
+  question_text: <%= question.question_text %>
+<% end %>
+
+
+<table style="width:100%">
+  <tr>
+    <th>question_key</th>
+    <th>question_text</th> 
+    <th>airtable_id</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td> 
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td> 
+    <td>94</td>
+  </tr>
+</table>
