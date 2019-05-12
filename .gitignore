@@ -7,8 +7,9 @@ capybara-*.html
 /coverage/
 /spec/tmp
 *.orig
-rerun.txt
-pickle-email-*.html
+
+/.vscode
+/tmp
 
 # Ignore all logfiles and tempfiles.
 /log/*
