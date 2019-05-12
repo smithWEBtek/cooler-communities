@@ -4,10 +4,12 @@ User
   t.string :first_name 
   t.string :last_name 
   t.string :password 
-  t.string :email (added by Devise migration)
-  t.string :city (added by Devise migration)
+  t.string :city
   t.string :state
   t.boolean :admin, default: false
+
+  t.string :email (added by Devise migration)
+  t.string :password_digest (added by Devise migration)
 
   has_many :responses
   has_many :questions, through: :responses
@@ -33,7 +35,6 @@ UserSurvey
   
 Category 
   t.string :title
-  t.text :description
   
   has_many :questions
   has_many :responses, through: :questions

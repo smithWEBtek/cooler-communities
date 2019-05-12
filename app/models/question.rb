@@ -11,46 +11,38 @@ class Question < ApplicationRecord
    csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
    
    csv.each do |row|
-     binding.pry
-    #  row[0] = #Question key
-    #  row["Question ID"]
-    #  row["Question Text"]
-    #  row["Category"]
+    question_data = {
+      survey_id: 1,
+      question_key: row[0],
+      airtable_id: row[1],
+      category_id: Category.find_or_create_by(title: row[2]).id,
+      question_text: row[3],
+      question_type: row[4],
+      option1: row[5],
+      option1_points: row[6],
 
-     # Question,Question ID,Category,Question Text,Question Type,Responce Option 1,Responce Option 1 Points,Responce Option 2,Responce Option 2 Points,Responce Option 3,Responce Option 3 Points,Responce Option 4,Responce Option 4 Points,Responce Option 5,Responce Option 5 Points,Responce Option 6,Responce Option 6 Points
+      option2: row[7],
+      option2_points: row[8],
 
-  #  id: nil,
-  #  survey_id: nil,
-  #  question_key: nil,
-  #  airtable_id: nil,
-  #  category_id: nil,
-  #  question_text: nil,
-  #  question_type: nil,
-  #  survey_logic_type: nil,
-  #  conditional_parent_question_id: nil,
-  #  option1: nil,
-  #  option1_points: nil,
-  #  option2: nil,
-  #  option2_points: nil,
-  #  option3: nil,
-  #  option3_points: nil,
-  #  option4: nil,
-  #  option4_points: nil,
-  #  option5: nil,
-  #  option5_points: nil,
-  #  option6: nil,
-  #  option6_points: nil,
-  #  option7: nil,
-  #  option7_points: nil,
-  #  option8: nil,
-  #  option8_points: nil,
-  #  option9: nil,
-  #  option9_points: nil,
-  #  option10: nil,
-  #  option10_points: nil,
-  #  created_at: nil,
-  #  updated_at: nil>
+      option3: row[9],
+      option3_points: row[10],
 
+      option4: row[11],
+      option4_points: row[12],
+
+      option5: row[13],
+      option5_points: row[14],
+
+      option6: row[15],
+      option6_points: row[16]
+    }
+    
+    new_question = Question.new(question_data)
+      if new_question.save
+        puts "."
+      else
+        raise 'question NOT saved, please check airtable-cooler.csv for data accuracy'
+      end
     end
   end
 end
