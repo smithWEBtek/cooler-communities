@@ -1,81 +1,0 @@
-{:uriI"„file://app/assets/javascripts/results.json?type=application/json&id=660c4686f581fce010d41b84fc703ce56c78b5df7b7d39c1fe0f1f5749a73bf6:ET:load_pathI"app/assets/javascripts;T:filenameI"(app/assets/javascripts/results.json;T:	nameI"results;T:logical_pathI"results.json;T:content_typeI"application/json;T:sourceI"Ø{
-  "categorySelection1": {
-    "eating": "Yes",
-    "waterHeating": "Yes",
-    "solarPower": "Yes",
-    "yardLandscaping": "Yes"
-  },
-  "goalMeals": {
-    "goalMealsBeefLambPorkPerWeek": "4",
-    "goalMealsPoultryCheeseFishSeafood": "4",
-    "goalMealsVegetarianCheeseEggs": "5",
-    "goalMealsVeganNonDairy": "3"
-  },
-  "heatingCooling": {
-    "heatingSystemAssessment": "Yes",
-    "upgradeBoilerFurnace": "No",
-    "installAirSourceHeatPump": "Yes"
-  },
-  "homeAppliances": {
-    "replaceRefridgerator": "Yes",
-    "replaceClothesWasher": "No"
-  },
-  "homeLaundry": {
-    "goalLaundryColdWashesPerWeek": "3",
-    "goalLaundryLineDryPerWeek": "3"
-  },
-  "bulbsLeds": {
-    "bulbSwap": "Yes",
-    "bulbsLeds": "Yes"
-  },
-  "solarPower": {
-    "solarAssessment": "Yes",
-    "installSolarPanels": "No"
-  },
-  "transportationCars": {
-    "car1": "keep",
-    "car2": "replace"
-  },
-  "transportationMileage": {
-    "Car1": "12000",
-    "Car2": "4000"
-  },
-  "mileage-reduction-options": [
-    "carpooling",
-    "bus/bike/walk school/work",
-    "carpool",
-    "public trans"
-  ],
-  "reuseRecycle": {
-    "refillableContainers": "ues",
-    "buyBulk": "yes",
-    "buyRecycledMaterials": "maybe",
-    "buyUsed": "you don't know me"
-  },
-  "waterHeating": {
-    "hotWaterAssessment": "Yes",
-    "replaceWithHeatPump": "No"
-  },
-  "weatherizationThermostats": {
-    "signupEnergyAudit": "Yes",
-    "insulateAirSealHome": "No",
-    "installProgrammableThermostats": "Yes"
-  },
-  "yardLandscaping1": {
-    "lawnAssessment": "Yes",
-    "useRakeOrElectricBlower": "No",
-    "replaceGasMowerWithManualOrElectric": "Yes",
-    "lowerMowingFrequency": "No"
-  },
-  "yardLandscaping": {
-    "reduceLawnSqFootage": "120",
-    "numberLawnFertilizerApplications": "3"
-  }
-}
-;T:metadata{	:dependencieso:Set:
-@hash}
-I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"@processors:type=application/json&file_type=application/json;TTI"6file-digest://app/assets/javascripts/results.json;TTF:charsetI"
-utf-8;F:digest"%ågæññÊ)f]&>˜
-Q
-¯ØNýVxMõkn„‰ª—¤:lengthiØ:dependencies_digest"%h`,û@‘î(G,9@yé·V‚°!Z%F¿Ä;:idI"E660c4686f581fce010d41b84fc703ce56c78b5df7b7d39c1fe0f1f5749a73bf6;F:
-mtimel+¿Ó\
