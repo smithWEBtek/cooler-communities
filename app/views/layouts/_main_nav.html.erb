@@ -2,20 +2,12 @@
   <div>
     <%= link_to (image_tag("cc-logo.png", class: "main-nav__cc-logo")), root_path %>
   </div>
-
-  <div class="main-nav__display-area">
-    <p><strong>A survey to help you choose actions that reduce your carbon footprint. </strong>It is used to determine the value in points, equivalent to lbs. of CO2 emission or trees. CO2 and cost estimates are based on assumptions of average energy consumption and fuel prices, and are not intended to be exact.
-      See notice below for privacy information.</p>
-      <p>Copyright &copy; 2019, Town of Concord Comprehensive Sustainable Energy Committee. </p>
-  </div>
-
   <div class="main-nav__links">
     <% if !user_signed_in? %>
     <%= link_to "Login", new_user_session_path, class: "main-nav__link" %>
     <span class="main-nav__link-separator"> | </span>
     <%= link_to "Register", new_user_registration_path, class: "main-nav__link" %>
       <% else %>
-      <span class="main-nav__link-separator"> | </span>
       <%= link_to "Logout", destroy_user_session_path, class: "main-nav__link" %>
       <span class="main-nav__link-separator"> | </span>
       <%= link_to "Summary", user_summary_path, class: "main-nav__link" %>
