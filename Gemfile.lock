@@ -307,7 +307,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   bcrypt (~> 3.1.7)
-  capistrano (~> 3.10)
+  capistrano (~> 3.11)
   capistrano-bundler
   capistrano-passenger
   capistrano-rails (~> 1.3)

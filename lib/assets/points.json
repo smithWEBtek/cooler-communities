@@ -1,0 +1,259 @@
+{
+  "lawn_size": {
+    "small change ~100 sq ft reduction": 5,
+    "medium change ~ 500 sq ft reduction": 7,
+    "large change ~ 1,000 sq ft reduction": 9,
+    "blank": 21
+  },
+  "mower_type": {
+    "yes": 10,
+    "no": 14,
+    "blank": 42
+  },
+  "mower_switch": {
+    "no": 10,
+    "i will use a rake": 14,
+    "i will use an electric mower": 18,
+    "blank": 42
+  },
+  "mowing_frequency": {
+    "two  less": 10,
+    "five less ": 14,
+    "ten less": 18,
+    "blank": 42
+  },
+  "fertilizer": {
+    "no": 15,
+    "yes": 21,
+    "blank": 63
+  },
+  "fertilizer_applications": {
+    "no": 15,
+    "1 less": 21,
+    "2 less": 27,
+    "3 less ": 33,
+    "4 less": 39,
+    "5 less": 45,
+    "blank": 63
+  },
+  "leaf_cleanup": {
+    "no": 20,
+    "yes": 28,
+    "blank": 84
+  },
+  "leaf_cleanup_gas_blower_use": {
+    "no": 20,
+    "yes": 28,
+    "blank": 84
+  },
+  "weatherized": {
+    "no": 25,
+    "yes": 35,
+    "blank": 105
+  },
+  "energy_audit": {
+    "no": 25,
+    "yes": 35,
+    "blank": 105
+  },
+  "insulate_home": {
+    "no": 35,
+    "yes": 49,
+    "blank": 147
+  },
+  "install_programmable_thermostats": {
+    "i already use programmable thermostats": 30,
+    "no": 42,
+    "yes": 54,
+    "blank": 126
+  },
+  "heating_system_type": {
+    "blank": 147
+  },
+  "upgrade_heating_system": {
+    "blank": 147
+  },
+  "install_heat_pump": {
+    "blank": 147
+  },
+  "heating_system_assessment": {
+    "no": 35,
+    "yes": 49,
+    "blank": 147
+  },
+  "water_heater_type": {
+    "blank": 168
+  },
+  "hot_water_assessment": {
+    "blank": 168
+  },
+  "replace_water_heater": {
+    "blank": 168
+  },
+  "solar_panels": {
+    "blank": 189
+  },
+  "solar_assessment": {
+    "blank": 189
+  },
+  "install_solar_panels": {
+    "blank": 189
+  },
+  "bulbs_incandescent": {
+    "blank": 210
+  },
+  "bulbs_fluorescent_cfl": {
+    "blank": 210
+  },
+  "bulbs_swap": {
+    "blank": 210
+  },
+  "bulbs_replace_leds": {
+    "some": 50,
+    "half": 70,
+    "all": 90,
+    "blank": 210
+  },
+  "appliances_replace_refrigerator": {
+    "i already use a energy star product": 55,
+    "no": 77,
+    "yes": 99,
+    "blank": 231
+  },
+  "appliances_replace_washer": {
+    "i already use a energy star product": 60,
+    "no": 84,
+    "yes": 108,
+    "blank": 252
+  },
+  "cold_water_wash_loads": {
+    "no": 65,
+    "once per week": 91,
+    "twice per week": 117,
+    "three times per week": 143,
+    "blank": 273
+  },
+  "line_or_rack_dry_loads": {
+    "no": 70,
+    "once per week": 98,
+    "twice per week": 126,
+    "three times per week": 154,
+    "blank": 294
+  },
+  "extra_refrigerator": {
+    "no": 75,
+    "yes": 105,
+    "blank": 315
+  },
+  "extra_refrigerator_age": {
+    ">20 years old": 75,
+    "15-20 years old": 105,
+    "10-15 years old": 135,
+    "0-10 years old": 165,
+    "blank": 315
+  },
+  "extra_refrigerator_pickup": {
+    "no": 75,
+    "yes": 105,
+    "blank": 315
+  },
+  "unplug_refrigerator": {
+    "no": 75,
+    "blank": 315
+  },
+  "smart_power_strips": {
+    "no": 80,
+    "yes": 112,
+    "blank": 336
+  },
+  "install_electricity_monitor": {
+    "no": 85,
+    "yes": 119,
+    "blank": 357
+  },
+  "transportation_car_type": {
+    "electric / hybrid": 90,
+    "gas / diesel ": 126,
+    "blank": 378
+  },
+  "reduce_total_mileage": {
+    "blank": 399
+  },
+  "carpooling_increase": {
+    "no": 95,
+    "blank": 399
+  },
+  "carpooling_amount": {
+    "blank": 399
+  },
+  "transportation_public": {
+    "no": 95,
+    "blank": 399
+  },
+  "transportation_public_amount": {
+    "blank": 399
+  },
+  "transportation_telecommute": {
+    "no": 95,
+    "blank": 399
+  },
+  "transportation_telecommute_amount": {
+    "blank": 399
+  },
+  "transportation_commute_bike_walk": {
+    "no": 95,
+    "blank": 399
+  },
+  "transportation_commute_bike_walk_amount": {
+    "blank": 399
+  },
+  "transportation_flights": {
+    "no": 100,
+    "yes": 140,
+    "blank": 420
+  },
+  "eating_switch_meals": {
+    "no": 105,
+    "yes": 147,
+    "blank": 441
+  },
+  "eating_switch_meals_amount": {
+    "none": 105,
+    "1 to 2 meals": 147,
+    "3 to 4 meals": 189,
+    "5 to 6 meals": 231,
+    "7 to 8 meals": 273,
+    "blank": 441
+  },
+  "family_size": {
+    "blank": 462
+  },
+  "reuse_containers": {
+    "usually": 115,
+    "sometimes": 161,
+    "rarely": 207,
+    "never": 253,
+    "blank": 483
+  },
+  "buy_bulk": {
+    "usually": 115,
+    "sometimes": 161,
+    "rarely": 207,
+    "never": 253,
+    "blank": 483
+  },
+  "buy_recycled": {
+    "usually": 115,
+    "sometimes": 161,
+    "rarely": 207,
+    "never": 253,
+    "blank": 483
+  },
+  "buy_sell_used": {
+    "usually": 105,
+    "sometimes": 147,
+    "rarely": 189,
+    "never": 231,
+    "blank": 441
+  }
+}
