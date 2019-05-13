@@ -43,6 +43,7 @@ h3 {
 .privacy-notice {
   background-color: rgb(219, 241, 222);
   border: 2px dashed rgba(255, 28, 28, 0.671);
+  margin: 0 2rem;
 }
 
 /* main nav *********************************************/
@@ -83,7 +84,6 @@ h3 {
   color: rgb(119, 119, 119);
   font-size: 1.2rem;
   font-weight: 400;
-  padding-left: 1rem;
   text-decoration: none;
 }
 
@@ -98,6 +98,15 @@ h3 {
   background-color: rgb(141, 193, 238);
   grid-column-start: 2;
   grid-row-start: 1;
+}
+
+/* landing page *******************************************/
+.landing-page__about {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  padding: 0 2rem;
 }
 
 /* eventbrite *********************************************/
