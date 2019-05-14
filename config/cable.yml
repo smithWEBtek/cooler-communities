@@ -4,7 +4,11 @@ development:
 test:
   adapter: async
 
+staging: 
+  adapter: redis
+  url: redis://localhost:6379/1
+
 production:
   adapter: redis
   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  channel_prefix: cooler_production
+  channel_prefix: cooler-communities_production

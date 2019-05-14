@@ -16,7 +16,6 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'seed_dump'	
 gem 'mechanize', '~> 2.7', '>= 2.7.5'
 
-
 gem 'rails', '~> 5.2.3'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
@@ -31,6 +30,12 @@ gem 'http'
 gem 'devise'
 gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
+
+gem "capistrano", "~> 3.11", require: false
+gem "capistrano-rails", "~> 1.3", require: false
+gem "capistrano-bundler"
+gem "capistrano-passenger"
+gem "capistrano-rvm"
 
 group :development, :test do
   # Adds support for Capybara system testing and selenium driver
