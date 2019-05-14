@@ -1,6 +1,7 @@
 <div class="survey">
   <div class="survey__category-tabs"></div>
   <div class="survey__display">
+
     <div class="landing-page__about">
       <p><strong>A survey to help you choose actions that reduce your carbon footprint. </strong>It is used to determine
         the value in points, equivalent to lbs. of CO2 emission or trees. CO2 and cost estimates are based on
@@ -9,6 +10,11 @@
       <p>Copyright &copy; 2019, Town of Concord Comprehensive Sustainable Energy Committee.</p>
     </div>
   </div>
+
+  <div class="summary">
+    <%= render partial: 'surveys/summary' %>
+  </div>
+
   <div class="survey__category-view" id="solar">=== solar survey here ===</div>
   <div class="survey__category-view" id="weatherization">=== weatherization survey here ===</div>
   <div class="survey__category-view" id="yard">">=== yard survey here ===</div>

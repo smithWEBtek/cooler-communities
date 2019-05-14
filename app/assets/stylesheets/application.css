@@ -198,6 +198,39 @@ h3 {
   border-top: 0;
 }
 
+/* survey summary *********************************************/
+.summary {
+  display: none;
+  background-color: aliceblue;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  margin: 2rem;
+}
+
+.summary__header {
+  display: none;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.summary__body {
+  /* display: none; */
+  background-color: rgb(149, 186, 228);
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  font-size: 1.5rem;
+}
+
+.sv_body.sv_completed_page {
+  display: none;
+}
+
 /* survey points *********************************************/
 .survey__points {
   display: grid;
@@ -244,3 +277,4 @@ h3 {
   padding: .5rem;
   width: 11rem;
 }
+ 
