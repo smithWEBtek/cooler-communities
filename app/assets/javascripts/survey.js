@@ -57,15 +57,15 @@ function saveCategoryResults(results) {
 
   thankyouMessage(category, points);
 
-  $.post({
-    url: '/responses',
-    dataType: 'json',
-    data: resultsObject,
-  }).done(function (results) {
-    let points = 0;
-    results.forEach(result => points += result.points);
-    $('.survey__points-user-total')[0].innerText = JSON.stringify(points);
-  })
+  // $.post({
+  //   url: '/responses',
+  //   dataType: 'json',
+  //   data: resultsObject,
+  // }).done(function (results) {
+  //   let points = 0;
+  //   results.forEach(result => points += result.points);
+  //   $('.survey__points-user-total')[0].innerText = JSON.stringify(points);
+  // })
 }
 
 function categoryTabHandler() {
