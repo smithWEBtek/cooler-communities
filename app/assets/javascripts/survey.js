@@ -55,7 +55,7 @@ function saveCategoryResults(results) {
     }
   }
 
-  $(".summary__body").text(JSON.stringify(`Your choices reduced Carbon Emissions by: ${points} points!`));
+  thankyouMessage(category, points);
 
   $.post({
     url: '/responses',
@@ -66,7 +66,6 @@ function saveCategoryResults(results) {
     results.forEach(result => points += result.points);
     $('.survey__points-user-total')[0].innerText = JSON.stringify(points);
   })
-  thankyouMessage(results.category);
 }
 
 function categoryTabHandler() {
@@ -108,10 +107,11 @@ function tabCompleted(currentTab) {
   })
 }
 
-function thankyouMessage(category) {
+function thankyouMessage(category, points) {
   category = category.toLowerCase()
     .split(' ')
     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
     .join(' ');
-  $('div.sv_body.sv_completed_page')[0].children[0].innerText = `Thanks for completing the ${category} category!`
+  $('.summary').css('display', 'inline')
+  $('.summary__body')[0].children[0].innerText = (`Thanks for completing the ${category} category. Your chosen actions will reduce Carbon Emissions by: ${points} points!`)
 }
