@@ -1,34 +1,24 @@
 $(() => {
   loadSurveys();
-  loadPointsJSON();
 });
 
-let pointsJSON = {}
-
-function loadPointsJSON() {
-  $.get('/assets/json/points.json', (data) => {
-    pointsJSON = data;
-  })
-}
-
 function loadSurveys() {
-  $.get('/assets/json/surveyJSON.json', function (data) {
-    data.pages.map(page => {
-      let categorySurvey = new Survey.Model(page);
-      let categorySurveyDiv = $(`#${page.name}`)
-      let categoryTabsDiv = $('.survey__category-tabs');
-      let category = page.name;
+  surveyJSON.pages.map(page => {
+    let categorySurvey = new Survey.Model(page);
+    let categorySurveyDiv = $(`#${page.name}`)
+    let categoryTabsDiv = $('.survey__category-tabs');
+    let category = page.name;
 
-      categorySurveyDiv.Survey({
-        model: categorySurvey,
-        onComplete: saveCategoryResults,
-        category
-      });
-      categoryTabsDiv.prepend(`<img id="${page.name}" src="/assets/images/${page.name}.png" class="survey__category-tab survey__category-tab-image" />`)
-      styleSurveyDivs();
-      categoryTabHandler();
-    })
-  });
+    categorySurveyDiv.Survey({
+      model: categorySurvey,
+      onComplete: saveCategoryResults,
+      category
+    });
+    categoryTabsDiv.prepend(`<img id="${page.name}" src="/assets/images/${page.name}.png" class="survey__category-tab survey__category-tab-image" />`)
+    styleSurveyDivs();
+    categoryTabHandler();
+  })
+
   document.querySelector('.survey__category-view').classList.add('survey__category-default-view')
 }
 

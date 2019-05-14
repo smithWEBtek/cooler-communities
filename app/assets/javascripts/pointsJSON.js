@@ -1,3 +1,4 @@
+const pointsJSON =
 {
   "lawn_size": {
     "small change ~100 sq ft reduction": 9,
