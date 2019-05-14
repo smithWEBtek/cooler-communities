@@ -15,6 +15,7 @@ function loadSurveys() {
       category
     });
     categoryTabsDiv.prepend(`<img id="${page.name}" src="/assets/images/${page.name}.png" class="survey__category-tab survey__category-tab-image" />`)
+
     styleSurveyDivs();
     categoryTabHandler();
   })
