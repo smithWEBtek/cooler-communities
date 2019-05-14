@@ -54,6 +54,6 @@ class Question < ApplicationRecord
           points_hash[qkey][akey.downcase] = points[qkey][akey]
         end
       end      
-      IO.write "public/assets/json/points.json", JSON.pretty_generate(points_hash)
+      IO.write "app/assets/javascripts/pointsJSON.js", JSON.pretty_generate(points_hash)
     end
 end
