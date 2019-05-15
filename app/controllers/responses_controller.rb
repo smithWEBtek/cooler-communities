@@ -1,31 +1,27 @@
 class ResponsesController < ApplicationController
 
+  def create
+    @responses = []
+    category_points = 0
 
-  def create 
-    raise params.inspect
+    params[:data].keys.each_with_index do |question_key, index|
+      question = Question.find_by(question_key: question_key)
+      answer = question.answer_key.keys[0]
+      points = question.answer_key[answer]
+      response_data = {
+        user_id: current_user.id,
+        question_id: question.id,
+        answer: answer,
+        points: points
+      }
 
+      new_response = Response.create(response_data)
+      category_points += points
+      @responses.push(new_response)
+    end
+    render json: { 
+      category: params[:category],
+      responses: @responses, 
+      category_points: category_points }
   end
-
-  # def create
-  #   @responses = []
-  #   params[:data].keys.each_with_index do |question_key, index|
-  #     question = Question.find_by(question_key: question_key)
-  #     user_answer = params[:data][question_key].downcase
-  #     binding.pry
-
-  #     if question.answer_key.include?(params[:data][question_key])
-  #       points = question.answer_key.include?(params[:data][question_key])
-  #     end
-
-  #     response_data = {
-  #       user_id: current_user.id,
-  #       question_id: question.id,
-  #       answer: user_answer,
-  #       points: points
-  #     }
-  #     new_response = Response.create(response_data)
-  #     @responses.push(new_response)
-  #   end
-  #   render json: @responses
-  # end
 end

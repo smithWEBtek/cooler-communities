@@ -6,42 +6,57 @@ class Question < ApplicationRecord
   belongs_to :survey
   has_many :responses
 
-  def self.build_answer_points_hash(data)
-    answer_hash = {}
+  def self.build_answer_key(data)
+    points_hash = {}
     data.each.with_index(5) do |row, index|
       key = index % 2 == 0 ? index + 1 : index
-      answer_key = data[key]
+      answer_key = data[key].downcase.gsub(' / ', '/') unless data[key].nil?
       answer_points = data[key + 1].to_i
-      answer_hash[answer_key] = answer_points unless answer_key.nil?
+      points_hash[answer_key] = answer_points unless answer_key.nil?
     end
-    answer_hash
+    points_hash
   end
   
-	def self.import #import airtable_cooler.csv
+	def self.import_airtable_cooler_csv
     csv_text = File.read(Rails.root.join('lib', 'assets', 'airtable_cooler.csv'))
     csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
     points = {}
+    answer_key = {}
 
     csv.each do |row|
-      question_data = {
-        survey_id: 1,
-        question_key: row[0],
-        airtable_id: row[1],
-        category_id: Category.find_or_create_by(title: row[2]).id,
-        question_text: row[3],
-        question_type: row[4], 
-        answer_key: self.build_answer_points_hash(row)
-      }
-      points[row[0]] = self.build_answer_points_hash(row)
-      new_question = Question.new(question_data)
-      
-      if new_question.save
-        puts "."
-      else
-        raise 'question NOT saved, please check airtable-cooler.csv for data accuracy'
+      if !row[0].nil?
+        question_data = {
+          survey_id: 1,
+          question_key: row[0],
+          airtable_id: row[1],
+          category_id: Category.find_or_create_by(title: row[2]).id,
+          question_text: row[3],
+          question_type: row[4], 
+          answer_key: self.build_answer_key(row)
+        }
+        new_question = Question.new(question_data)
+        category = new_question.category.title
+        question_key = new_question.question_key
+        answer_key = new_question.answer_key
+
+        # creates hash with category keys
+        # points[category]= {} if !points[category] || !points[category].nil? 
+        # points[category][question_key] = answer_key
+
+        points[question_key] = {} if !points[question_key] || !points[category].nil? 
+        points[question_key] = answer_key
+
+        if new_question.save
+          puts "."
+        else
+          raise 'question NOT saved, please check app/lib/assets/airtable_cooler.csv for data accuracy'
+        end
+        else
       end
     end
-    self.clean_points(points)
+    # binding.pry
+    IO.write "app/assets/javascripts/pointsJSON.js", "const pointsJSON = " + JSON.pretty_generate(points)
+    # self.clean_points(points)
   end
   
   def self.clean_points(points)
@@ -53,7 +68,7 @@ class Question < ApplicationRecord
         answer_keys.each do |akey|
           points_hash[qkey][akey.downcase] = points[qkey][akey]
         end
-      end      
-      IO.write "app/assets/javascripts/pointsJSON.js", JSON.pretty_generate(points_hash)
-    end
+      end
+    IO.write "app/assets/javascripts/pointsJSON.js", "const pointsJSON = " + JSON.pretty_generate(points_hash)
+  end
 end
