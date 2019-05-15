@@ -12,4 +12,4 @@ User.create(first_name: "Johnny", last_name: "Cash", email: "john@abc.com", pass
 
 Survey.create(title: "Cooler Communities", description: "Choosing behavior changes that reduce your carbon footprint.")
 
-Question.import
+Question.import_airtable_cooler_csv

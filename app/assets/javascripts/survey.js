@@ -32,31 +32,36 @@ function styleSurveyDivs() {
 
 function saveCategoryResults(results) {
   let category = results.category;
+  // let points = 0;
+  // for (let key in results.data) {
+  //   let answer = results.data[key]
+  //   let pts = pointsJSON[key][answer]
+
+  //   if (typeof pts === 'number') {
+  //     points += pts
+  //   }
+  // }
+
   let resultsObject = {
     category: results.category,
     data: results.data
   }
-  let points = 0;
-  for (let key in results.data) {
-    let answer = results.data[key]
-    let pts = pointsJSON[key][answer]
 
-    if (typeof pts === 'number') {
-      points += pts
-    }
-  }
 
-  thankyouMessage(category, points);
+  $.post({
+    url: '/responses',
+    dataType: 'json',
+    data: resultsObject,
+  }).done(function (results) {
 
-  // $.post({
-  //   url: '/responses',
-  //   dataType: 'json',
-  //   data: resultsObject,
-  // }).done(function (results) {
-  //   let points = 0;
-  //   results.forEach(result => points += result.points);
-  //   $('.survey__points-user-total')[0].innerText = JSON.stringify(points);
-  // })
+    let category_points = results.category_points
+    console.log('results: ', results)
+    // debugger;
+    // let points = 0;
+    // results.forEach(result => points += result.points);
+    $('.survey__points-user-total')[0].innerText = JSON.stringify(category, category_points);
+    thankyouMessage(category, category_points);
+  })
 }
 
 function categoryTabHandler() {
@@ -104,5 +109,5 @@ function thankyouMessage(category, points) {
     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
     .join(' ');
   $('.summary').css('display', 'inline')
-  $('.summary__body')[0].children[0].innerText = (`Thanks for completing the ${category} category. Your chosen actions will reduce Carbon Emissions by: ${points} points!`)
+  $('.summary__body')[0].children[0].innerText = (`Thanks for completing the ${category} category.\n Your chosen actions will reduce Carbon Emissions by: ${points} points!`)
 }

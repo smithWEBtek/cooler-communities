@@ -169,8 +169,8 @@ const pointsJSON = {
     "yes": 50
   },
   "transportation_car_type": {
-    "electric / hybrid": 0,
-    "gas / diesel ": 0
+    "electric/hybrid": 0,
+    "gas/diesel ": 0
   },
   "reduce_total_mileage": {
     "none": 0,
@@ -273,7 +273,5 @@ const pointsJSON = {
     "sometimes": 30,
     "rarely": 10,
     "never": 0
-  },
-  "": {
   }
 }
