@@ -38,9 +38,6 @@ gem 'capistrano-bundler'
 gem 'capistrano-passenger'
 gem 'capistrano-rvm'
 
-# Gem provides a helper asset_path in javascript.
-gem 'js_assets', '<= 0.0.10'
-
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'

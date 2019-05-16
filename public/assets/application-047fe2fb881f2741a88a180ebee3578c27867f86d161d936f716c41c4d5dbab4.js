@@ -2553,6 +2553,7 @@ const pointsJSON = {
 $(() => {
   loadSurveys();
 });
+let categoryImageUrl = ''
 
 function loadSurveys() {
   surveyJSON.pages.map(page => {
@@ -2567,18 +2568,17 @@ function loadSurveys() {
       category
     });
 
-    let categoryImageUrl = ''
 
     $.ajax({
       url: `/img_url/${category}`,
       dataType: 'json'
     }).done(function (response) {
-      console.log('response: ', response)
+      console.log('response: ', response.url)
       categoryImageUrl = response.url
-    });
 
-    // categoryTabsDiv.prepend(`<img id="${page.name}" src="/assets/images/${page.name}.png" class="survey__category-tab survey__category-tab-image" />`)
-    categoryTabsDiv.prepend(`<img id="${page.name}" src="${categoryImageUrl}" class="survey__category-tab survey__category-tab-image" />`)
+      // categoryTabsDiv.prepend(`<img id="${page.name}" src="/assets/images/${page.name}.png" class="survey__category-tab survey__category-tab-image" />`)
+      categoryTabsDiv.prepend(`<img id="${page.name}" src="${categoryImageUrl}" class="survey__category-tab survey__category-tab-image" />`)
+    })
     styleSurveyDivs();
     categoryTabHandler();
   })
