@@ -1,7 +1,6 @@
 $(() => {
   loadSurveys();
 });
-let categoryImageUrl = ''
 
 function loadSurveys() {
   surveyJSON.pages.map(page => {
@@ -21,17 +20,28 @@ function loadSurveys() {
       url: `/img_url/${category}`,
       dataType: 'json'
     }).done(function (response) {
-      console.log('response: ', response.url)
-      categoryImageUrl = response.url
-
-      // categoryTabsDiv.prepend(`<img id="${page.name}" src="/assets/images/${page.name}.png" class="survey__category-tab survey__category-tab-image" />`)
-      categoryTabsDiv.prepend(`<img id="${page.name}" src="${categoryImageUrl}" class="survey__category-tab survey__category-tab-image" />`)
-    })
-    styleSurveyDivs();
-    categoryTabHandler();
+      categoryTabsDiv.prepend(`<div class="category-image"><img id="${page.name}" src="${response.url}" class="survey__category-tab survey__category-tab-image" /></div>`)
+    }).then(categoryTabHandler());
   })
-
+  // categoryTabHandler();
+  styleSurveyDivs();
   document.querySelector('.survey__category-view').classList.add('survey__category-default-view')
+}
+
+function categoryTabHandler() {
+  debugger;
+  $('div.category-image img').on('click', function (event) {
+    event.preventDefault();
+
+    let currentTab = document.getElementById(event.currentTarget.id);
+    let categoryViewDiv = $(`div#${event.currentTarget.id}`);
+    $('.survey__category-view').css('display', 'none');
+    $('.summary__body').css('display', 'inline');
+
+    categoryViewDiv.css('display', 'inline');
+    tabSelected(currentTab);
+    // tabCompleted(currentTab);
+  })
 }
 
 function styleSurveyDivs() {
@@ -66,26 +76,10 @@ function saveCategoryResults(results) {
   }).done(function (results) {
 
     let category_points = results.category_points
-    console.log('results: ', results)
-    // debugger;
     // let points = 0;
     // results.forEach(result => points += result.points);
     $('.survey__points-user-total')[0].innerText = JSON.stringify(category, category_points);
     thankyouMessage(category, category_points);
-  })
-}
-
-function categoryTabHandler() {
-  $('img.survey__category-tab').on('click', function (event) {
-    event.preventDefault();
-    let currentTab = document.getElementById(event.currentTarget.id);
-    let categoryViewDiv = $(`div#${event.currentTarget.id}`);
-    $('.survey__category-view').css('display', 'none');
-    $('.summary__body').css('display', 'inline');
-
-    categoryViewDiv.css('display', 'inline');
-    tabSelected(currentTab);
-    // tabCompleted(currentTab);
   })
 }
 
