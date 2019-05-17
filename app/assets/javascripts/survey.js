@@ -1,8 +1,8 @@
 $(() => {
-  loadSurveys();
+  loadSurveyTabs();
 });
 
-function loadSurveys() {
+function loadSurveyTabs() {
   surveyJSON.pages.map(page => {
     let categorySurvey = new Survey.Model(page);
     let categorySurveyDiv = $(`#${page.name}`)
@@ -15,24 +15,21 @@ function loadSurveys() {
       category
     });
 
-
     $.ajax({
       url: `/img_url/${category}`,
       dataType: 'json'
     }).done(function (response) {
       categoryTabsDiv.prepend(`<div class="category-image"><img id="${page.name}" src="${response.url}" class="survey__category-tab survey__category-tab-image" /></div>`)
-    }).then(categoryTabHandler());
+      categoryTabHandler(page.name);
+    })
   })
-  // categoryTabHandler();
   styleSurveyDivs();
   document.querySelector('.survey__category-view').classList.add('survey__category-default-view')
 }
 
-function categoryTabHandler() {
-  debugger;
-  $('div.category-image img').on('click', function (event) {
+function categoryTabHandler(imageId) {
+  $(`#${imageId}`).on('click', function (event) {
     event.preventDefault();
-
     let currentTab = document.getElementById(event.currentTarget.id);
     let categoryViewDiv = $(`div#${event.currentTarget.id}`);
     $('.survey__category-view').css('display', 'none');
@@ -40,7 +37,7 @@ function categoryTabHandler() {
 
     categoryViewDiv.css('display', 'inline');
     tabSelected(currentTab);
-    // tabCompleted(currentTab);
+    tabCompleted(currentTab);
   })
 }
 
@@ -67,7 +64,6 @@ function saveCategoryResults(results) {
     category: results.category,
     data: results.data
   }
-
 
   $.post({
     url: '/responses',
