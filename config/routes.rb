@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/about', to: 'static#about'
   get '/eventbrite', to: 'static#eventbrite'
 
+  get '/img_url/:id', to: 'static#img_url'
   devise_scope :user do
     get '/users/sign_out', to: 'devise/sessions#destroy'
   end

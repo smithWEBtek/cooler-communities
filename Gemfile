@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
+
+ruby '2.5.3'
 
 gem 'pdf-reader'
 gem 'mailgun'
@@ -21,28 +23,29 @@ gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'pg', '>= 0.18', '< 2.0'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 gem 'webpacker'
 gem 'dotenv-rails', :groups => [:development, :test]
-ruby '2.5.3'
 gem 'active_model_serializers'
 gem 'http'
 gem 'devise'
 gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
-gem "capistrano", "~> 3.11", require: false
-gem "capistrano-rails", "~> 1.3", require: false
-gem "capistrano-bundler"
-gem "capistrano-passenger"
-gem "capistrano-rvm"
+gem 'capistrano', '~> 3.11', require: false
+gem 'capistrano-rails', '~> 1.3', require: false
+gem 'capistrano-bundler'
+gem 'capistrano-passenger'
+gem 'capistrano-rvm'
 
-group :development, :test do
+group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
 end
 
 group :development do
+  gem 'guard'
+  gem 'guard-shell'
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'foreman', '~> 0.82.0'

@@ -38,11 +38,6 @@ class Question < ApplicationRecord
         category = new_question.category.title
         question_key = new_question.question_key
         answer_key = new_question.answer_key
-
-        # creates hash with category keys
-        # points[category]= {} if !points[category] || !points[category].nil? 
-        # points[category][question_key] = answer_key
-
         points[question_key] = {} if !points[question_key] || !points[category].nil? 
         points[question_key] = answer_key
 
@@ -54,21 +49,7 @@ class Question < ApplicationRecord
         else
       end
     end
-    # binding.pry
     IO.write "app/assets/javascripts/pointsJSON.js", "const pointsJSON = " + JSON.pretty_generate(points)
-    # self.clean_points(points)
   end
-  
-  def self.clean_points(points)
-    points_hash = {}
-    question_keys = points.keys
-    question_keys.each do |qkey|
-      points_hash[qkey] = {}
-      answer_keys = points[qkey].keys
-        answer_keys.each do |akey|
-          points_hash[qkey][akey.downcase] = points[qkey][akey]
-        end
-      end
-    IO.write "app/assets/javascripts/pointsJSON.js", "const pointsJSON = " + JSON.pretty_generate(points_hash)
-  end
+
 end

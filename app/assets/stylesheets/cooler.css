@@ -1,44 +1,53 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
 
-
- */
-
+html {
+  background-color: rgba(250, 253, 255, 0.767);
+}
 
 body {
   box-sizing: border-box;
-  font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  height: auto;
+}
+
+td {
+  border: .01rem solid #616c6a;
+}
+
+h3 {
+  font-size: 1.3rem !important;
+  font-weight: 300 !important;
 }
 
 .privacy-notice {
   background-color: rgb(219, 241, 222);
   border: 2px dashed rgba(255, 28, 28, 0.671);
+  margin: 0 2rem;
 }
 
 /* main nav *********************************************/
 .main-nav {
   display: grid;
-  grid-template-columns: 5rem 5rem 1fr 1fr;
+  grid-template-columns: 5rem 5rem 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr auto;
 }
 
 .main-nav__display-area {
-  grid-column-start: 2;
-  grid-column-end: 4;
+  grid-column-start: 3;
+  grid-column-end: 7;
   grid-row-start: 1;
+  padding-left: 1rem;
+  margin: 0 1rem 1rem 0;
+  border: .03rem solid #98a3a1;
 }
 
-.main-nav__cc-logo{
+.main-nav__cc-logo {
   display: inline-block;
   grid-column-start: 1;
   grid-row-start: 1;
@@ -50,20 +59,22 @@ body {
 
 .main-nav__links {
   align-content: right;
-  grid-column-start: 4;
+  grid-column-start: 5;
+  grid-column-end: 7;
   grid-row-start: 2;
+  margin: 0 2rem;
 }
 
 .main-nav__link {
   color: rgb(119, 119, 119);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 400;
   text-decoration: none;
 }
 
 .main-nav__link-separator {
-  font-size: 1.8rem;
-  font-weight: 40;
+  font-size: 1.5rem;
+  font-weight: 300;
   color: rgb(119, 119, 119);
   padding: 0 1rem;
 }
@@ -74,17 +85,31 @@ body {
   grid-row-start: 1;
 }
 
+/* landing page *******************************************/
+.landing-page__about {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  padding: 0 2rem;
+}
+
+.welcome-message {
+  background-color: rgb(223, 238, 195);
+}
+
 /* eventbrite *********************************************/
 .eventbrite {
   background-color: aliceblue;
 }
+
 .eventbrite__title {
   color: red;
 }
 
 .eventbrite__confirmation-link {
   text-decoration: none;
-  color: green;  
+  color: green;
 }
 
 /* survey *********************************************/
@@ -108,7 +133,7 @@ body {
   border-top: .1rem solid #98a3a1;
   display: block;
   height: 5rem;
-  margin-bottom: .3rem; 
+  margin-bottom: .3rem;
   padding: .5rem 0 .5rem .5rem;
   width: auto;
 }
@@ -118,6 +143,8 @@ body {
   height: 3rem;
   padding-left: 1.2rem;
   padding-top: .5rem;
+  z-index: 11;
+  cursor: pointer;
 }
 
 .survey__display {
@@ -128,6 +155,7 @@ body {
   /* border-left: .2rem solid #1ab394; */
   /* border-top: .1rem solid #1ab394; */
 }
+
 .survey__category-view {
   /* border-left: .2rem solid #1ab394; */
   display: none;
@@ -139,9 +167,7 @@ body {
 
 .survey__category-tab-selected {
   background-color: rgb(207, 240, 207);
-  border-left: .2rem solid #1ab394;
-  border-right: .2rem solid #1ab394;
-  border-top: .1rem solid #1ab394;
+  border: .1rem solid #1ab394;
 }
 
 .survey__category-tab-completed {
@@ -163,6 +189,39 @@ body {
   border-top: 0;
 }
 
+/* survey summary *********************************************/
+.summary {
+  display: none;
+  background-color: aliceblue;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  margin: 2rem;
+}
+
+.summary__header {
+  display: none;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.summary__body {
+  /* display: none; */
+  background-color: rgb(149, 186, 228);
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  font-size: 1.3rem;
+}
+
+.sv_body.sv_completed_page {
+  display: none;
+}
+
 /* survey points *********************************************/
 .survey__points {
   display: grid;
@@ -172,7 +231,7 @@ body {
 }
 
 .survey__points-category-total {
-  border: .09rem solid  rgba(161, 161, 167, 0.829);
+  border: .09rem solid rgba(161, 161, 167, 0.829);
   box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
   grid-column-start: 2;
   grid-row-start: 1;
@@ -182,7 +241,7 @@ body {
 }
 
 .survey__points-community-total {
-  border: .09rem solid  rgba(161, 161, 167, 0.829);
+  border: .09rem solid rgba(161, 161, 167, 0.829);
   box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
   grid-column-start: 3;
   grid-row-start: 1;
@@ -192,7 +251,7 @@ body {
 }
 
 .survey__points-user-total {
-  border: .09rem solid  rgba(161, 161, 167, 0.829);
+  border: .09rem solid rgba(161, 161, 167, 0.829);
   box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
   grid-column-start: 4;
   grid-row-start: 1;
@@ -202,10 +261,11 @@ body {
 }
 
 .survey__points-group-total {
-  border: .09rem solid  rgba(161, 161, 167, 0.829);
+  border: .09rem solid rgba(161, 161, 167, 0.829);
   box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
   grid-column-start: 5;
   grid-row-start: 1;
   padding: .5rem;
   width: 11rem;
 }
+ 

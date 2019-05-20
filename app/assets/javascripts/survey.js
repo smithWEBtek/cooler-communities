@@ -1,8 +1,8 @@
 $(() => {
-  loadSurveys();
+  loadSurveyTabs();
 });
 
-function loadSurveys() {
+function loadSurveyTabs() {
   surveyJSON.pages.map(page => {
     let categorySurvey = new Survey.Model(page);
     let categorySurveyDiv = $(`#${page.name}`)
@@ -14,13 +14,31 @@ function loadSurveys() {
       onComplete: saveCategoryResults,
       category
     });
-    categoryTabsDiv.prepend(`<img id="${page.name}" src="/assets/images/${page.name}.png" class="survey__category-tab survey__category-tab-image" />`)
 
-    styleSurveyDivs();
-    categoryTabHandler();
+    $.ajax({
+      url: `/img_url/${category}`,
+      dataType: 'json'
+    }).done(function (response) {
+      categoryTabsDiv.prepend(`<div class="category-image"><img id="${page.name}" src="${response.url}" class="survey__category-tab survey__category-tab-image" /></div>`)
+      categoryTabHandler(page.name);
+    })
   })
-
+  styleSurveyDivs();
   document.querySelector('.survey__category-view').classList.add('survey__category-default-view')
+}
+
+function categoryTabHandler(imageId) {
+  $(`#${imageId}`).on('click', function (event) {
+    event.preventDefault();
+    let currentTab = document.getElementById(event.currentTarget.id);
+    let categoryViewDiv = $(`div#${event.currentTarget.id}`);
+    $('.survey__category-view').css('display', 'none');
+    $('.summary__body').css('display', 'inline');
+
+    categoryViewDiv.css('display', 'inline');
+    tabSelected(currentTab);
+    tabCompleted(currentTab);
+  })
 }
 
 function styleSurveyDivs() {
@@ -47,7 +65,6 @@ function saveCategoryResults(results) {
     data: results.data
   }
 
-
   $.post({
     url: '/responses',
     dataType: 'json',
@@ -55,26 +72,10 @@ function saveCategoryResults(results) {
   }).done(function (results) {
 
     let category_points = results.category_points
-    console.log('results: ', results)
-    // debugger;
     // let points = 0;
     // results.forEach(result => points += result.points);
     $('.survey__points-user-total')[0].innerText = JSON.stringify(category, category_points);
     thankyouMessage(category, category_points);
-  })
-}
-
-function categoryTabHandler() {
-  $('img.survey__category-tab').on('click', function (event) {
-    event.preventDefault();
-    let currentTab = document.getElementById(event.currentTarget.id);
-    let categoryViewDiv = $(`div#${event.currentTarget.id}`);
-    $('.survey__category-view').css('display', 'none');
-    $('.summary__body').css('display', 'inline');
-
-    categoryViewDiv.css('display', 'inline');
-    tabSelected(currentTab);
-    // tabCompleted(currentTab);
   })
 }
 

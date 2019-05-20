@@ -1,5 +1,4 @@
 class SurveysController < ApplicationController
-
   def survey
     render 'surveys/survey'
   end
