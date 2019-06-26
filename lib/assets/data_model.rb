@@ -8,8 +8,8 @@ User
   t.string :state
   t.boolean :admin, default: false
 
-  t.string :email (added by Devise migration)
-  t.string :password_digest (added by Devise migration)
+  t.string :email
+  t.string :password_digest (added by Bcrypt)
 
   has_many :responses
   has_many :questions, through: :responses

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :user_surveys
-  devise_for :users
   resources :survey_responses
   resources :survey_questions
   resources :surveys
@@ -8,7 +7,7 @@ Rails.application.routes.draw do
   resources :question_responses
   resources :responses
   resources :questions
-  # resources :users
+  resources :users
 
   root 'surveys#survey'
   get '/summary', to: 'surveys#summary'
@@ -17,8 +16,6 @@ Rails.application.routes.draw do
   get '/eventbrite', to: 'static#eventbrite'
 
   get '/img_url/:id', to: 'static#img_url'
-  devise_scope :user do
-    get '/users/sign_out', to: 'devise/sessions#destroy'
-  end
+ 
   
 end
