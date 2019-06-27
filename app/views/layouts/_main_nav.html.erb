@@ -3,14 +3,20 @@
     <%= link_to (image_tag("cc-logo.png", class: "main-nav__cc-logo")), root_path %>
   </div>
   <div class="main-nav__links">
+  <div>
     <% if !current_user %>
-    <%= link_to "Login", login_path, class: "main-nav__link" %>
-    <span class="main-nav__link-separator"> | </span>
-    <%= link_to "Register", register_path, class: "main-nav__link" %>
-      <% else %>
-      <%= link_to "Logout", destroy_user_session_path, class: "main-nav__link" %>
+      <%= render partial: 'layouts/welcome_message' %>
+      <%= link_to "Login", login_path, class: "main-nav__link" %>
+      <span class="main-nav__link-separator"> | </span>
+      <%= link_to "Register", register_path, class: "main-nav__link" %>
+    <% else %>
+       <span class="main-nav__link">Welcome, <%= current_user.first_name %>!</span>
+      <span class="main-nav__link-separator"> | </span>
+      <%= link_to "Logout", logout_path, class: "main-nav__link" %>
       <span class="main-nav__link-separator"> | </span>
       <%= link_to "Summary", user_summary_path, class: "main-nav__link" %>
     <% end %>
   </div>
+</div>
+
 </div>

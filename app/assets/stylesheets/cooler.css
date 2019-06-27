@@ -31,11 +31,31 @@ h3 {
   margin: 0 2rem;
 }
 
+/* notice message alert ***********************************/
+  .alert {
+    color: red;
+  }
+   
+/* admin nav *********************************************/
+.admin-nav {
+  display: grid;
+  grid-template-columns: 5rem 5rem 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr auto;
+  background-color: rgb(193, 252, 222);
+  border: 2px solid green;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
 /* main nav *********************************************/
 .main-nav {
   display: grid;
   grid-template-columns: 5rem 5rem 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr auto;
+  background-color: rgb(193, 252, 222);
+  border: 2px solid rgb(20, 77, 20);
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
 .main-nav__display-area {
@@ -96,6 +116,44 @@ h3 {
 
 .welcome-message {
   background-color: rgb(223, 238, 195);
+}
+
+/* form__registration *************************************/
+.form__registration {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  border: 2px solid gray;
+  border-radius: 1rem;
+}
+
+.form__registration-required {
+  background-color: rgb(236, 199, 206);
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border-radius: 1rem;
+}
+
+.form__registration-optional {
+  background-color: rgb(240, 230, 232);
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border-radius: 1rem;
+}
+
+fieldset {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.form__registration-submit {
+  background-color: rgb(151, 247, 151);
+  width: 8rem;
+  padding: .5rem;
 }
 
 /* eventbrite *********************************************/

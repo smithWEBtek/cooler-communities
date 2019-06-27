@@ -8,16 +8,21 @@ Rails.application.routes.draw do
   resources :responses
   resources :questions
   resources :users
-
+ 
   get '/register', to: 'users#new'
-  get '/login', to: 'users#login'
-  root 'surveys#survey'
+  post '/register', to: 'users#create'
+  
+  get '/login', to: 'sessions#new'
+  post '/sessions', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
+
   get '/summary', to: 'surveys#summary'
   get '/user_summary', to: 'users#user_summary'
+  
   get '/about', to: 'static#about'
   get '/eventbrite', to: 'static#eventbrite'
-
   get '/img_url/:id', to: 'static#img_url'
- 
+  
+  root 'surveys#survey'
   
 end

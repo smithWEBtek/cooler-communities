@@ -1,22 +1,33 @@
 class UsersController < ApplicationController
   before_action :authorize_admin, only: [:destroy]
   before_action :set_user, only: [:export_csv, :show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:show]
+  # before_action :authenticate_user!, only: [:show]
+  before_action :require_login, only: [:show]
+
+  def index
+    @users = User.all
+    if current_user && current_user.admin?
+      # redirect_to users_path
+      render 'index'
+    else
+      flash[:notice] = "Admins only. Redirecting to HOME page."
+      redirect_to root_path
+    end
+  end
 
   def new
     @user = User.new
-    render 'users/new'
   end
 
   def login
-    user = User.new(user_params)
-    if user.authenticate(params[:password])
-      session[:user_id] = user.id
-      flash[:notice] = "Welcome, #{@user.first_name}!"
-      redirect_to root_path
-    else
-      redirect_to '/login'
-    end
+    # user = User.find(params[:id])
+    # if user.authenticate(params[:password])
+    #   session[:user_id] = user.id
+    #   flash[:notice] = "Welcome, #{@user.first_name}!"
+    #   redirect_to root_path
+    # else
+    #   redirect_to '/login'
+    # end
   end
 
   def auth
@@ -34,12 +45,27 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
-    if user.save
-      flash[:notice] = "Welcome, #{@user.first_name}! you have successfully signed up, please SIGN IN."
-      redirect_to login_path
-    else
-      redirect_to '/register'
+		@user = User.new(
+      first_name: params[:user][:first_name], 
+      last_name: params[:user][:last_name],
+      username: params[:user][:username],
+      password: params[:user][:password],
+      password_confirmation: params[:user][:password_confirmation],
+      address: params[:user][:address],
+      city: params[:user][:city],
+      state: params[:user][:state],
+      zipcode: params[:user][:zipcode],
+      phone: params[:user][:phone]
+      )
+
+    if @user && @user.password == @user.password_confirmation
+      @user.save
+      flash[:success] = "You have successfully registered and logged in"
+      session[:user_id] = @user.id
+      welcome
+		else
+      flash[:error] = "You must register before logging in"
+      redirect_to '/users/new'
     end
   end
 
@@ -74,6 +100,18 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :address, :city, :state, :zipcode, :phone, :admin)
+    params.require(:user).permit(:username, :password, :password_confirmation, :first_name, :last_name, :email, :address, :city, :state, :zipcode, :phone)
+  end
+
+  def require_login
+    return head(:forbidden) unless session.include? :user_id
+  end
+
+  def welcome
+    if @user
+      render :welcome
+    else
+      redirect_to login_path
+    end
   end
 end

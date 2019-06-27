@@ -15,13 +15,12 @@
   </head>
 
   <body>
+    <%# if authorize_admin %>
+      <%= render partial: 'layouts/admin_nav' %>
+    <%# end %>
+
     <%= render partial: 'layouts/main_nav' %>
-    <% if current_user %>
-      Welcome, <%= current_user.first_name %>!
-    <% else %>
-    <%= render partial: 'layouts/welcome_message' %>
-    <% end %>
-    
+ 
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>
