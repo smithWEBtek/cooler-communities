@@ -1,11 +1,27 @@
 class UsersController < ApplicationController
   before_action :authorize_admin, only: [:destroy]
   before_action :set_user, only: [:export_csv, :show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:show]
+  # before_action :authenticate_user!, only: [:show]
+  before_action :require_login, only: [:show]
+
+  def index
+    @users = User.all
+    if current_user && current_user.admin?
+      # redirect_to users_path
+      render 'index'
+    else
+      flash[:notice] = "Admins only. Redirecting to HOME page."
+      redirect_to root_path
+    end
+  end
 
   def new
     @user = User.new
-    authorize_admin
+  end
+
+  def auth
+    @user = User.find
+    render 'users/login'
   end
 
   def user_summary
@@ -18,12 +34,28 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    if @user.save
-      flash[:notice] = "Welcome, #{@user.username.upcase}! you have successfully signed up, please SIGN IN."
+		@user = User.new(
+      first_name: params[:user][:first_name], 
+      last_name: params[:user][:last_name],
+      username: params[:user][:username],
+      password: params[:user][:password],
+      password_confirmation: params[:user][:password_confirmation],
+      email: params[:user][:email],
+      address: params[:user][:address],
+      city: params[:user][:city],
+      state: params[:state],
+      zipcode: params[:user][:zipcode],
+      phone: params[:user][:phone]
+      )
+
+    if @user.save && @user.password == @user.password_confirmation
+      flash[:success] = "You have successfully registered and logged in"
+      session[:user_id] = @user.id
+      welcome
       redirect_to root_path
-    else
-      render :new
+		else
+      flash[:error] = "You must register before logging in"
+      redirect_to '/users/new'
     end
   end
 
@@ -51,6 +83,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def users_report
+    @users = User.all
+    # respond_to do |format|
+    #   format.csv {send_data @users.to_csv}
+    # end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @users.to_csv, filename: "users_report_#{Date.today}.csv" }
+    end
+    # render '/users/users_report.csv.erb'
+  end
+
   private
 
   def set_user
@@ -58,6 +103,18 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :city, :state, :admin)
+    params.require(:user).permit(:username, :password, :password_confirmation, :first_name, :last_name, :email, :address, :city, :state, :zipcode, :phone)
+  end
+
+  def require_login
+    return head(:forbidden) unless session.include? :user_id
+  end
+
+  def welcome
+    if @user
+      render :welcome
+    else
+      redirect_to login_path
+    end
   end
 end

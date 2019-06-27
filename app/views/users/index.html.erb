@@ -1,0 +1,28 @@
+<h1>All Users</h1>
+<table style="width:100%">
+  <tr>
+    <th>first_name</th>
+    <th>last_name</th> 
+    <th>username</th>
+    <th>email</th>
+    <th>phone</th>
+    <th>address</th>
+    <th>city</th>
+    <th>state</th>
+    <th>zipcode</th>
+  </tr>
+  
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= user.username %></td>
+      <td><%= user.email %></td>
+      <td><%= user.phone %></td>
+      <td><%= user.address %></td>
+      <td><%= user.city %></td>
+      <td><%= user.state %></td>
+      <td><%= user.zipcode %></td
+    </tr>
+  <% end %>
+</table>
