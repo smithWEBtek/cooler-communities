@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :questions
   resources :users
 
+  get '/register', to: 'users#new'
+  get '/login', to: 'users#login'
   root 'surveys#survey'
   get '/summary', to: 'surveys#summary'
   get '/user_summary', to: 'users#user_summary'

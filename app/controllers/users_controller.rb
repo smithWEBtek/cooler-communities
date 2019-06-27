@@ -5,7 +5,23 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    authorize_admin
+    render 'users/new'
+  end
+
+  def login
+    user = User.new(user_params)
+    if user.authenticate(params[:password])
+      session[:user_id] = user.id
+      flash[:notice] = "Welcome, #{@user.first_name}!"
+      redirect_to root_path
+    else
+      redirect_to '/login'
+    end
+  end
+
+  def auth
+    @user = User.find
+    render 'users/login'
   end
 
   def user_summary
@@ -18,12 +34,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    if @user.save
-      flash[:notice] = "Welcome, #{@user.username.upcase}! you have successfully signed up, please SIGN IN."
-      redirect_to root_path
+    user = User.new(user_params)
+    if user.save
+      flash[:notice] = "Welcome, #{@user.first_name}! you have successfully signed up, please SIGN IN."
+      redirect_to login_path
     else
-      render :new
+      redirect_to '/register'
     end
   end
 
@@ -58,6 +74,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :city, :state, :admin)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :address, :city, :state, :zipcode, :phone, :admin)
   end
 end

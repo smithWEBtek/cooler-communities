@@ -1,13 +1,20 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery prepend: true
-  helper_method :user_signed_in?, :admin?
-  
-  def user_signed_in?
-    !!current_user
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
-  
+  helper_method :current_user
+
+  def authorize
+    redirect_to '/login' unless current_user
+  end
+
   def authorize_admin
     return unless !current_user.admin?
     redirect_to root_path, alert: 'Admins only, you have been redirected to HOME page.'
   end
+
 end
