@@ -15,9 +15,9 @@
   </head>
 
   <body>
-    <%# if authorize_admin %>
+    <% if current_user && current_user.admin? %>
       <%= render partial: 'layouts/admin_nav' %>
-    <%# end %>
+    <% end %>
 
     <%= render partial: 'layouts/main_nav' %>
  

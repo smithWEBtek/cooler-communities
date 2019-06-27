@@ -19,17 +19,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def login
-    # user = User.find(params[:id])
-    # if user.authenticate(params[:password])
-    #   session[:user_id] = user.id
-    #   flash[:notice] = "Welcome, #{@user.first_name}!"
-    #   redirect_to root_path
-    # else
-    #   redirect_to '/login'
-    # end
-  end
-
   def auth
     @user = User.find
     render 'users/login'
@@ -51,18 +40,19 @@ class UsersController < ApplicationController
       username: params[:user][:username],
       password: params[:user][:password],
       password_confirmation: params[:user][:password_confirmation],
+      email: params[:user][:email],
       address: params[:user][:address],
       city: params[:user][:city],
-      state: params[:user][:state],
+      state: params[:state],
       zipcode: params[:user][:zipcode],
       phone: params[:user][:phone]
       )
 
-    if @user && @user.password == @user.password_confirmation
-      @user.save
+    if @user.save && @user.password == @user.password_confirmation
       flash[:success] = "You have successfully registered and logged in"
       session[:user_id] = @user.id
       welcome
+      redirect_to root_path
 		else
       flash[:error] = "You must register before logging in"
       redirect_to '/users/new'
@@ -91,6 +81,16 @@ class UsersController < ApplicationController
       flash[:notice] = @user.errors.full_messages
       redirect_to user_path(@user)
     end
+  end
+
+  def users_report
+    puts "downloading CSV of USERS ******************************"
+    puts "downloading CSV of USERS ******************************"
+    puts "downloading CSV of USERS ******************************"
+    puts "downloading CSV of USERS ******************************"
+    puts "downloading CSV of USERS ******************************"
+    @user = current_user
+    render '/users/user_summary.csv.erb'
   end
 
   private

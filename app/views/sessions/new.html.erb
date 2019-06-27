@@ -1,9 +1,20 @@
-<h1>Login</h1>
 
-<%= form_for(:user, url: sessions_path) do |f| %>
-  <%= f.label :name %>
-    <%= f.text_field :username, placeholder: "username" %><br>
-  <%= f.label :password %>
-    <%= f.password_field :password, placeholder: "password" %><br>
-  <%= f.submit "Login" %>
-<% end %>
+<div class="form__login">
+  <h1>Login</h1>
+
+  <%= form_for(:user, url: sessions_path) do |f| %>
+    <div class="field">
+      <%= f.label :username %>
+      <%= f.text_field :username, placeholder: "username", autofocus: true %><br>
+    </div>
+
+    <div class="field">
+      <%= f.label :password %>
+      <%= f.password_field :password, placeholder: "password" %><br>
+    </div>
+
+    <div class="actions login">
+      <%= f.submit "Login" %>
+    </div>
+  <% end %>
+</div>

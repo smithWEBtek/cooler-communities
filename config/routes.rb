@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   get '/summary', to: 'surveys#summary'
   get '/user_summary', to: 'users#user_summary'
+  get '/users_report', to: 'users#users_report'
   
   get '/about', to: 'static#about'
   get '/eventbrite', to: 'static#eventbrite'
