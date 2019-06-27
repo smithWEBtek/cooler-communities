@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :affiliations
   resources :user_surveys
   resources :survey_responses
   resources :survey_questions

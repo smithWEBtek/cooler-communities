@@ -84,13 +84,16 @@ class UsersController < ApplicationController
   end
 
   def users_report
-    puts "downloading CSV of USERS ******************************"
-    puts "downloading CSV of USERS ******************************"
-    puts "downloading CSV of USERS ******************************"
-    puts "downloading CSV of USERS ******************************"
-    puts "downloading CSV of USERS ******************************"
-    @user = current_user
-    render '/users/user_summary.csv.erb'
+    @users = User.all
+    # respond_to do |format|
+    #   format.csv {send_data @users.to_csv}
+    # end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @users.to_csv, filename: "users_report_#{Date.today}.csv" }
+    end
+    # render '/users/users_report.csv.erb'
   end
 
   private

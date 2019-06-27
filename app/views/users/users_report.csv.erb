@@ -1,0 +1,13 @@
+"first_name", "last_name", "phone", "email", "address", "city", "state", "zipcode", "affiliation_name"
+<% @users.each do |user| %>
+  <%= raw "\"#{user.first_name}\"" %>,
+  <%= raw "\"#{user.last_name}\"" %>,
+  <%= raw "\"#{user.phone}\"" %>,
+  <%= raw "\"#{user.email}\"" %>,
+  <%= raw "\"#{user.address}\"" %>,
+  <%= raw "\"#{user.city}\"" %>,
+  <%= raw "\"#{user.state}\"" %>
+  <%= raw "\"#{user.zipcode}\"" %>
+  <%= raw "\"#{user.affiliation_name}\"" %>
+  <%= raw "\"#{user.summary}\"" %>
+<% end %>
