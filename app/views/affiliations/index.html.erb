@@ -1,0 +1,39 @@
+<% if current_user && current_user.admin? %>
+  <h4><strong>Affiliations Index<strong></h4>
+  <div class="table">
+    <table class="pretty-table">
+      <tr>
+        <th scope="col">name</th>
+        <th scope="col">edit</th>
+        <th scope="col">delete</th>
+      </tr>
+      <% @affiliations.each do |a| %>  
+      <tr>
+        <td><%= a.name %></td>
+        <td><%= link_to 'edit', edit_affiliation_path(a) %></td>
+        <td><%= link_to 'delete', method: 'delete', path: "/affiliations/#{a.id}" %></td> 
+      </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <h4><strong>Affiliated Users<strong></h4>
+  <div class="table">
+    <% @affiliations.each do |affiliation| %>  
+    <h4><strong><%= affiliation.name %></strong></h4>
+    <table class="pretty-table">
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">username</th>
+          <th scope="col">email</th>
+        </tr>
+        <% affiliation.users.each do |u| %>
+          <tr scope="row">
+            <td><%= u.username %></td>
+            <td><%= u.email %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+<% end %>

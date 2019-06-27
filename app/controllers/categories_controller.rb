@@ -3,9 +3,9 @@ class CategoriesController < ApplicationController
 
   def index
     if current_user.admin?
-      @categories = Category.all.sort_by {|m| [m.created_at, m.category_id]}
+      @categories = Category.all.sort_by {|c| [c.created_at, c.id]}
     else
-      @categories = current_user.categories.sort_by {|m| [m.created_at, m.category_id]}
+      @categories = current_user.categories.sort_by {|c| [c.created_at, c.id]}
     end
     respond_to do |format|
       format.html { render :index }

@@ -1,8 +1,8 @@
 const pointsJSON = {
   "lawn_size": {
-    "small change ~100 sq ft reduction": 9,
-    "medium change ~ 500 sq ft reduction": 43,
-    "large change ~ 1,000 sq ft reduction": 86
+    "small change ~100 sq ft reduction": 13,
+    "medium change ~ 500 sq ft reduction": 67,
+    "large change ~ 1,000 sq ft reduction": 133
   },
   "mower_type": {
     "yes": 0,
@@ -10,13 +10,13 @@ const pointsJSON = {
   },
   "mower_switch": {
     "no": 0,
-    "i will use a rake": 44,
-    "i will use an electric mower": 22
+    "yes": 396
   },
   "mowing_frequency": {
-    "two  less": 2,
-    "five less ": 5,
-    "ten less": 10
+    "no": 0,
+    "two  less": 220,
+    "five less ": 280,
+    "ten less": 320
   },
   "fertilizer": {
     "no": 0,
@@ -24,117 +24,73 @@ const pointsJSON = {
   },
   "fertilizer_applications": {
     "no": 0,
-    "1 less": 10,
-    "2 less": 20,
-    "3 less ": 30,
-    "4 less": 40,
-    "5 less": 50
+    "1 less": 20,
+    "2 less": 40,
+    "3 less ": 60
   },
   "leaf_cleanup": {
     "no": 0,
     "yes": 0
   },
-  "leaf_cleanup_gas_blower_use": {
+  "leaf_cleanup_gas_blower_switch": {
     "no": 0,
-    "yes": 0
-  },
-  "weatherized": {
-    "no": 0,
-    "yes": 0
-  },
-  "energy_audit": {
-    "no": 0,
-    "yes": 100
-  },
-  "insulate_home": {
-    "no": 0,
-    "yes": 100
-  },
-  "install_programmable_thermostats": {
-    "i already use programmable thermostats": 0,
-    "no": 0,
-    "yes": 43
-  },
-  "heating_system_type": {
-    "oil furnace": 0,
-    "forced hot air": 0,
-    "baseboard water": 0,
-    "wood fireplace": 0,
-    "solar": 0,
-    "other": 0
-  },
-  "upgrade_heating_system": {
-    "no": 0,
-    "yes": 100
-  },
-  "install_heat_pump": {
-    "no": 0,
-    "yes": 100
-  },
-  "heating_system_assessment": {
-    "no": 0,
-    "yes": 100
+    "yes": 133
   },
   "water_heater_type": {
-    "conventional storage tank ": 0,
-    "tankless(on-demand) ": 0,
-    "heat pump (hybrid) ": 0,
-    "solar powered": 0,
-    "condensing": 0
+    "fuel oil": 0,
+    "nat gas": 0,
+    "propane": 0,
+    "electric": 0,
+    "heat pump": 0
   },
   "hot_water_assessment": {
-    "no": 0,
-    "yes": 100
+    "yes": 50,
+    "no": 0
   },
   "replace_water_heater": {
-    "no": 0,
-    "yes": 100
+    "yes": 1750,
+    "no": 0
   },
   "solar_panels": {
     "no": 0,
     "yes": 0
   },
   "solar_assessment": {
-    "no": 0,
-    "yes": 100
+    "yes": 1175,
+    "no": 0
   },
   "install_solar_panels": {
-    "no": 0,
-    "yes": 100
+    "yes": 5875,
+    "no": 0
   },
   "bulbs_incandescent": {
-    "no": 0,
-    "yes": 0
-  },
-  "bulbs_fluorescent_cfl": {
-    "no": 0,
-    "yes": 0
+    "yes": 0,
+    "no": 0
   },
   "bulbs_swap": {
-    "no": 0,
-    "yes": 100
+    "yes": 985,
+    "no": 0
   },
   "bulbs_replace_leds": {
-    "some": 10,
-    "half": 50,
-    "all": 100,
-    "0": 0
+    "some": 250,
+    "half": 490,
+    "all": 985
   },
   "appliances_replace_refrigerator": {
     "i already use a energy star product": 0,
     "no": 0,
-    "yes": 0
+    "yes": 1
   },
   "appliances_replace_washer": {
     "i already use a energy star product": 0,
     "no": 0,
-    "yes": 0
+    "yes": 1
   },
   "cold_water_wash_loads": {
     "no": 0,
-    "once per week": 10,
-    "twice per week": 20,
-    "three times per week": 30
+    "once per week": 48,
+    "twice per week": 95,
+    "three times per week": 143
   },
   "line_or_rack_dry_loads": {
     "no": 0,
@@ -144,7 +100,7 @@ const pointsJSON = {
   },
   "extra_refrigerator": {
     "no": 0,
-    "yes": 0
+    "yes": 42
   },
   "extra_refrigerator_age": {
     ">20 years old": 0,
@@ -154,11 +110,10 @@ const pointsJSON = {
   },
   "extra_refrigerator_pickup": {
     "no": 0,
-    "yes": 100
+    "yes": 350
   },
   "unplug_refrigerator": {
-    "no": 0,
-    "yes": 50
+    "no": 0
   },
   "smart_power_strips": {
     "no": 0,
@@ -170,108 +125,103 @@ const pointsJSON = {
   },
   "transportation_car_type": {
     "electric/hybrid": 0,
-    "gas/diesel ": 0
+    "gas/diesel ": 42
   },
   "reduce_total_mileage": {
-    "none": 0,
-    "5000": 50,
-    "10000": 100,
-    "15000": 200,
-    "20000": 300
   },
   "carpooling_increase": {
-    "no": 0,
-    "yes": 100
+    "no": 0
   },
   "carpooling_amount": {
-    "1 ": 10,
-    "2 ": 20,
-    "3": 30,
-    "4": 40,
-    "5": 50,
-    "6": 60
   },
   "transportation_public": {
-    "no": 0,
-    "yes": 0
+    "no": 0
   },
   "transportation_public_amount": {
-    "1 ": 10,
-    "2 ": 20,
-    "3": 30,
-    "4": 40,
-    "5": 50,
-    "6": 60
   },
   "transportation_telecommute": {
-    "no": 0,
-    "yes": 0
+    "no": 0
   },
   "transportation_telecommute_amount": {
-    "1 ": 10,
-    "2 ": 20,
-    "3": 30,
-    "4": 40,
-    "5": 50,
-    "6": 60
   },
   "transportation_commute_bike_walk": {
-    "no": 0,
-    "yes": 0
+    "no": 0
   },
   "transportation_commute_bike_walk_amount": {
-    "1 ": 10,
-    "2 ": 20,
-    "3": 30,
-    "4": 40,
-    "5": 50,
-    "6": 60
   },
   "transportation_flights": {
     "no": 0,
-    "yes": 100
+    "yes": 0
   },
   "eating_switch_meals": {
     "no": 0,
-    "yes": 0
+    "yes": 42
   },
   "eating_switch_meals_amount": {
     "none": 0,
-    "1 to 2 meals": 50,
-    "3 to 4 meals": 100,
-    "5 to 6 meals": 200,
-    "7 to 8 meals": 400
+    "1 to 2 meals": 173,
+    "3 to 4 meals": 690,
+    "5 to 6 meals": 863
   },
   "family_size": {
-    "1 ": 10,
-    "2 ": 20,
-    "3": 30,
-    "4": 40,
-    "5": 50,
-    "6": 60
+    "blank": 0
+  },
+  "buy_sell_used": {
+    "usually": 75,
+    "sometimes": 50,
+    "rarely": 25,
+    "never": 0
   },
   "reuse_containers": {
-    "usually": 50,
-    "sometimes": 30,
-    "rarely": 10,
+    "usually": 75,
+    "sometimes": 50,
+    "rarely": 25,
     "never": 0
   },
   "buy_bulk": {
-    "usually": 50,
-    "sometimes": 30,
-    "rarely": 10,
+    "usually": 75,
+    "sometimes": 50,
+    "rarely": 25,
     "never": 0
   },
   "buy_recycled": {
-    "usually": 50,
-    "sometimes": 30,
-    "rarely": 10,
+    "usually": 75,
+    "sometimes": 50,
+    "rarely": 25,
     "never": 0
   },
-  "buy_sell_used": {
-    "usually": 50,
-    "sometimes": 30,
-    "rarely": 10,
-    "never": 0
+  "heating_system_type": {
+    "fuel oil": 0,
+    "nat gas": 0,
+    "propane": 0,
+    "wood": 0,
+    "electric resistance": 0,
+    "heat pump": 0
+  },
+  "heating_system_assessment": {
+    "no": 0,
+    "yes": 100
+  },
+  "upgrade_heating_system": {
+    "no": 0,
+    "yes": 3048,
+    "yes, high efficient heat pump ": 11140
+  },
+  "weatherized": {
+    "no": 0,
+    "yes": 0
+  },
+  "energy_audit": {
+    "no": 0,
+    "yes": 500
+  },
+  "insulate_home": {
+    "no": 0,
+    "yes": 3428
+  },
+  "install_programmable_thermostats": {
+    "i already use programmable thermostats": 0,
+    "no": 0,
+    "yes": 3428
   }
 }

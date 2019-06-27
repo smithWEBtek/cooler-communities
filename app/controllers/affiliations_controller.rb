@@ -2,7 +2,7 @@ class AffiliationsController < ApplicationController
   before_action :set_affiliation, only: [:show, :update, :destroy]
 
   def index
-    @affiliations = Affiliations.all
+    @affiliations = Affiliation.all
   end
 
   def show
@@ -30,6 +30,7 @@ class AffiliationsController < ApplicationController
   end
   
   def destroy
+    @affiliation.delete
     redirect_to affiliations_path
   end
 
