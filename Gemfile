@@ -37,6 +37,7 @@ gem 'capistrano-rails', '~> 1.3', require: false
 gem 'capistrano-bundler'
 gem 'capistrano-passenger'
 gem 'capistrano-rvm'
+gem 'listen', '>= 3.0.5', '< 3.2'
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
@@ -47,7 +48,6 @@ group :development do
   gem 'guard'
   gem 'guard-shell'
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'foreman', '~> 0.82.0'
   gem 'pry'
 end
