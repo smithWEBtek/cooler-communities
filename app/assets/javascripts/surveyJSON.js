@@ -1,5 +1,4 @@
-const surveyJSON =
-{
+const surveyJSON = {
   "pages": [
     {
       "name": "yard",
@@ -61,12 +60,14 @@ const surveyJSON =
           "type": "radiogroup",
           "name": "fertilizer_applications",
           "visibleIf": "{fertilizer} = \"yes\"",
-          "title": "Will you choose to reduce you fertilizer applications this year?",
+          "title": "Will you choose to reduce your fertilizer applications this year?",
           "choices": [
-            "yes",
-            "no"
+            "no",
+            "1less",
+            "2less",
+            "3less"
           ],
-          "colCount": 2
+          "colCount": 4
         },
         {
           "type": "radiogroup",
@@ -80,9 +81,9 @@ const surveyJSON =
         },
         {
           "type": "radiogroup",
-          "name": "leaf_cleanup_gas_blower_use",
+          "name": "leaf_cleanup_gas_blower_switch",
           "visibleIf": "{leaf_cleanup} = \"yes\"",
-          "title": "Will you choose to replace your gas blower?",
+          "title": "Will you choose to switch from gas blower to rake or electric blower?",
           "choices": [
             "yes",
             "no"
@@ -93,113 +94,6 @@ const surveyJSON =
       "title": "Yard / Landscaping"
     },
     {
-      "name": "weatherization",
-      "elements": [
-        {
-          "type": "radiogroup",
-          "name": "weatherized",
-          "title": "Is your home well insulated/weatherized?",
-          "choices": [
-            "yes",
-            "no"
-          ],
-          "colCount": 2
-        },
-        {
-          "type": "radiogroup",
-          "name": "energy_audit",
-          "visibleIf": "{weatherized} = \"no\"",
-          "title": "Will you choose to sign up for a free energy audit?",
-          "choices": [
-            "yes",
-            "no"
-          ],
-          "colCount": 2
-        },
-        {
-          "type": "radiogroup",
-          "name": "insulate_home",
-          "visibleIf": "{weatherized} = \"no\"",
-          "title": "Will you choose to better insulate your home?",
-          "choices": [
-            "yes",
-            "no"
-          ],
-          "colCount": 2
-        },
-        {
-          "type": "radiogroup",
-          "name": "install_programmable_thermostats",
-          "title": "Will you choose to install programmable thermostats?",
-          "choices": [
-            "yes",
-            "no"
-          ],
-          "colCount": 2
-        }
-      ],
-      "title": "Weatherization and Thermostats"
-    },
-    {
-      "name": "heating",
-      "elements": [
-        {
-          "type": "radiogroup",
-          "name": "heating_system_type",
-          "title": "What type of heating system do you have?",
-          "hasOther": true,
-          "choices": [
-            "oil furnace",
-            "forced hot air",
-            "baseboard water",
-            "wood fireplace",
-            "solar"
-          ]
-        },
-        {
-          "type": "radiogroup",
-          "name": "insulate_home",
-          "title": "Will you choose to better insulate your home?",
-          "choices": [
-            "yes",
-            "no"
-          ],
-          "colCount": 2
-        },
-        {
-          "type": "radiogroup",
-          "name": "upgrade_heating_system",
-          "title": "Will you choose to upgrade to a more efficient boiler/furnace?",
-          "choices": [
-            "yes",
-            "no"
-          ],
-          "colCount": 2
-        },
-        {
-          "type": "radiogroup",
-          "name": "install_heat_pump",
-          "title": "Will you choose to switch from oil to heat pump?",
-          "choices": [
-            "yes",
-            "no"
-          ],
-          "colCount": 2
-        },
-        {
-          "type": "radiogroup",
-          "name": "heating_system_assessment",
-          "title": "Will you choose to sign up for a free heating system assessment?",
-          "choices": [
-            "yes",
-            "no"
-          ],
-          "colCount": 2
-        }
-      ],
-      "title": "Heating and Cooling systems"
-    },
-    {
       "name": "water",
       "elements": [
         {
@@ -208,30 +102,19 @@ const surveyJSON =
           "title": "What type of water heater do you have in your home?",
           "choices": [
             {
-              "value": "storage_tank",
-              "text": "Conventional Storage Tank "
+              "value": "Fuel Oil",
+              "text": "Fuel Oil "
             },
-            {
-              "value": "tankless",
-              "text": "Tankless (On-Demand)"
-            },
-            {
-              "value": "heat_pump",
-              "text": "Heat Pump (Hybrid) "
-            },
-            {
-              "value": "solar",
-              "text": "Solar Powered"
-            },
-            {
-              "value": "condensing",
-              "text": "Condensing"
-            }
+            "Nat Gas",
+            "Propane",
+            "Electric",
+            "Heat Pump"
           ]
         },
         {
           "type": "radiogroup",
           "name": "hot_water_assessment",
+          "visibleIf": "{water_heater_type} = \"Fuel Oil\" or {water_heater_type} = \"Propane\" or {water_heater_type} = \"Electric\"",
           "title": "Will you choose to sign up for a free hot water assessment?",
           "choices": [
             "yes",
@@ -262,7 +145,8 @@ const surveyJSON =
           "choices": [
             "yes",
             "no"
-          ]
+          ],
+          "colCount": 2
         },
         {
           "type": "radiogroup",
@@ -272,7 +156,8 @@ const surveyJSON =
           "choices": [
             "yes",
             "no"
-          ]
+          ],
+          "colCount": 2
         },
         {
           "type": "radiogroup",
@@ -282,7 +167,8 @@ const surveyJSON =
           "choices": [
             "yes",
             "no"
-          ]
+          ],
+          "colCount": 2
         }
       ],
       "title": "Solar Power"
@@ -294,16 +180,6 @@ const surveyJSON =
           "type": "radiogroup",
           "name": "bulbs_incandescent",
           "title": "Do you have more than 10 incandescent/halogen bulbs in your home?",
-          "choices": [
-            "yes",
-            "no"
-          ],
-          "colCount": 2
-        },
-        {
-          "type": "radiogroup",
-          "name": "bulbs_fluorescent_cfl",
-          "title": "Do you have more than 10 fluorescent/CFL bulbs in your home?",
           "choices": [
             "yes",
             "no"
@@ -325,7 +201,6 @@ const surveyJSON =
           "name": "bulbs_replace_leds",
           "title": "Will you choose to replace your bulbs with LED bulbs",
           "choices": [
-            "none",
             "some",
             "half",
             "all"
@@ -461,15 +336,14 @@ const surveyJSON =
           "title": "What type of car do you drive?",
           "choices": [
             "electric/hybrid",
-            "gas/diesel",
-            "none"
+            "gas/diesel"
           ],
-          "colCount": 3
+          "colCount": 2
         },
         {
           "type": "rating",
           "name": "reduce_total_mileage",
-          "visibleIf": "{transportation_car_type} = \"electric/hybrid\" or {transportation_car_type} = \"gas/diesel\"",
+          "visibleIf": "{transportation_car_type} = \"gas/diesel\"",
           "title": "By how many miles are you willing to reduce the miles you travel by car/auto each year?",
           "rateMin": 0,
           "rateMax": 20000,
@@ -480,7 +354,7 @@ const surveyJSON =
         {
           "type": "radiogroup",
           "name": "carpooling_increase",
-          "visibleIf": "{transportation_car_type} <> \"none\"",
+          "visibleIf": "{transportation_car_type} = \"gas/diesel\"",
           "title": "Can you choose to carpool more often?",
           "choices": [
             "yes",
@@ -491,13 +365,14 @@ const surveyJSON =
         {
           "type": "rating",
           "name": "carpooling_amount",
-          "visibleIf": "{carpooling_increase} = \"yes\" && {transportation_car_type} <> \"none\"",
-          "title": "How many times can you choose to carpool per week?",
+          "visibleIf": "{carpooling_increase} = \"yes\"",
+          "title": "if so how much?",
           "rateMax": 6
         },
         {
           "type": "radiogroup",
           "name": "transportation_public",
+          "visibleIf": "{transportation_car_type} = \"gas/diesel\"",
           "title": "Can you choose public/train/bus transportation more often?",
           "choices": [
             "yes",
@@ -509,7 +384,7 @@ const surveyJSON =
           "type": "rating",
           "name": "transportation_public_amount",
           "visibleIf": "{transportation_public} = \"yes\"",
-          "title": "How many times can you choose public transportation per week?",
+          "title": "if so how much?",
           "rateMax": 6
         },
         {
@@ -532,6 +407,7 @@ const surveyJSON =
         {
           "type": "radiogroup",
           "name": "transportation_commute_bike_walk",
+          "visibleIf": "{transportation_car_type} = \"gas/diesel\"",
           "title": "Can you choose to bike or walk your commute more often?",
           "choices": [
             "yes",
@@ -543,7 +419,7 @@ const surveyJSON =
           "type": "rating",
           "name": "transportation_commute_bike_walk_amount",
           "visibleIf": "{transportation_commute_bike_walk} = \"yes\"",
-          "title": "How many times can you choose to bike or walk your commute",
+          "title": "if so how much?",
           "rateMax": 6
         },
         {
@@ -565,7 +441,7 @@ const surveyJSON =
         {
           "type": "radiogroup",
           "name": "eating_switch_meals",
-          "title": "Will you choose to change the food consumed in your family meals change to lower emissions?",
+          "title": "Will you choose to change the food consumed in your family meals to lower emissions?",
           "choices": [
             "yes",
             "no"
@@ -580,10 +456,9 @@ const surveyJSON =
           "choices": [
             "1 - 2 meals",
             "3 - 4 meals",
-            "5 - 6 meals",
-            "7 - 8 meals"
+            "5 - 6 meals"
           ],
-          "colCount": 4
+          "colCount": 3
         },
         {
           "type": "rating",
@@ -598,6 +473,18 @@ const surveyJSON =
     {
       "name": "recycle",
       "elements": [
+        {
+          "type": "radiogroup",
+          "name": "buy_sell_used",
+          "title": "When possible, will you buy or sell used goods rather than new?",
+          "choices": [
+            "usually",
+            "sometimes",
+            "rarely",
+            "never"
+          ],
+          "colCount": 4
+        },
         {
           "type": "radiogroup",
           "name": "reuse_containers",
@@ -633,21 +520,93 @@ const surveyJSON =
             "never"
           ],
           "colCount": 4
-        },
-        {
-          "type": "radiogroup",
-          "name": "buy_sell_used",
-          "title": "When possible, will you buy or sell used goods rather than new?",
-          "choices": [
-            "usually",
-            "sometimes",
-            "rarely",
-            "never"
-          ],
-          "colCount": 4
         }
       ],
       "title": "Reuse / Recycle"
+    },
+    {
+      "name": "heating_cooling",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "heating_system_type",
+          "title": "What is the primary heating system type in your home?",
+          "choices": [
+            "Fuel Oil",
+            "Nat Gas",
+            "Propane",
+            "Wood",
+            "Electric Resistance",
+            "Heat Pump"
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "heating_system_assessment",
+          "visibleIf": "{heating_system_type} <> \"Heat Pump\"",
+          "title": "Will you choose to sign up for a free heating system assessment?",
+          "choices": [
+            "yes",
+            "no"
+          ],
+          "colCount": 2
+        },
+        {
+          "type": "radiogroup",
+          "name": "upgrade_heating_system",
+          "visibleIf": "{heating_system_type} <> \"Heat Pump\"",
+          "title": "Will you choose to upgrade to a more efficient system?",
+          "choices": [
+            "no",
+            "yes, higher efficiency system",
+            "yes, high efficiency heat pump"
+          ],
+          "colCount": 3
+        },
+        {
+          "type": "radiogroup",
+          "name": "weatherized",
+          "title": "Is your home well insulated/weatherized?",
+          "choices": [
+            "yes",
+            "no"
+          ],
+          "colCount": 2
+        },
+        {
+          "type": "radiogroup",
+          "name": "energy_audit",
+          "visibleIf": "{weatherized} = \"no\"",
+          "title": "Will you choose to sign up for a free energy audit?",
+          "choices": [
+            "yes",
+            "no"
+          ],
+          "colCount": 2
+        },
+        {
+          "type": "radiogroup",
+          "name": "insulate_home",
+          "visibleIf": "{weatherized} = \"no\"",
+          "title": "Will you choose to better insulate your home?",
+          "choices": [
+            "yes",
+            "no"
+          ],
+          "colCount": 2
+        },
+        {
+          "type": "radiogroup",
+          "name": "install_programmable_thermostats",
+          "title": "Will you choose to install programmable thermostats?",
+          "choices": [
+            "yes",
+            "no"
+          ],
+          "colCount": 2
+        }
+      ],
+      "title": "Home Heating and Cooling"
     }
   ],
   "questionStartIndex": "1"

@@ -45,20 +45,18 @@ h3 {
   }
    
 /* admin nav *********************************************/
-.admin-nav {
-  background-color: rgb(224, 252, 193);
+.admin__nav {
+  display: grid;
+  grid-template-columns: 5rem 5rem 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr auto;
+  background-color: rgb(193, 252, 222);
   border: 2px solid green;
   border-radius: 1rem;
   padding: 1rem;
-  margin-top: .25rem;
 }
 
-a.admin-nav-link {
-  color: rgb(119, 119, 119);
-  font-size: 1.2rem;
-  font-weight: 400;
+admin__nav-link {
   text-decoration: none;
-  margin-right: 1rem;
 }
 
 /* main nav *********************************************/
@@ -73,7 +71,7 @@ a.admin-nav-link {
 }
 
 .main-nav__display-area {
-  grid-column-start: 2;
+  grid-column-start: 3;
   grid-column-end: 7;
   grid-row-start: 1;
   padding-left: 1rem;
@@ -93,7 +91,7 @@ a.admin-nav-link {
 
 .main-nav__links {
   align-content: right;
-  grid-column-start: 2;
+  grid-column-start: 5;
   grid-column-end: 7;
   grid-row-start: 2;
   margin: 0 2rem;
@@ -137,6 +135,7 @@ a.admin-nav-link {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  border-radius: 1rem;
 }
 
 .form__registration-required {
@@ -146,9 +145,6 @@ a.admin-nav-link {
   grid-row-start: 1;
   grid-row-end: 2;
   border-radius: 1rem;
-  border: 1px solid gray;
-  padding: 1rem;
-  width: 12rem;
 }
 
 .form__registration-optional {
@@ -157,6 +153,7 @@ a.admin-nav-link {
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
+  border-radius: 1rem;
 }
 
 fieldset {
@@ -358,3 +355,80 @@ fieldset {
   width: 11rem;
 }
  
+.table {
+  margin: 1rem;
+}
+
+.pretty-table {
+  padding: 0;
+  margin: 0;
+  border-collapse: collapse;
+  border: 1px solid #333;
+  font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.9em;
+  color: #000;
+  background: #e6eff8 url("widget-table-bg.jpg") top left repeat-x;
+}
+
+.pretty-table caption {
+  caption-side: bottom;
+  font-size: 0.9em;
+  font-style: italic;
+  text-align: right;
+  padding: 0.5em 0;
+}
+
+.pretty-table th,
+.pretty-table td {
+  border: 1px dotted #666;
+  padding: 0.5em;
+  text-align: left;
+  color: #28313a;
+}
+
+.pretty-table th[scope=col] {
+  color: #000;
+  background-color: #8fadcc;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  border-bottom: 2px solid #333;
+  border-right: 2px solid #333;
+}
+
+.pretty-table th+th[scope=col] {
+  color: #fff;
+  background-color: #7d98b3;
+  border-right: 1px dotted #666;
+}
+
+.pretty-table th[scope=row] {
+  background-color: #b8cfe5;
+  border-right: 2px solid #333;
+}
+
+.pretty-table tr.alt th,
+.pretty-table tr.alt td {
+  color: #2a4763;
+}
+
+.pretty-table tr:hover th[scope=row],
+.pretty-table tr:hover td {
+  background-color: #d1c8c8;
+  color: #fff;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+

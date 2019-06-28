@@ -2,10 +2,18 @@ class AffiliationsController < ApplicationController
   before_action :set_affiliation, only: [:show, :update, :destroy]
 
   def index
-    @affiliations = Affiliations.all
+    @affiliations = Affiliation.all
+    respond_to do |f|
+      f.html { render :index }
+      f.json { render json: @affiliations }
+    end
   end
 
   def show
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @affiliation }
+    end
   end
 
   def new
@@ -30,6 +38,7 @@ class AffiliationsController < ApplicationController
   end
   
   def destroy
+    @affiliation.delete
     redirect_to affiliations_path
   end
 
