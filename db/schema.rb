@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 7) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "title"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 7) do
   end
 
   create_table "responses", force: :cascade do |t|
+    t.integer "survey_id", default: 1
     t.integer "question_id"
     t.integer "user_id"
     t.text "answer"

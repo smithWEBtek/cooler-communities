@@ -57,9 +57,9 @@ class UsersController < ApplicationController
       )
 
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to root_path 
-      flash[:notice] = "You have successfully registered and logged in, welcome to the survey!"
+      UserSurvey.create(user_id: @user.id, survey_id: 1)
+      redirect_to login_path
+      flash[:notice] = "#{@user.username}, you have successfully registered, please login."
 		else
       flash[:error] = "Please enter the required fields."
       render :new

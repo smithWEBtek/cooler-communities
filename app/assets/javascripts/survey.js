@@ -23,9 +23,6 @@ function loadSurveyTabs() {
       categoryTabHandler(page.name);
     })
   })
-
-  styleSurveyDivs();
-  document.querySelector('.survey__category-view').classList.add('survey__category-default-view')
 }
 
 function categoryTabHandler(imageId) {
@@ -39,44 +36,6 @@ function categoryTabHandler(imageId) {
     categoryViewDiv.css('display', 'inline');
     tabSelected(currentTab);
     tabCompleted(currentTab);
-  })
-}
-
-function styleSurveyDivs() {
-  let surveyDivs = document.querySelectorAll('div.sv_body');
-  surveyDivs.forEach(div => {
-    div.style.border = '0'
-  });
-}
-
-function saveCategoryResults(results) {
-  let category = results.category;
-  // let points = 0;
-  // for (let key in results.data) {
-  //   let answer = results.data[key]
-  //   let pts = pointsJSON[key][answer]
-
-  //   if (typeof pts === 'number') {
-  //     points += pts
-  //   }
-  // }
-
-  let resultsObject = {
-    category: results.category,
-    data: results.data
-  }
-
-  $.post({
-    url: '/responses',
-    dataType: 'json',
-    data: resultsObject,
-  }).done(function (results) {
-
-    let category_points = results.category_points
-    // let points = 0;
-    // results.forEach(result => points += result.points);
-    $('.survey__points-user-total')[0].innerText = JSON.stringify(category, category_points);
-    thankyouMessage(category, category_points);
   })
 }
 
@@ -100,13 +59,34 @@ function tabSelected(currentTab) {
 function tabCompleted(currentTab) {
   $('input.sv_complete_btn').on('click', function (event) {
     event.preventDefault();
-    // debugger;
     currentTab.classList.add('survey__category-tab-completed');
   })
 }
 
+function saveCategoryResults(results) {
+
+  let dataObject = {
+    category: results.category,
+    data: results.data
+  }
+
+  $.post({
+    url: '/responses',
+    dataType: 'json',
+    data: dataObject,
+  }).done(function (response) {
+
+    let category_points = 0;
+    response.responses.forEach(function (res) {
+      category_points += res.points
+    })
+    $('.survey__points-user-total')[0].innerText = JSON.stringify(response.category, category_points);
+    thankyouMessage(response.category, category_points);
+  })
+}
+
 function thankyouMessage(category, points) {
-  category = category.toLowerCase()
+  category = category.name.toLowerCase()
     .split(' ')
     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
     .join(' ');
