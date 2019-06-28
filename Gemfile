@@ -28,7 +28,7 @@ gem 'webpacker'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'active_model_serializers'
 gem 'http'
-gem 'devise'
+
 gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 

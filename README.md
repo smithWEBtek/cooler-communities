@@ -4,8 +4,7 @@ Community Event; Carbon Point Survey and Estimator
 * Ruby version: 
   2.5.3
 
-* System dependencies: 
-  Devise
+* System dependencies:
 
 * Configuration
 

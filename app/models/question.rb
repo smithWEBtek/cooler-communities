@@ -34,6 +34,7 @@ class Question < ApplicationRecord
           question_type: row[4], 
           answer_key: self.build_answer_key(row)
         }
+        
         new_question = Question.new(question_data)
         category = new_question.category.title
         question_key = new_question.question_key
@@ -42,7 +43,7 @@ class Question < ApplicationRecord
         points[question_key] = answer_key
 
         if new_question.save
-          puts "."
+          puts "question_imported: #{new_question.question_text}"
         else
           raise 'question NOT saved, please check app/lib/assets/airtable_cooler.csv for data accuracy'
         end

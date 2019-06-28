@@ -187,16 +187,14 @@ Boxes update upon save of a Survey
 [] process the user's responses by creating unique rows
 
 [] commitment summary
-[] set up user authentication with Devise
+[] set up user authentication with Bcrypt
 [] thank you / summary email data
 [] community summary data visualizations
  
 [x] Ruby on Rails app 
-[x] Devise for user logins 
 [x] JavaScript library Survey.js to intake responses from users and POST data to Rails backend.
 [x] Survey JSON: json format definition of survey questions and choices, from Survey.js library
 [x] change survey keys to camelCased with convention
-[x] set up user authentication with Devise
 
 ===============================================================================
 
