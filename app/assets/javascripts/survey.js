@@ -19,10 +19,11 @@ function loadSurveyTabs() {
       url: `/img_url/${category}`,
       dataType: 'json'
     }).done(function (response) {
-      categoryTabsDiv.prepend(`<div class="category-image"><img id="${page.name}" src="${response.url}" class="survey__category-tab survey__category-tab-image" /></div>`)
+      categoryTabsDiv.append(`<div class="category-image"><img id="${page.name}" src="${response.url}" class="survey__category-tab survey__category-tab-image" /></div>`)
       categoryTabHandler(page.name);
     })
   })
+
   styleSurveyDivs();
   document.querySelector('.survey__category-view').classList.add('survey__category-default-view')
 }
