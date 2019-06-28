@@ -26,12 +26,16 @@ class ResponsesController < ApplicationController
       render json: @responses
   end
 
+  def show
+   render json: @response
+  end
+
   def create
     @responses = []
  
     params[:data].keys.each_with_index do |question_key, index|
       question = Question.find_by(question_key: question_key)
-      answer = question.answer_key.keys[0]
+      answer = params[:data][question_key]
       points = question.answer_key[answer]
       
       response_data = {
@@ -45,6 +49,8 @@ class ResponsesController < ApplicationController
       new_response = Response.create(response_data)
       @responses.push(new_response)
    end
+
+
 
    render json: { category: @responses.first.category, responses: @responses }
   end

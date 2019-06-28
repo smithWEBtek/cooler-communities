@@ -64,7 +64,6 @@ function tabCompleted(currentTab) {
 }
 
 function saveCategoryResults(results) {
-
   let dataObject = {
     category: results.category,
     data: results.data
@@ -74,16 +73,36 @@ function saveCategoryResults(results) {
     url: '/responses',
     dataType: 'json',
     data: dataObject,
-  }).done(function (response) {
+  }).done(function (data) {
+    // loadCommunityPoints();
+    // loadCategoryPoints(data.category.id);
+    // loadGroupPoints(data.category.id);
+    // debugger;
 
     let category_points = 0;
-    response.responses.forEach(function (res) {
+    data.responses.forEach(function (res) {
       category_points += res.points
     })
-    $('.survey__points-user-total')[0].innerText = JSON.stringify(response.category, category_points);
-    thankyouMessage(response.category, category_points);
+    loadUserPoints(category_points);
+    // $('.survey__points-category-total')[0].innerText = `${data.category.name}: ${category_points}`;
+    thankyouMessage(data.category, category_points);
   })
 }
+
+// function loadCategoryPoints(id) {
+//   $.ajax({
+//     url: `/categories/${id}`,
+//     dataType: 'json'
+//   }).done(function (data) {
+//     console.log("data.total_points: ", data.total_points)
+//     $('div.survey__points_user_total--co2').innerText = data.total_points
+//   })
+// }
+
+function loadUserPoints(points) {
+  $('div.survey__points-user-total--co2').innerText = points
+}
+
 
 function thankyouMessage(category, points) {
   category = category.name.toLowerCase()
