@@ -23,6 +23,9 @@ function loadSurveyTabs() {
       categoryTabHandler(page.name);
     })
   })
+
+  debugger;
+
   styleSurveyDivs();
   document.querySelector('.survey__category-view').classList.add('survey__category-default-view')
 }

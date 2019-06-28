@@ -125,6 +125,7 @@ const surveyJSON = {
         {
           "type": "radiogroup",
           "name": "replace_water_heater",
+          "visibleIf": "{water_heater_type} = \"Fuel Oil\" or {water_heater_type} = \"Propane\" or {water_heater_type} = \"Electric\"",
           "title": "Will you choose to replace your current water heater w/ heat pump?",
           "choices": [
             "yes",
