@@ -7,8 +7,10 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     if current_user && current_user.admin?
-      # redirect_to users_path
-      render 'index'
+      respond_to do |f|
+        f.html { render :index }
+        f.json { render json: @users }
+      end
     else
       flash[:notice] = "Admins only. Redirecting to HOME page."
       redirect_to root_path
@@ -31,6 +33,10 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user unless current_user.admin?
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @user }
+    end
   end
 
   def create
@@ -45,17 +51,18 @@ class UsersController < ApplicationController
       city: params[:user][:city],
       state: params[:state],
       zipcode: params[:user][:zipcode],
-      phone: params[:user][:phone]
+      phone: params[:user][:phone],
+      affiliation_id: params[:affiliation][:affiliation_id],
+      admin: params[:user][:admin]
       )
 
-    if @user.save && @user.password == @user.password_confirmation
-      flash[:success] = "You have successfully registered and logged in"
+    if @user.save
       session[:user_id] = @user.id
-      welcome
-      redirect_to root_path
+      redirect_to root_path 
+      flash[:notice] = "You have successfully registered and logged in, welcome to the survey!"
 		else
-      flash[:error] = "You must register before logging in"
-      redirect_to '/users/new'
+      flash[:error] = "Please enter the required fields."
+      render :new
     end
   end
 
@@ -103,18 +110,18 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation, :first_name, :last_name, :email, :address, :city, :state, :zipcode, :phone)
+    params.require(:user).permit(:admin, :username, :password, :password_confirmation, :first_name, :last_name, :email, :address, :city, :state, :zipcode, :phone, :affiliation_id)
   end
 
   def require_login
     return head(:forbidden) unless session.include? :user_id
   end
 
-  def welcome
-    if @user
-      render :welcome
-    else
-      redirect_to login_path
-    end
-  end
+  # def welcome
+  #   if @user
+  #     render :welcome
+  #   else
+  #     redirect_to login_path
+  #   end
+  # end
 end

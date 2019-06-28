@@ -137,7 +137,6 @@ a.admin-nav-link {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  border-radius: 1rem;
 }
 
 .form__registration-required {
@@ -147,6 +146,9 @@ a.admin-nav-link {
   grid-row-start: 1;
   grid-row-end: 2;
   border-radius: 1rem;
+  border: 1px solid gray;
+  padding: 1rem;
+  width: 12rem;
 }
 
 .form__registration-optional {
@@ -155,7 +157,6 @@ a.admin-nav-link {
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
-  border-radius: 1rem;
 }
 
 fieldset {

@@ -4,14 +4,14 @@
     <table class="pretty-table">
       <tr>
         <th scope="col">name</th>
-        <th scope="col">edit</th>
-        <th scope="col">delete</th>
+        <%# <th scope="col">edit</th> %>
+        <%# <th scope="col">delete</th> %>
       </tr>
       <% @affiliations.each do |a| %>  
       <tr>
         <td><%= a.name %></td>
-        <td><%= link_to 'edit', edit_affiliation_path(a) %></td>
-        <td><%= link_to 'delete', method: 'delete', path: "/affiliations/#{a.id}" %></td> 
+        <%# <td><%= link_to 'edit', edit_affiliation_path(a) %></td>
+        <%# <td><%= link_to 'delete', method: 'delete', path: "/affiliations/#{a.id}" %></td>
       </tr>
       <% end %>
     </table>
