@@ -45,18 +45,20 @@ h3 {
   }
    
 /* admin nav *********************************************/
-.admin__nav {
-  display: grid;
-  grid-template-columns: 5rem 5rem 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr auto;
-  background-color: rgb(193, 252, 222);
+.admin-nav {
+  background-color: rgb(224, 252, 193);
   border: 2px solid green;
   border-radius: 1rem;
   padding: 1rem;
+  margin-top: .25rem;
 }
 
-.admin__nav-link {
+a.admin-nav-link {
+  color: rgb(119, 119, 119);
+  font-size: 1.2rem;
+  font-weight: 400;
   text-decoration: none;
+  margin-right: 1rem;
 }
 
 /* main nav *********************************************/
@@ -71,7 +73,7 @@ h3 {
 }
 
 .main-nav__display-area {
-  grid-column-start: 3;
+  grid-column-start: 2;
   grid-column-end: 7;
   grid-row-start: 1;
   padding-left: 1rem;
@@ -91,7 +93,7 @@ h3 {
 
 .main-nav__links {
   align-content: right;
-  grid-column-start: 5;
+  grid-column-start: 2;
   grid-column-end: 7;
   grid-row-start: 2;
   margin: 0 2rem;
