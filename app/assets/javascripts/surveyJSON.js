@@ -11,8 +11,7 @@ const surveyJSON = {
             "Small Change ~100 sq ft reduction",
             "Medium Change ~ 500 sq ft reduction",
             "Large Change ~ 1,000 sq ft reduction"
-          ],
-          "colCount": 3
+          ]
         },
         {
           "type": "radiogroup",
@@ -21,8 +20,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -32,8 +30,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -43,8 +40,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -53,8 +49,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -66,8 +61,7 @@ const surveyJSON = {
             "1less",
             "2less",
             "3less"
-          ],
-          "colCount": 4
+          ]
         },
         {
           "type": "radiogroup",
@@ -76,8 +70,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -87,8 +80,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         }
       ],
       "title": "Yard / Landscaping"
@@ -119,8 +111,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -130,8 +121,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         }
       ],
       "title": "Water Heating"
@@ -146,8 +136,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -157,8 +146,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -168,8 +156,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         }
       ],
       "title": "Solar Power"
@@ -184,8 +171,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -194,8 +180,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -205,8 +190,7 @@ const surveyJSON = {
             "some",
             "half",
             "all"
-          ],
-          "colCount": 4
+          ]
         }
       ],
       "title": "Lighting"
@@ -222,8 +206,7 @@ const surveyJSON = {
             "I already use a Energy Star Product",
             "yes",
             "no"
-          ],
-          "colCount": 3
+          ]
         },
         {
           "type": "radiogroup",
@@ -233,8 +216,7 @@ const surveyJSON = {
             "I already use a Energy Star Product",
             "yes",
             "no"
-          ],
-          "colCount": 3
+          ]
         },
         {
           "type": "radiogroup",
@@ -245,8 +227,7 @@ const surveyJSON = {
             "once per week",
             "twice per week",
             "three times per week"
-          ],
-          "colCount": 4
+          ]
         },
         {
           "type": "radiogroup",
@@ -257,8 +238,7 @@ const surveyJSON = {
             "once per week",
             "twice per week",
             "three times per week"
-          ],
-          "colCount": 4
+          ]
         },
         {
           "type": "radiogroup",
@@ -267,8 +247,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -280,8 +259,7 @@ const surveyJSON = {
             "15-20 years old",
             "10-15 years old",
             "0-10 years old"
-          ],
-          "colCount": 4
+          ]
         },
         {
           "type": "radiogroup",
@@ -291,8 +269,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -302,8 +279,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -312,8 +288,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -322,8 +297,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         }
       ],
       "title": "Home Appliances"
@@ -338,8 +312,7 @@ const surveyJSON = {
           "choices": [
             "electric/hybrid",
             "gas/diesel"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "rating",
@@ -360,8 +333,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "rating",
@@ -378,8 +350,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "rating",
@@ -395,8 +366,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "rating",
@@ -413,8 +383,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "rating",
@@ -430,8 +399,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         }
       ],
       "title": "Transportation"
@@ -446,8 +414,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -458,8 +425,7 @@ const surveyJSON = {
             "1 - 2 meals",
             "3 - 4 meals",
             "5 - 6 meals"
-          ],
-          "colCount": 3
+          ]
         },
         {
           "type": "rating",
@@ -483,8 +449,7 @@ const surveyJSON = {
             "sometimes",
             "rarely",
             "never"
-          ],
-          "colCount": 4
+          ]
         },
         {
           "type": "radiogroup",
@@ -495,8 +460,7 @@ const surveyJSON = {
             "sometimes",
             "rarely",
             "never"
-          ],
-          "colCount": 4
+          ]
         },
         {
           "type": "radiogroup",
@@ -507,8 +471,7 @@ const surveyJSON = {
             "sometimes",
             "rarely",
             "never"
-          ],
-          "colCount": 4
+          ]
         },
         {
           "type": "radiogroup",
@@ -520,7 +483,7 @@ const surveyJSON = {
             "rarely",
             "never"
           ],
-          "colCount": 4
+          "colCount": 1
         }
       ],
       "title": "Reuse / Recycle"
@@ -549,8 +512,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -561,8 +523,7 @@ const surveyJSON = {
             "no",
             "yes, higher efficiency system",
             "yes, high efficiency heat pump"
-          ],
-          "colCount": 3
+          ]
         },
         {
           "type": "radiogroup",
@@ -571,8 +532,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -582,8 +542,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -593,8 +552,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "radiogroup",
@@ -603,8 +561,7 @@ const surveyJSON = {
           "choices": [
             "yes",
             "no"
-          ],
-          "colCount": 2
+          ]
         }
       ],
       "title": "Home Heating and Cooling"
