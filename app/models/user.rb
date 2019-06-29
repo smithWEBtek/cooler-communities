@@ -25,6 +25,10 @@ class User < ApplicationRecord
     self.admin
   end
 
+  def reset_password
+    self.update(password: "password")
+  end
+
   def summary
     puts "******************************************"
     puts "create report of all points for this user"

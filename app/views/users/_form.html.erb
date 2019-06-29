@@ -1,0 +1,86 @@
+<%= form_for user do |f| %>
+<div class="form__registration">
+  <fieldset class="form__registration-required">
+    <h3>required fields</h3>
+
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :username %><br />
+      <%= f.text_field :username %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :affiliation %><br />
+      <%= f.collection_select(:affiliation_id, Affiliation.all, :id, :name, default: 'unspecified') %>
+    </div>
+
+    <div class="form__registration-optional">
+    <h3>optional fields</h3>
+      <div class="field">
+        <%= f.label :first_name %><br />
+        <%= f.text_field :first_name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :last_name %><br />
+        <%= f.text_field :last_name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :address %><br />
+        <%= f.text_field :address %>
+      </div>
+
+      <div class="field">
+        <%= f.label :city %><br />
+        <%= f.text_field :city %>
+      </div>
+
+      <div class="field">
+        <%= f.label :state %><br />
+        <%= f.collection_select(:state, State.all, :state_code, :state_name, default: 'unspecified') %>
+      </div>
+
+      <div class="field">
+        <%= f.label :zipcode %><br />
+        <%= f.text_field :zipcode %>
+      </div>
+
+      <div class="field">
+        <%= f.label :phone %><br />
+        <%= f.text_field :phone %>
+      </div>
+
+    <% if current_user && current_user.admin? %>
+      <div class="set-user-admin">
+        <p>admin permissions?</p>
+        <p><%= f.label :admin, "standard user", value: false %>
+        <%= f.radio_button :admin, false, :value => false %></p>
+        <p><%= f.label :admin, "admin", value: false %>
+        <%= f.radio_button :admin, true, :value => true %></p>
+      </div>
+    <% end %>
+
+    <div class="actions form__registration-submit">
+      <%= f.submit %>
+    </div>
+    <% end %>
+    </fieldset>
+</div>
