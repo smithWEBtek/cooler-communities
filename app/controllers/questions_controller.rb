@@ -23,6 +23,3 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 end
-
-
-
