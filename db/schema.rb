@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 7) do
+ActiveRecord::Schema.define(version: 8) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 7) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "title"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -42,12 +42,18 @@ ActiveRecord::Schema.define(version: 7) do
   end
 
   create_table "responses", force: :cascade do |t|
+    t.integer "survey_id", default: 1
     t.integer "question_id"
     t.integer "user_id"
     t.text "answer"
     t.integer "points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string "state_name"
+    t.string "state_code"
   end
 
   create_table "surveys", force: :cascade do |t|

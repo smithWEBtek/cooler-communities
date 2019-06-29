@@ -25,6 +25,10 @@ class User < ApplicationRecord
     self.admin
   end
 
+  def reset_password
+    self.update(password: "password")
+  end
+
   def summary
     puts "******************************************"
     puts "create report of all points for this user"
@@ -62,22 +66,22 @@ class User < ApplicationRecord
     csv_text = File.read(Rails.root.join('lib', 'assets', 'users.csv'))
     csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
     csv.each do |row|
-      a = User.new
-      a.username = row[0]
-      a.first_name = row[1]
-      a.last_name = row[2]
-      a.email = row[3]
-      a.password = row[4]
-      a.phone = row[5]
-      a.address = row[6]
-      a.city = row[7]
-      a.state = row[8]
-      a.zipcode = row[9]
-      a.admin = row[10]
-      a.affiliation = Affiliation.find_by_name(row[11])
+      user = User.new
+      user.username = row[0]
+      user.first_name = row[1]
+      user.last_name = row[2]
+      user.email = row[3]
+      user.password = row[4]
+      user.phone = row[5]
+      user.address = row[6]
+      user.city = row[7]
+      user.state = row[8]
+      user.zipcode = row[9]
+      user.admin = row[10]
+      user.affiliation = Affiliation.find_by_name(row[11])
 
-      if a.save
-        puts "user: #{a.username} created"
+      if user.save
+        puts "user: #{user.username} created"
       else 
         puts "user not saved, check csv file:  lib/assets/users.csv"
       end

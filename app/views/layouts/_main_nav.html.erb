@@ -1,7 +1,5 @@
 <div class="main-nav">
-  <div>
-    <%= link_to (image_tag("cc-logo.png", class: "main-nav__cc-logo")), root_path %>
-  </div>
+  <%= link_to (image_tag("cc-logo.png", class: "main-nav__cc-logo")), root_path %>
   <div class="main-nav__links">
     <div>
       <% if !current_user %>
@@ -10,6 +8,7 @@
         <span class="main-nav__link-separator"> | </span>
         <%= link_to "Register", register_path, class: "main-nav__link" %>
       <% else %>
+        <%= render partial: 'layouts/points_boxes' %>
         <span class="main-nav__link">Welcome, <%= current_user.first_name != "" ? current_user.first_name : current_user.username%>!</span>
         <span class="main-nav__link-separator"> | </span>
         <%= link_to "Logout", logout_path, class: "main-nav__link" %>

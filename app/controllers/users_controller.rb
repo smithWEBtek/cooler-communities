@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize_admin, only: [:destroy]
-  before_action :set_user, only: [:export_csv, :show, :edit, :update, :destroy]
+  before_action :set_user, only: [:export_csv, :show, :edit, :update, :destroy, :reset_password]
   # before_action :authenticate_user!, only: [:show]
   before_action :require_login, only: [:show]
 
@@ -20,12 +20,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
-
-  def auth
-    @user = User.find
-    render 'users/login'
-  end
-
+ 
   def user_summary
     @user = current_user
     render '/users/user_summary.csv.erb'
@@ -49,17 +44,17 @@ class UsersController < ApplicationController
       email: params[:user][:email],
       address: params[:user][:address],
       city: params[:user][:city],
-      state: params[:state],
+      state: params[:user][:state],
       zipcode: params[:user][:zipcode],
       phone: params[:user][:phone],
-      affiliation_id: params[:affiliation][:affiliation_id],
+      affiliation_id: params[:user][:affiliation_id],
       admin: params[:user][:admin]
       )
 
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to root_path 
-      flash[:notice] = "You have successfully registered and logged in, welcome to the survey!"
+      UserSurvey.create(user_id: @user.id, survey_id: 1)
+      redirect_to login_path
+      flash[:notice] = "#{@user.username}, you have successfully registered, please login."
 		else
       flash[:error] = "Please enter the required fields."
       render :new
@@ -71,11 +66,28 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update_without_password(user_params)
+    @user.update(first_name: params[:user][:first_name], 
+      last_name: params[:user][:last_name],
+      username: params[:user][:username],
+      email: params[:user][:email],
+      address: params[:user][:address],
+      city: params[:user][:city],
+      state: params[:user][:state],
+      zipcode: params[:user][:zipcode],
+      phone: params[:user][:phone],
+      affiliation_id: params[:user][:affiliation_id],
+      admin: params[:user][:admin])
+
+    if !params[:user][:password].empty?
+      @user.password = params[:user][:password]
+      @user.password_confirmation = params[:user][:password_confirmation]
+    end
+
     if @user.save
       flash[:notice] = 'User Account updated.'
-      redirect_to user_path(@user)
+      redirect_to root_path
     else
+      flash[:notice] = "Errors: #{@user.errors.full_messages}"
       render :edit
     end
   end
@@ -103,8 +115,18 @@ class UsersController < ApplicationController
     # render '/users/users_report.csv.erb'
   end
 
-  private
+  def reset_password
+    if current_user && current_user.admin?
+      @user.reset_password
+      flash[:notice] = "#{@user.username} password reset to: 'password'. Please change it when you log in."
+      redirect_to login_path
+    else
+      redirect_to root_path
+    end
+  end
 
+  private
+  
   def set_user
     @user = User.find_by_id(params[:id])
   end
