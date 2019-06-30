@@ -1,17 +1,5 @@
 <%= form_for user do |f| %>
 
-
-  <% if f.object.errors.any? %>
-  <div id="error_explanation" class="flash_style">
-    <h2>There were some errors:</h2>
-    <ul>
-      <% f.object.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
-
 <div class="form__registration">
   <fieldset class="form__registration-required">
     <h3>required fields</h3>
@@ -68,7 +56,7 @@
 
       <div class="field">
         <%= f.label :state %><br />
-        <%= f.collection_select(:state, State.all, :state_code, :state_name, default: 'unspecified') %>
+        <%= f.collection_select(:state, State.all, :code, :name, default: 'unspecified') %>
       </div>
 
       <div class="field">

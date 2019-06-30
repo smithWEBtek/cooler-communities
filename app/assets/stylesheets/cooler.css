@@ -75,7 +75,6 @@ a.admin-nav-link {
 
 .main-nav__cc-logo {
   grid-column-start: 1;
-  /* grid-row-start: 1; */
   height: 6rem;
   padding: 0;
   margin: 0;
@@ -84,6 +83,7 @@ a.admin-nav-link {
 
 .main-nav__links {
   grid-column-start: 2;
+  grid-column-end: 5;
   margin: 0 2rem;
 }
 
@@ -369,4 +369,10 @@ fieldset {
   padding: 2px;
   background-color: red;
   display: table;
+}
+
+.flash_style {
+  font-weight: bold;
+  color: #cc3300;
+  font-style: italic;
 }

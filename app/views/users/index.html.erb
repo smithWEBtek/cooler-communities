@@ -1,27 +1,27 @@
 <h4><strong>Users Index</strong></h4>
-<table class = "pretty-table" style="width:90%">
+<table class = "pretty-table">
   <tr>
-    <th>id</th>
-    <th>reset pw</th>
-    <th>edit</th>
-    <th>delete</th>
-    <th>admin</th>
-    <th>affiliation</th>
-    <th>first_name</th>
-    <th>last_name</th> 
-    <th>username</th>
-    <th>email</th>
-    <th>phone</th>
-    <th>address</th>
-    <th>city</th>
-    <th>state</th>
-    <th>zipcode</th>
+    <th scope="col">id</th>
+    <th scope="col">pw</th>
+    <th scope="col">edit</th>
+    <th scope="col">del</th>
+    <th scope="col">admin</th>
+    <th scope="col">affiliation</th>
+    <th scope="col">first</th>
+    <th scope="col">last</th> 
+    <th scope="col">username</th>
+    <th scope="col">email</th>
+    <th scope="col">phone</th>
+    <th scope="col">address</th>
+    <th scope="col">city</th>
+    <th scope="col">st</th>
+    <th scope="col">zip</th>
   </tr>
   
   <% @users.each do |user| %>
-    <tr>
+    <tr scope="row">
       <td><%= user.id %></td>
-      <td><%= link_to 'reset pw', "/reset_password/#{user.id}" %></td>
+      <td><%= link_to 'reset', "/reset_password/#{user.id}" %></td>
       <td><%= link_to 'edit', edit_user_path(user) %></td>
       <td><%= link_to 'X', '/users/' + user.id.to_s, method: 'delete' %></td>
       <td><%= user.admin %></td>
@@ -33,7 +33,7 @@
       <td><%= user.phone  %></td>
       <td><%= user.address  %></td>
       <td><%= user.city  %></td>
-      <td><%= user.state  %></td>
+      <td><%= user.state.code  %></td>
       <td><%= user.zipcode %></td
     </tr>
   <% end %>

@@ -56,8 +56,7 @@ class UsersController < ApplicationController
       flash[:notice] = "#{@user.username}, you have successfully registered, please login."
       redirect_to root_path
     else
-      binding.pry
-      flash[:notice] = "Errors: #{@user.errors.messages}"
+      flash[:notice] = "Errors: #{@user.errors.full_messages}"
       render :new
     end
   end
@@ -88,7 +87,8 @@ class UsersController < ApplicationController
       flash[:notice] = 'User Account updated.'
       redirect_to root_path
     else
-      flash[:notice] = "Errors: #{@user.errors.full_messages}"
+      # binding.pry
+      flash[:notice] = @user.errors.full_messages[0]
       render :edit
     end
   end

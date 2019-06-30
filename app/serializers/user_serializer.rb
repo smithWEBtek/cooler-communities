@@ -6,4 +6,5 @@ class UserSerializer < ActiveModel::Serializer
   has_many :user_surveys
   has_many :surveys, through: :user_surveys
   belongs_to :affiliation
+  belongs_to :state
 end

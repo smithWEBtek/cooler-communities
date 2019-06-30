@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :phone
       t.string :address
       t.string :city
-      t.string :state
+      t.integer :state_id, default: 1
       t.string :zipcode
       t.integer :affiliation_id, default: 1
       t.boolean :admin, default: 'false'
