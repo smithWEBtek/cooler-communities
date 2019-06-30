@@ -82,8 +82,7 @@ ActiveRecord::Schema.define(version: 8) do
     t.string "state"
     t.string "zipcode"
     t.integer "affiliation_id", default: 1
-    t.boolean "admin"
-    t.boolean "false"
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

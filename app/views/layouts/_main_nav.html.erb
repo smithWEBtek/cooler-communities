@@ -14,6 +14,8 @@
         <%= link_to "Logout", logout_path, class: "main-nav__link" %>
         <span class="main-nav__link-separator"> | </span>
         <%= link_to "Summary", user_summary_path, class: "main-nav__link" %>
+        <span class="main-nav__link-separator"> | </span>
+        <%= link_to "EditMyInfo", edit_user_path(current_user), class: "main-nav__link" %>
       <% end %>
     </div>
   </div>

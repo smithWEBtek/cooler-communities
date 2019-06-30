@@ -1,4 +1,17 @@
 <%= form_for user do |f| %>
+
+
+  <% if f.object.errors.any? %>
+  <div id="error_explanation" class="flash_style">
+    <h2>There were some errors:</h2>
+    <ul>
+      <% f.object.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
 <div class="form__registration">
   <fieldset class="form__registration-required">
     <h3>required fields</h3>
@@ -13,17 +26,17 @@
       <%= f.text_field :username %>
     </div>
 
-    <div class="field">
+    <div class="field<%= '_with_errors' if f.object.errors[:password].any? %>">
       <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password" %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> or more characters)</em>
+        <% end %><br />
+      <%= f.password_field :password %><br>
     </div>
 
     <div class="field">
       <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <%= f.password_field :password_confirmation, id: 'password_confirmation' %>
     </div>
     
     <div class="field">
@@ -69,8 +82,8 @@
       </div>
 
     <% if current_user && current_user.admin? %>
-      <div class="set-user-admin">
-        <p>admin permissions?</p>
+      <div class="set-user-type">
+        <p>user type</p>
         <p><%= f.label :admin, "standard user", value: false %>
         <%= f.radio_button :admin, false, :value => false %></p>
         <p><%= f.label :admin, "admin", value: false %>
@@ -84,3 +97,19 @@
     <% end %>
     </fieldset>
 </div>
+
+<script type="text/javascript">
+  var password = document.getElementById("password")
+    , confirm_password = document.getElementById("confirm_password");
+
+  function validatePassword(){
+    if(password.value != confirm_password.value) {
+      confirm_password.setCustomValidity("Passwords Don't Match");
+    } else {
+      confirm_password.setCustomValidity('');
+    }
+  }
+
+  password.onchange = validatePassword;
+  confirm_password.onkeyup = validatePassword;
+</script>

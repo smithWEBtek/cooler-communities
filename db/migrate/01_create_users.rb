@@ -12,7 +12,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :state
       t.string :zipcode
       t.integer :affiliation_id, default: 1
-      t.boolean :admin, false
+      t.boolean :admin, default: 'false'
       t.timestamps
     end
   end

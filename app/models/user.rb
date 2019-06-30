@@ -3,6 +3,10 @@ require 'csv'
 class User < ApplicationRecord
   validates :username, uniqueness: true
   has_secure_password
+  validates :password,
+    presence: { on: [:create, :update] },
+    length: { minimum: 6, allow_blank: false }
+
   has_many :responses
   has_many :questions, through: :responses
   has_many :user_surveys

@@ -51,18 +51,19 @@ class UsersController < ApplicationController
       admin: params[:user][:admin]
       )
 
-    if @user.save
+    if params[:user][:password] == params[:user][:password_confirmation] && @user.save
       UserSurvey.create(user_id: @user.id, survey_id: 1)
-      redirect_to login_path
       flash[:notice] = "#{@user.username}, you have successfully registered, please login."
-		else
-      flash[:error] = "Please enter the required fields."
+      redirect_to root_path
+    else
+      binding.pry
+      flash[:notice] = "Errors: #{@user.errors.messages}"
       render :new
     end
   end
 
   def edit
-    @user
+    @minimum_password_length = 6
   end
 
   def update
@@ -83,7 +84,7 @@ class UsersController < ApplicationController
       @user.password_confirmation = params[:user][:password_confirmation]
     end
 
-    if @user.save
+    if params[:user][:password] == params[:user][:password_confirmation] && @user.save
       flash[:notice] = 'User Account updated.'
       redirect_to root_path
     else
@@ -95,9 +96,9 @@ class UsersController < ApplicationController
   def destroy
     if @user.delete
       flash[:notice] = 'User deleted'
-      redirect_to root_path
+      redirect_to users_path
     else
-      flash[:notice] = @user.errors.full_messages
+      # flash[:notice] = @user.errors.full_messages
       redirect_to user_path(@user)
     end
   end
