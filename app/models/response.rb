@@ -6,41 +6,36 @@ class Response < ApplicationRecord
   def self.yard
     self.all.select {|r| r.question.category_id == 1}
   end
-
-  def self.weatherization
+  
+  def self.water
     self.all.select {|r| r.question.category_id == 2}
   end
-
-  def self.heating
+  
+  def self.solar
     self.all.select {|r| r.question.category_id == 3}
   end
-
-  def self.water
+  
+  def self.lighting
     self.all.select {|r| r.question.category_id == 4}
   end
-
-  def self.solar
+  
+  def self.appliances
     self.all.select {|r| r.question.category_id == 5}
   end
-
-  def self.lighting
+  
+  def self.transportation
     self.all.select {|r| r.question.category_id == 6}
   end
-
-  def self.appliances
+  
+  def self.eating
     self.all.select {|r| r.question.category_id == 7}
   end
-
-  def self.transportation
+  
+  def self.recycle
     self.all.select {|r| r.question.category_id == 8}
   end
 
-  def self.eating
+  def self.heating_cooling
     self.all.select {|r| r.question.category_id == 9}
   end
-
-  def self.recycle
-    self.all.select {|r| r.question.category_id == 10}
-  end
-
 end
