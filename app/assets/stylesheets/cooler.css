@@ -65,11 +65,11 @@ a.admin-nav-link {
 
 /* main nav *********************************************/
 .main-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   background-color: rgba(199, 233, 249, 0.667);
   border: 2px solid rgb(20, 77, 20);
   border-radius: 1rem;
+  display: grid;
+  grid-template-columns: 10% 1fr 1fr 1fr 1fr;
   padding: 1rem;
 }
 
@@ -78,7 +78,6 @@ a.admin-nav-link {
   height: 6rem;
   padding: 0;
   margin: 0;
-  /* width: auto; */
 }
 
 .main-nav__links {
@@ -319,7 +318,7 @@ fieldset {
   text-decoration: none;
 }
 
-.survey__points-category-total {
+.survey__category-total {
   background-color: rgba(239, 239, 239, 0.687);
   border: .09rem solid rgba(99, 99, 99, 0.829);
   border-radius: .5rem;
@@ -330,7 +329,11 @@ fieldset {
   width: 9rem;
 }
 
-.survey__points-community-total {
+.survey__category-total--points {
+ color: green; 
+}
+
+.survey__community-total {
   background-color: rgba(239, 239, 239, 0.687);
   border-radius: .5rem;
   border: .09rem solid rgba(99, 99, 99, 0.829);
@@ -341,7 +344,7 @@ fieldset {
   width: 9rem;
 }
 
-.survey__points-user-total {
+.survey__user-total {
   background-color: rgba(239, 239, 239, 0.687);
   border-radius: .5rem;
   border: .09rem solid rgba(99, 99, 99, 0.829);
@@ -352,7 +355,7 @@ fieldset {
   width: 9rem;
 }
 
-.survey__points-group-total {
+.survey__group-total {
   background-color: rgba(239, 239, 239, 0.687);
   border: .09rem solid rgba(99, 99, 99, 0.829);
   border-radius: .5rem;

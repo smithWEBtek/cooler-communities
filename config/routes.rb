@@ -26,9 +26,9 @@ Rails.application.routes.draw do
   get '/eventbrite', to: 'static#eventbrite'
   get '/img_url/:id', to: 'static#img_url'
   
-
   post '/users', to: 'users#update'
-
+  
   root 'surveys#survey'
   
+  get '/points_totals', to: 'responses#points_totals'
 end

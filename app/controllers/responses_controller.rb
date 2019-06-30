@@ -32,7 +32,6 @@ class ResponsesController < ApplicationController
 
   def create
     @responses = []
- 
     params[:data].keys.each_with_index do |question_key, index|
       question = Question.find_by(question_key: question_key)
       answer = params[:data][question_key]
@@ -48,11 +47,23 @@ class ResponsesController < ApplicationController
 
       new_response = Response.create(response_data)
       @responses.push(new_response)
-   end
+    end
+
+    render json: { category: @responses.first.category, responses: @responses }
+  end
 
 
 
-   render json: { category: @responses.first.category, responses: @responses }
+  def points_totals
+    community_total = Response.community_total
+    category_total = Response.category_total(params[:category_id])
+    affiliation_total = Response.affiliation_total(params[:affilitation_id])
+
+    render json: {
+      community_total: community_total,
+      category_total: category_total,
+      affiliation_total: affiliation_total
+    }
   end
 
   private 
@@ -62,6 +73,6 @@ class ResponsesController < ApplicationController
   end
 
   def response_params
-   require(:response).permit( :survey_id, :question_id, :user_id, :answer, :points)
+    require(:response).permit( :survey_id, :question_id, :user_id, :answer, :points)
   end
 end

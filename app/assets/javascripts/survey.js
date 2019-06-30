@@ -74,20 +74,72 @@ function saveCategoryResults(results) {
     dataType: 'json',
     data: dataObject,
   }).done(function (data) {
-    // loadCommunityPoints();
-    // loadCategoryPoints(data.category.id);
-    // loadGroupPoints(data.category.id);
-    // debugger;
-
-    let category_points = 0;
-    data.responses.forEach(function (res) {
-      category_points += res.points
-    })
-    loadUserPoints(category_points);
-    // $('.survey__points-category-total')[0].innerText = `${data.category.name}: ${category_points}`;
-    thankyouMessage(data.category, category_points);
+    loadPoints(data);
   })
 }
+
+function loadPoints(data) {
+  let userPoints = 0;
+  // debugger;
+
+
+  // data.responses.forEach(function (res) {
+  //   category_points += res.points
+  // })
+
+  // data.responses.forEach(r => myPoints += r.points)
+
+
+  // $('.survey__category-total--points')[0].innerText = `${data.category.name}: ${category_points}`;
+
+  loadCommunityPoints();
+  // loadCateogryAndAffilitationPoints(category_id, affiliation_id);
+  // thankyouMessage(data.category, category_points);
+}
+
+function loadCommunityPoints() {
+  $.ajax({
+    url: '/points_totals',
+    dataType: 'json'
+  }).done(function (response) {
+    let community_total = response["community_total"]
+    $('div.survey__community-total--points')[0].innerText = `${community_total}`;
+  })
+}
+
+function loadAffilitationPoints(id) {
+  // $.ajax({
+  // url: `/responses?category_id=${id}`,
+  //   dataType: 'json',
+  //   data: dataObject
+  // }).done(function (response) {
+  // custom methods in Rails give the totals for Community, Category, Group
+  // JS compares those totals to existing values in points boxes, updating if different
+  // })
+}
+
+function loadCategoryPoints(id) {
+  // $.ajax({
+  // url: `/responses?affiliation_id=${id}`,
+  //   dataType: 'json',
+  //   data: dataObject
+  // }).done(function (response) {
+  // custom methods in Rails give the totals for Community, Category, Group
+  // JS compares those totals to existing values in points boxes, updating if different
+  // })
+}
+
+
+
+function thankyouMessage(category, points) {
+  category = category.name.toLowerCase()
+    .split(' ')
+    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+    .join(' ');
+  $('.summary').css('display', 'inline')
+  $('.summary__body')[0].children[0].innerText = (`Thanks for completing the ${category} category.\n Your chosen actions will reduce Carbon Emissions by: ${points} points!`)
+}
+
 
 // function loadCategoryPoints(id) {
 //   $.ajax({
@@ -104,11 +156,3 @@ function loadUserPoints(points) {
 }
 
 
-function thankyouMessage(category, points) {
-  category = category.name.toLowerCase()
-    .split(' ')
-    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-    .join(' ');
-  $('.summary').css('display', 'inline')
-  $('.summary__body')[0].children[0].innerText = (`Thanks for completing the ${category} category.\n Your chosen actions will reduce Carbon Emissions by: ${points} points!`)
-}

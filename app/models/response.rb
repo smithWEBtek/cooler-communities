@@ -2,9 +2,16 @@ class Response < ApplicationRecord
   belongs_to :question
   has_one :category, through: :question
   belongs_to :user
+  has_one :affiliation, through: :user
 
   def self.yard
-    self.all.select {|r| r.question.category_id == 1}
+    total = 0
+    self.all.each do |r| 
+      if r.question.category_id == 1
+        total += r.points if !r.points.nil?
+      end
+    end
+    total
   end
   
   def self.water
@@ -37,5 +44,31 @@ class Response < ApplicationRecord
 
   def self.heating_cooling
     self.all.select {|r| r.question.category_id == 9}
+  end
+
+  def self.community_total
+    total = 0
+    self.all.each {|r| total += r.points if !r.points.nil?}
+    total
+  end
+
+  def self.category_total(id)
+    total = 0
+    self.all.each do  |r|
+      if r.question.category_id == id
+        total += r.points if !r.points.nil?
+      end
+    end
+    total
+  end
+
+  def self.affiliation_total(id)
+    total = 0
+    self.all.each do  |r|
+      if r.user.affiliation_id == id
+        total += r.points if !r.points.nil?
+      end
+    end
+    total
   end
 end
