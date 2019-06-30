@@ -56,7 +56,7 @@
 
       <div class="field">
         <%= f.label :state %><br />
-        <%= f.collection_select(:state, State.all, :code, :name, default: 'unspecified') %>
+        <%= f.collection_select(:state_id, State.all, :id, :name, default: 'unspecified') %>
       </div>
 
       <div class="field">

@@ -355,7 +355,7 @@ fieldset {
   width: 9rem;
 }
 
-.survey__group-total {
+.survey__affiliation-total {
   background-color: rgba(239, 239, 239, 0.687);
   border: .09rem solid rgba(99, 99, 99, 0.829);
   border-radius: .5rem;

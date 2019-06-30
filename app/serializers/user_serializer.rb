@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :admin, :username, :first_name, :last_name, :email, :address, :city, :state, :zipcode, :phone, :affiliation
+  attributes :id, :admin, :username, :first_name, :last_name, :email, :address, :city, :state, :zipcode, :phone, :affiliation, :total_points
 
   has_many :responses
   has_many :questions, through: :responses

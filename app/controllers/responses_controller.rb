@@ -2,7 +2,7 @@ class ResponsesController < ApplicationController
  		
   def index
 		case
-		when params[:category] == 'yard'
+	  	when params[:category] == 'yard'
          @responses = Response.yard
       when params[:category] == 'water'
          @responses = Response.water
@@ -21,9 +21,13 @@ class ResponsesController < ApplicationController
       when params[:category] == 'heating_cooling'
          @responses = Response.heating_cooling
       else
-         @responses = Response.all
+        @responses = Response.all
     end
-      render json: @responses
+    render json: { 
+      responses: @responses,
+      user: current_user,
+      user_total_points: current_user.total_points
+    }
   end
 
   def show
@@ -49,21 +53,27 @@ class ResponsesController < ApplicationController
       @responses.push(new_response)
     end
 
-    render json: { category: @responses.first.category, responses: @responses }
+    render json: { 
+      category: @responses.first.category, 
+      responses: @responses,
+      user: current_user,
+      user_total_points: current_user.total_points   
+    }
   end
 
-
-
-  def points_totals
+  def community_total
     community_total = Response.community_total
-    category_total = Response.category_total(params[:category_id])
-    affiliation_total = Response.affiliation_total(params[:affilitation_id])
+    render json: { community_total: community_total }
+  end
 
-    render json: {
-      community_total: community_total,
-      category_total: category_total,
-      affiliation_total: affiliation_total
-    }
+  def category_total
+    category_total = Response.category_total(params[:id].to_i)
+    render json: { category_total: category_total }
+  end
+
+  def affiliation_total
+    affiliation_total = Response.affiliation_total(params[:id].to_i)
+    render json: { affiliation_total: affiliation_total }
   end
 
   private 

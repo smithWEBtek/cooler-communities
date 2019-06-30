@@ -34,16 +34,6 @@ class User < ApplicationRecord
     self.update(password: "password")
   end
 
-  def summary
-    puts "******************************************"
-    puts "create report of all points for this user"
-    puts "******************************************"
-  end
-
-  def affiliation_name
-    self.affiliation.name
-  end
-
   def self.to_csv
     attributes = ["username",
       "first_name",
@@ -92,4 +82,21 @@ class User < ApplicationRecord
       end
     end
   end
+
+  def total_points
+    points = 0
+    self.responses.each {|r| points += r.points if r.points }
+    points
+  end
+  
+  def summary
+    puts "******************************************"
+    puts "create report of all points for this user"
+    puts "******************************************"
+  end
+
+  def affiliation_name
+    self.affiliation.name
+  end
+
 end

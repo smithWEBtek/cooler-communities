@@ -1,8 +1,8 @@
 $(() => {
-  loadSurveyTabs();
+  loadSurvey();
 });
 
-function loadSurveyTabs() {
+function loadSurvey() {
   surveyJSON.pages.map(page => {
     let categorySurvey = new Survey.Model(page);
     let categorySurveyDiv = $(`#${page.name}`)
@@ -23,6 +23,7 @@ function loadSurveyTabs() {
       categoryTabHandler(page.name);
     })
   })
+  loadCommunityPoints();
 }
 
 function categoryTabHandler(imageId) {
@@ -64,72 +65,46 @@ function tabCompleted(currentTab) {
 }
 
 function saveCategoryResults(results) {
-  let dataObject = {
-    category: results.category,
-    data: results.data
-  }
-
+  let dataObject = { category: results.category, data: results.data }
   $.post({
     url: '/responses',
     dataType: 'json',
     data: dataObject,
   }).done(function (data) {
-    loadPoints(data);
+
+    $('div.survey__user-total--points')[0].innerText = data.user_total_points;
+    loadCategoryPoints(data.category.id);
+    loadAffiliationPoints(data.user.affiliation_id);
+    loadCommunityPoints();
   })
-}
-
-function loadPoints(data) {
-  let userPoints = 0;
-  // debugger;
-
-
-  // data.responses.forEach(function (res) {
-  //   category_points += res.points
-  // })
-
-  // data.responses.forEach(r => myPoints += r.points)
-
-
-  // $('.survey__category-total--points')[0].innerText = `${data.category.name}: ${category_points}`;
-
-  loadCommunityPoints();
-  // loadCateogryAndAffilitationPoints(category_id, affiliation_id);
-  // thankyouMessage(data.category, category_points);
 }
 
 function loadCommunityPoints() {
   $.ajax({
-    url: '/points_totals',
+    url: '/community_total',
     dataType: 'json'
   }).done(function (response) {
-    let community_total = response["community_total"]
-    $('div.survey__community-total--points')[0].innerText = `${community_total}`;
+    $('div.survey__community-total--points')[0].innerText = `${response.community_total}`;
   })
 }
 
-function loadAffilitationPoints(id) {
-  // $.ajax({
-  // url: `/responses?category_id=${id}`,
-  //   dataType: 'json',
-  //   data: dataObject
-  // }).done(function (response) {
-  // custom methods in Rails give the totals for Community, Category, Group
-  // JS compares those totals to existing values in points boxes, updating if different
-  // })
-}
-
 function loadCategoryPoints(id) {
-  // $.ajax({
-  // url: `/responses?affiliation_id=${id}`,
-  //   dataType: 'json',
-  //   data: dataObject
-  // }).done(function (response) {
-  // custom methods in Rails give the totals for Community, Category, Group
-  // JS compares those totals to existing values in points boxes, updating if different
-  // })
+  $.ajax({
+    url: `/category_total/${id}`,
+    dataType: 'json'
+  }).done(function (response) {
+    $('div.survey__category-total--points')[0].innerText = `${response.category_total}`;
+  })
 }
 
-
+function loadAffiliationPoints(id) {
+  $.ajax({
+    url: `/affiliation_total/${id}`,
+    dataType: 'json'
+  }).done(function (response) {
+    $('div.survey__affiliation-total--points')[0].innerText = `${response.affiliation_total}`;
+  })
+}
 
 function thankyouMessage(category, points) {
   category = category.name.toLowerCase()
@@ -140,19 +115,6 @@ function thankyouMessage(category, points) {
   $('.summary__body')[0].children[0].innerText = (`Thanks for completing the ${category} category.\n Your chosen actions will reduce Carbon Emissions by: ${points} points!`)
 }
 
-
-// function loadCategoryPoints(id) {
-//   $.ajax({
-//     url: `/categories/${id}`,
-//     dataType: 'json'
-//   }).done(function (data) {
-//     console.log("data.total_points: ", data.total_points)
-//     $('div.survey__points_user_total--co2').innerText = data.total_points
-//   })
-// }
-
 function loadUserPoints(points) {
   $('div.survey__points-user-total--co2').innerText = points
 }
-
-

@@ -30,5 +30,7 @@ Rails.application.routes.draw do
   
   root 'surveys#survey'
   
-  get '/points_totals', to: 'responses#points_totals'
+  get '/community_total', to: 'responses#community_total'
+  get '/category_total/:id', to: 'responses#category_total'
+  get '/affiliation_total/:id', to: 'responses#affiliation_total'
 end
