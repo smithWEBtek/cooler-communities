@@ -3,15 +3,16 @@ require 'csv'
 class User < ApplicationRecord
   validates :username, uniqueness: true
   has_secure_password
-  validates :password,
-    presence: { on: [:create, :update] },
-    length: { minimum: 6, allow_blank: false }
+  # validates :password,
+  #   presence: { on: [:create, :update] },
+  #   length: { minimum: 6 }
 
   has_many :responses
   has_many :questions, through: :responses
   has_many :user_surveys
   has_many :surveys, through: :user_surveys
   belongs_to :affiliation
+  belongs_to :state, optional: true
 
   def password=(new_password)
     salt = BCrypt::Engine::generate_salt
@@ -33,14 +34,8 @@ class User < ApplicationRecord
     self.update(password: "password")
   end
 
-  def summary
-    puts "******************************************"
-    puts "create report of all points for this user"
-    puts "******************************************"
-  end
-
-  def affiliation_name
-    self.affiliation.name
+  def state_abbr
+    self.state.code
   end
 
   def self.to_csv
@@ -51,7 +46,7 @@ class User < ApplicationRecord
       "phone",
       "address",
       "city",
-      "state",
+      "state_abbr",
       "zipcode",
       "admin",
       "affiliation_name"]
@@ -79,16 +74,33 @@ class User < ApplicationRecord
       user.phone = row[5]
       user.address = row[6]
       user.city = row[7]
-      user.state = row[8]
+      user.state = State.find_by_code(row[8]) if !row[8].nil?
       user.zipcode = row[9]
       user.admin = row[10]
       user.affiliation = Affiliation.find_by_name(row[11])
 
       if user.save
         puts "user: #{user.username} created"
-      else 
+      else
         puts "user not saved, check csv file:  lib/assets/users.csv"
       end
     end
   end
+
+  def total_points
+    points = 0
+    self.responses.each {|r| points += r.points if r.points }
+    points
+  end
+  
+  def summary
+    puts "******************************************"
+    puts "create report of all points for this user"
+    puts "******************************************"
+  end
+
+  def affiliation_name
+    self.affiliation.name
+  end
+
 end

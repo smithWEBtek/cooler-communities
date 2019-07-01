@@ -1,17 +1,5 @@
 <%= form_for user do |f| %>
 
-
-  <% if f.object.errors.any? %>
-  <div id="error_explanation" class="flash_style">
-    <h2>There were some errors:</h2>
-    <ul>
-      <% f.object.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
-
 <div class="form__registration">
   <fieldset class="form__registration-required">
     <h3>required fields</h3>
@@ -68,7 +56,7 @@
 
       <div class="field">
         <%= f.label :state %><br />
-        <%= f.collection_select(:state, State.all, :state_code, :state_name, default: 'unspecified') %>
+        <%= f.collection_select(:state_id, State.all, :id, :name, default: 'unspecified') %>
       </div>
 
       <div class="field">
@@ -97,19 +85,3 @@
     <% end %>
     </fieldset>
 </div>
-
-<script type="text/javascript">
-  var password = document.getElementById("password")
-    , confirm_password = document.getElementById("confirm_password");
-
-  function validatePassword(){
-    if(password.value != confirm_password.value) {
-      confirm_password.setCustomValidity("Passwords Don't Match");
-    } else {
-      confirm_password.setCustomValidity('');
-    }
-  }
-
-  password.onchange = validatePassword;
-  confirm_password.onkeyup = validatePassword;
-</script>

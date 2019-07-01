@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize_admin, only: [:destroy]
   before_action :set_user, only: [:export_csv, :show, :edit, :update, :destroy, :reset_password]
-  # before_action :authenticate_user!, only: [:show]
   before_action :require_login, only: [:show]
 
   def index
@@ -35,29 +34,13 @@ class UsersController < ApplicationController
   end
 
   def create
-		@user = User.new(
-      first_name: params[:user][:first_name], 
-      last_name: params[:user][:last_name],
-      username: params[:user][:username],
-      password: params[:user][:password],
-      password_confirmation: params[:user][:password_confirmation],
-      email: params[:user][:email],
-      address: params[:user][:address],
-      city: params[:user][:city],
-      state: params[:user][:state],
-      zipcode: params[:user][:zipcode],
-      phone: params[:user][:phone],
-      affiliation_id: params[:user][:affiliation_id],
-      admin: params[:user][:admin]
-      )
-
+    @user = User.new(user_params)
     if params[:user][:password] == params[:user][:password_confirmation] && @user.save
       UserSurvey.create(user_id: @user.id, survey_id: 1)
       flash[:notice] = "#{@user.username}, you have successfully registered, please login."
       redirect_to root_path
     else
-      binding.pry
-      flash[:notice] = "Errors: #{@user.errors.messages}"
+      flash[:notice] = "Errors: #{@user.errors.full_messages}"
       render :new
     end
   end
@@ -67,28 +50,19 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update(first_name: params[:user][:first_name], 
-      last_name: params[:user][:last_name],
-      username: params[:user][:username],
-      email: params[:user][:email],
-      address: params[:user][:address],
-      city: params[:user][:city],
-      state: params[:user][:state],
-      zipcode: params[:user][:zipcode],
-      phone: params[:user][:phone],
-      affiliation_id: params[:user][:affiliation_id],
-      admin: params[:user][:admin])
-
+    @user.update(user_params)
+    updated_password_message = nil
     if !params[:user][:password].empty?
       @user.password = params[:user][:password]
       @user.password_confirmation = params[:user][:password_confirmation]
+      updated_password_message = "Password updated"
     end
 
     if params[:user][:password] == params[:user][:password_confirmation] && @user.save
-      flash[:notice] = 'User Account updated.'
+      flash[:notice] = 'User Account updated. ' + updated_password_message if updated_password_message
       redirect_to root_path
     else
-      flash[:notice] = "Errors: #{@user.errors.full_messages}"
+      flash[:notice] = @user.errors.full_messages
       render :edit
     end
   end
@@ -98,22 +72,16 @@ class UsersController < ApplicationController
       flash[:notice] = 'User deleted'
       redirect_to users_path
     else
-      # flash[:notice] = @user.errors.full_messages
       redirect_to user_path(@user)
     end
   end
 
   def users_report
     @users = User.all
-    # respond_to do |format|
-    #   format.csv {send_data @users.to_csv}
-    # end
-
     respond_to do |format|
       format.html
       format.csv { send_data @users.to_csv, filename: "users_report_#{Date.today}.csv" }
     end
-    # render '/users/users_report.csv.erb'
   end
 
   def reset_password
@@ -133,18 +101,10 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:admin, :username, :password, :password_confirmation, :first_name, :last_name, :email, :address, :city, :state, :zipcode, :phone, :affiliation_id)
+    params.require(:user).permit(:admin, :username, :password, :password_confirmation, :first_name, :last_name, :email, :address, :city, :state_id, :zipcode, :phone, :affiliation_id)
   end
 
   def require_login
     return head(:forbidden) unless session.include? :user_id
   end
-
-  # def welcome
-  #   if @user
-  #     render :welcome
-  #   else
-  #     redirect_to login_path
-  #   end
-  # end
 end

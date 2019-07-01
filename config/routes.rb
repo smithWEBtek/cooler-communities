@@ -26,9 +26,11 @@ Rails.application.routes.draw do
   get '/eventbrite', to: 'static#eventbrite'
   get '/img_url/:id', to: 'static#img_url'
   
-
   post '/users', to: 'users#update'
-
+  
   root 'surveys#survey'
   
+  get '/community_total', to: 'responses#community_total'
+  get '/category_total/:id', to: 'responses#category_total'
+  get '/affiliation_total/:id', to: 'responses#affiliation_total'
 end
