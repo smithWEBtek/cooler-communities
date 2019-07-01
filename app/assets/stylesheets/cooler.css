@@ -102,9 +102,9 @@ a.admin-nav-link {
   border: 2px solid rgb(20, 77, 20);
   border-radius: 1rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 2rem; 1fr 1fr;
-  padding: 1rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 2rem;
+  padding: .7rem;
 }
 
 .main-nav__header {
@@ -112,10 +112,15 @@ a.admin-nav-link {
   grid-column-end: 4;
   grid-row-start: 1;
   color: rgb(83, 80, 80);
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 400;
   text-decoration: none;
-  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.main-nav__header:hover {
+  font-weight: 450;
+  cursor: pointer;
 }
 
 .main-nav__links {
