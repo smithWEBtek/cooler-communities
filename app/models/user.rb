@@ -34,6 +34,10 @@ class User < ApplicationRecord
     self.update(password: "password")
   end
 
+  def state_abbr
+    self.state.code
+  end
+
   def self.to_csv
     attributes = ["username",
       "first_name",
@@ -42,7 +46,7 @@ class User < ApplicationRecord
       "phone",
       "address",
       "city",
-      "state",
+      "state_abbr",
       "zipcode",
       "admin",
       "affiliation_name"]
