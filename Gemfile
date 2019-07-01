@@ -39,6 +39,15 @@ gem 'capistrano-passenger'
 gem 'capistrano-rvm'
 gem 'listen', '>= 3.0.5', '< 3.2'
 
+  # for generation of PDF files from Rails views
+# gem 'nokogiri', :git => 'https://github.com/tenderlove/nokogiri.git'
+# https://github.com/mileszs/wicked_pdf
+# gem 'wicked_pdf', :git => 'https://github.com/mileszs/wicked_pdf.git'
+gem 'wicked_pdf'
+# gem 'wkhtmltopdf-binary', :git => 'https://github.com/pallymore/wkhtmltopdf-binary.git'
+gem 'wkhtmltopdf-binary'
+gem 'bootstrap'
+
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
@@ -53,4 +62,4 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

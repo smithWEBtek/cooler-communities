@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>PDFs - Ruby on Rails</title>
+  <%= wicked_pdf_stylesheet_link_tag "invoice" %>
+  <link rel="stylesheet" href="../../assets/stylesheets/cooler.css" />
+</head>
+
+<body>
+  <%= yield %>
+
+  <p>Community total: <%= Response.community_total %></p>
+  <p>Affiliation Group (<%= @user.affiliation.name %>) total: <%= Response.affiliation_total(@user.affiliation_id) %></p>
+  <p><%= @user.full_name %> total: <%= @user.total_points %></p>
+  <hr />
+
+  <p>Community Totals by Category</p>
+  <table class="pretty-table">
+    <tr>
+      <th>yard</th>
+      <th>water</th>
+      <th>solar</th>
+      <th>lighting</th>
+      <th>appliances</th>
+      <th>transportation</th>
+      <th>eating</th>
+      <th>recycling</th>
+      <th>heating_cooling</th>
+    </tr>
+    <tr scope="row">
+      <td><%= Response.category_total(1) %></td>
+      <td><%= Response.category_total(2) %></td>
+      <td><%= Response.category_total(3) %></td>
+      <td><%= Response.category_total(4) %></td>
+      <td><%= Response.category_total(5) %></td>
+      <td><%= Response.category_total(6) %></td>
+      <td><%= Response.category_total(7) %></td>
+      <td><%= Response.category_total(8) %></td>
+      <td><%= Response.category_total(9) %></td>
+    </tr>
+  </table>
+  <hr />
+
+  <p><%= @user.full_name %>'s responses today: </p>
+  <table class="pretty-table">
+    <tr>
+      <th scope="col2">category</th>
+      <th scope="col2">question_key</th>
+      <th scope="col2">question_text</th>
+      <th scope="col2">answer</th>
+      <th scope="col2">points</th>
+    </tr>
+    <% @user.responses.each do |r| %>
+    <tr scope="row">
+      <td><%= r.category.name %></td>
+      <td><%= r.question.question_key %></td>
+      <td><%= r.question.question_text %></td>
+      <td><%= r.answer %></td>
+      <td><%= r.points %></td>
+    </tr>
+    <% end %>
+  </table>
+  
+  <hr />
+
+  
+  <hr />
+</body>
+
+</html>

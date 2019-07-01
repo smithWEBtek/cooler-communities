@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize_admin, only: [:destroy]
-  before_action :set_user, only: [:export_csv, :show, :edit, :update, :destroy, :reset_password]
+  before_action :set_user, only: [:export_csv, :show, :edit, :update, :destroy, :reset_password, :user_summary]
   before_action :require_login, only: [:show]
 
   def index
@@ -91,6 +91,24 @@ class UsersController < ApplicationController
       redirect_to login_path
     else
       redirect_to root_path
+    end
+  end
+
+  def user_summary
+    @date = DateTime.new
+
+    respond_to do |format|
+        format.html
+        format.pdf do
+            render pdf: "User: #{@user.username}",
+            page_size: 'A4',
+            template: "users/summary_header.html.erb",
+            layout: "pdf.html",
+            orientation: "Landscape",
+            lowquality: true,
+            zoom: 1,
+            dpi: 75
+        end
     end
   end
 
