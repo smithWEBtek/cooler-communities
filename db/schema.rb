@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 8) do
   end
 
   create_table "states", force: :cascade do |t|
-    t.string "state_name"
-    t.string "state_code"
+    t.string "name"
+    t.string "code"
   end
 
   create_table "surveys", force: :cascade do |t|
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 8) do
     t.string "phone"
     t.string "address"
     t.string "city"
-    t.string "state"
+    t.integer "state_id", default: 1
     t.string "zipcode"
     t.integer "affiliation_id", default: 1
     t.boolean "admin", default: false

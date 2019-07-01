@@ -33,19 +33,52 @@ h3 {
 }
 
 .privacy-notice {
-  background-color: rgb(219, 241, 222);
-  border: 2px dashed rgba(255, 28, 28, 0.671);
-  margin: 2rem 0;
+  background-color: rgba(222, 247, 226, 0.687);
+  border: 2px dashed rgba(36, 134, 64, 0.529);
+  margin: 1rem;
   padding: 1rem;
-  width: 30%;
+  width: 90%;
   border-radius: 1rem;
 }
 
-/* notice message alert ***********************************/
-  .alert {
-    color: red;
-  }
-   
+/* messages ***********************************/
+.alert {
+  color: red;
+}
+
+.message__thankyou {
+  background-color: rgba(207, 226, 235, 0.667);
+  border: 1px solid rgb(122, 124, 129);
+  border-radius: .5rem;
+  padding: .5rem;
+  margin-top: .3rem;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+.flash_style {
+  font-weight: bold;
+  color: #cc3300;
+  font-style: italic;
+}
+
+.survey__message {
+  display: 'none';
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  padding: 0 2rem;
+}
+
+.welcome-message {
+  background-color: rgb(223, 238, 195);
+}
+
 /* admin nav *********************************************/
 .admin-nav {
   background-color: rgb(232, 244, 218);
@@ -65,25 +98,24 @@ a.admin-nav-link {
 
 /* main nav *********************************************/
 .main-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   background-color: rgba(199, 233, 249, 0.667);
   border: 2px solid rgb(20, 77, 20);
   border-radius: 1rem;
+  display: grid;
+  grid-template-columns: 10% 1fr 1fr 1fr 1fr;
   padding: 1rem;
 }
 
 .main-nav__cc-logo {
   grid-column-start: 1;
-  /* grid-row-start: 1; */
   height: 6rem;
   padding: 0;
   margin: 0;
-  /* width: auto; */
 }
 
 .main-nav__links {
   grid-column-start: 2;
+  grid-column-end: 5;
   margin: 0 2rem;
 }
 
@@ -105,19 +137,6 @@ a.admin-nav-link {
   background-color: rgb(141, 193, 238);
   grid-column-start: 2;
   grid-row-start: 1;
-}
-
-/* landing page *******************************************/
-.landing-page__about {
-  grid-column-start: 2;
-  grid-column-end: 4;
-  grid-row-start: 2;
-  grid-row-end: 4;
-  padding: 0 2rem;
-}
-
-.welcome-message {
-  background-color: rgb(223, 238, 195);
 }
 
 /* form__registration *************************************/
@@ -319,7 +338,7 @@ fieldset {
   text-decoration: none;
 }
 
-.survey__points-category-total {
+.survey__category-total {
   background-color: rgba(239, 239, 239, 0.687);
   border: .09rem solid rgba(99, 99, 99, 0.829);
   border-radius: .5rem;
@@ -330,7 +349,11 @@ fieldset {
   width: 9rem;
 }
 
-.survey__points-community-total {
+.survey__category-total--points {
+ color: green; 
+}
+
+.survey__community-total {
   background-color: rgba(239, 239, 239, 0.687);
   border-radius: .5rem;
   border: .09rem solid rgba(99, 99, 99, 0.829);
@@ -341,7 +364,7 @@ fieldset {
   width: 9rem;
 }
 
-.survey__points-user-total {
+.survey__user-total {
   background-color: rgba(239, 239, 239, 0.687);
   border-radius: .5rem;
   border: .09rem solid rgba(99, 99, 99, 0.829);
@@ -352,7 +375,7 @@ fieldset {
   width: 9rem;
 }
 
-.survey__points-group-total {
+.survey__affiliation-total {
   background-color: rgba(239, 239, 239, 0.687);
   border: .09rem solid rgba(99, 99, 99, 0.829);
   border-radius: .5rem;
@@ -362,11 +385,4 @@ fieldset {
   padding: .5rem;
   width: 9rem;
 }
-
-/* errors *************** */
-
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
+ 

@@ -43,7 +43,7 @@ class Question < ApplicationRecord
         points[question_key] = answer_key
 
         if new_question.save
-          puts "question_imported: #{new_question.question_text}"
+          puts "question_imported: #{new_question.question_key}"
         else
           raise 'question NOT saved, please check app/lib/assets/airtable_cooler.csv for data accuracy'
         end

@@ -1,8 +1,8 @@
 $(() => {
-  loadSurveyTabs();
+  loadSurvey();
 });
 
-function loadSurveyTabs() {
+function loadSurvey() {
   surveyJSON.pages.map(page => {
     let categorySurvey = new Survey.Model(page);
     let categorySurveyDiv = $(`#${page.name}`)
@@ -19,10 +19,14 @@ function loadSurveyTabs() {
       url: `/img_url/${category}`,
       dataType: 'json'
     }).done(function (response) {
-      categoryTabsDiv.append(`<div class="category-image"><img id="${page.name}" src="${response.url}" class="survey__category-tab survey__category-tab-image" /></div>`)
+      categoryTabsDiv.append(`
+        <div class="category-image">
+          <img id="${page.name}" src="${response.url}" class="survey__category-tab survey__category-tab-image" />
+        </div>`)
       categoryTabHandler(page.name);
     })
   })
+  loadCommunityPoints();
 }
 
 function categoryTabHandler(imageId) {
@@ -64,51 +68,85 @@ function tabCompleted(currentTab) {
 }
 
 function saveCategoryResults(results) {
-  let dataObject = {
-    category: results.category,
-    data: results.data
-  }
-
+  let dataObject = { category: results.category, data: results.data }
   $.post({
     url: '/responses',
     dataType: 'json',
     data: dataObject,
   }).done(function (data) {
-    // loadCommunityPoints();
-    // loadCategoryPoints(data.category.id);
-    // loadGroupPoints(data.category.id);
-    // debugger;
-
-    let category_points = 0;
-    data.responses.forEach(function (res) {
-      category_points += res.points
-    })
-    loadUserPoints(category_points);
-    // $('.survey__points-category-total')[0].innerText = `${data.category.name}: ${category_points}`;
-    thankyouMessage(data.category, category_points);
+    $('div.survey__user-total--points')[0].innerText = data.user_total_points;
+    loadCategoryPoints(data.category.id);
+    loadAffiliationPoints(data.user.affiliation_id);
+    loadCommunityPoints();
+    surveyMessage(data.category.name, data.user_total_points)
   })
 }
 
-// function loadCategoryPoints(id) {
-//   $.ajax({
-//     url: `/categories/${id}`,
-//     dataType: 'json'
-//   }).done(function (data) {
-//     console.log("data.total_points: ", data.total_points)
-//     $('div.survey__points_user_total--co2').innerText = data.total_points
-//   })
-// }
-
-function loadUserPoints(points) {
-  $('div.survey__points-user-total--co2').innerText = points
+// points ------------------------------------------------------------------
+function loadCommunityPoints() {
+  $.ajax({
+    url: '/community_total',
+    dataType: 'json'
+  }).done(function (response) {
+    $('div.survey__community-total--points')[0].innerText = `${response.community_total}`;
+  })
 }
 
+function loadCategoryPoints(id) {
+  $.ajax({
+    url: `/category_total/${id}`,
+    dataType: 'json'
+  }).done(function (response) {
+    $('div.survey__category-total--points')[0].innerText = `${response.category_total}`;
+  })
+}
 
-function thankyouMessage(category, points) {
-  category = category.name.toLowerCase()
-    .split(' ')
-    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-    .join(' ');
-  $('.summary').css('display', 'inline')
-  $('.summary__body')[0].children[0].innerText = (`Thanks for completing the ${category} category.\n Your chosen actions will reduce Carbon Emissions by: ${points} points!`)
+function loadAffiliationPoints(id) {
+  $.ajax({
+    url: `/affiliation_total/${id}`,
+    dataType: 'json'
+  }).done(function (response) {
+    $('div.survey__affiliation-total--points')[0].innerText = `${response.affiliation_total}`;
+  })
+}
+
+// messages ------------------------------------------------------------------
+function msgCategoryComplete(categoryName, points) {
+  $('#survey__message')[0].innerHTML = (`
+    <div class="survey__message">
+      Thanks for completing the ${categoryName} section.<br />
+      Your chosen actions will reduce Carbon Emissions by: ${points} points!
+    </div>
+  `)
+  $('#survey__message')[0].css('display', 'inline');
+  // msgNextCategory(currentCategory, nextCategory);
+}
+
+function msgSurveyStart(user_id) {
+  $('#survey__message')[0].innerHTML = (`
+    <div class="landing-page__about">
+    <p><strong>A survey to help you choose actions that reduce your carbon footprint. </strong>It is used to determine
+    the value in points, equivalent to lbs. of CO2 emission or trees. CO2 and cost estimates are based on
+    assumptions of average energy consumption and fuel prices, and are not intended to be exact. See notice below
+    for privacy information.</p>
+    <p>Copyright &copy; 2019, Town of Concord Comprehensive Sustainable Energy Committee.</p>
+    </div>
+  `)
+  $('#survey__message')[0].css('display', 'inline');
+  // userSummary(user_id);
+}
+
+function msgSurveyComplete(categoryName, points) {
+  $('#survey__message')[0].innerHTML = (`
+    <div class="survey__message">
+      Thanks for completing the ${categoryName} section.<br />
+      Your chosen actions will reduce Carbon Emissions by: ${points} points!
+    </div>
+  `)
+  $('#survey__message')[0].css('display', 'inline');
+  // userSummary(user_id);
+}
+
+function surveyMessage(text) {
+  $('.survey__message').text = text;
 }
