@@ -30,6 +30,10 @@ class User < ApplicationRecord
     self.admin
   end
 
+  def full_name
+    self.first_name + ' ' + self.last_name
+  end
+
   def reset_password
     self.update(password: "password")
   end

@@ -102,41 +102,41 @@ a.admin-nav-link {
   border: 2px solid rgb(20, 77, 20);
   border-radius: 1rem;
   display: grid;
-  grid-template-columns: 10% 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 2rem; 1fr 1fr;
   padding: 1rem;
 }
 
-.main-nav__cc-logo {
+.main-nav__header {
   grid-column-start: 1;
-  height: 6rem;
-  padding: 0;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  color: rgb(83, 80, 80);
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-decoration: none;
   margin: 0;
 }
 
 .main-nav__links {
-  grid-column-start: 2;
+  grid-column-start: 1;
   grid-column-end: 5;
-  margin: 0 2rem;
+  grid-row-start: 2;
+  margin: 0 .2rem;
 }
 
 .main-nav__link {
   color: rgb(119, 119, 119);
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 400;
   text-decoration: none;
 }
 
 .main-nav__link-separator {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 300;
   color: rgb(119, 119, 119);
   padding: 0 1rem;
-}
-
-.main-nav__about {
-  background-color: rgb(141, 193, 238);
-  grid-column-start: 2;
-  grid-row-start: 1;
 }
 
 /* form__registration *************************************/
@@ -189,7 +189,7 @@ fieldset {
 
 /* form__login *************************************/
 .form__login {
-  width: 9rem;
+  width: 7rem;
   padding: .5rem;
   border: 2px solid gray;
   border-radius: 1rem;
@@ -197,7 +197,7 @@ fieldset {
 
 .form__login {
   background-color: rgb(240, 230, 232);
-  width: 9rem;
+  width: 7rem;
   padding: .5rem;
   margin-top: 2rem;
 }
@@ -343,14 +343,14 @@ fieldset {
   border: .09rem solid rgba(99, 99, 99, 0.829);
   border-radius: .5rem;
   box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
-  grid-column-start: 1;
+  grid-column-start: 2;
   grid-row-start: 1;
   padding: .5rem;
-  width: 9rem;
+  width: 7rem;
 }
 
 .survey__category-total--points {
- color: green; 
+ color: green;
 }
 
 .survey__community-total {
@@ -358,31 +358,42 @@ fieldset {
   border-radius: .5rem;
   border: .09rem solid rgba(99, 99, 99, 0.829);
   box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
-  grid-column-start: 2;
+  grid-column-start: 1;
   grid-row-start: 1;
   padding: .5rem;
-  width: 9rem;
+  width: 7rem;
 }
+
+.survey__community-total--points {
+  color: green;
+ }
 
 .survey__user-total {
   background-color: rgba(239, 239, 239, 0.687);
   border-radius: .5rem;
   border: .09rem solid rgba(99, 99, 99, 0.829);
   box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
-  grid-column-start: 3;
+  grid-column-start: 4;
   grid-row-start: 1;
   padding: .5rem;
-  width: 9rem;
+  width: 7rem;
 }
+
+.survey__user-total--points {
+  color: green;
+ }
 
 .survey__affiliation-total {
   background-color: rgba(239, 239, 239, 0.687);
   border: .09rem solid rgba(99, 99, 99, 0.829);
   border-radius: .5rem;
   box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
-  grid-column-start: 4;
+  grid-column-start: 3;
   grid-row-start: 1;
   padding: .5rem;
-  width: 9rem;
+  width: 7rem;
 }
  
+.survey__affiliation-total--points {
+  color: green;
+ }
