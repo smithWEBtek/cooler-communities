@@ -1,0 +1,13 @@
+<% if @user == current_user %>
+  <div class="user__account">
+    <h3>My Account</h3>
+    <%= link_to "Edit my info", edit_user_path(@user) %>
+    <hr>
+    <p>username: <%= @user.username %></p>
+    <p>email: <%= @user.email %></p>
+    <p><%= @user.full_name %></p>
+    <p><%= @user.address %></p>
+    <p><%= @user.city %>, <%= @user.state.code %><%= @user.zipcode %></p>
+    <hr>
+  </div>
+<% end %>

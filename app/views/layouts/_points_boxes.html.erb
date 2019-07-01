@@ -1,22 +1,18 @@
-<div class="survey__points>
-  <div class="survey__category-total">
-    <p>Category pts</p>
-    <div class="survey__category-total--title"></div>
-    <div class="survey__category-total--points">...</div>
-  </div>
+<div class="survey__points">
   <div class="survey__community-total">
-    <p>Community pts</p>
-    <div class="survey__community-total--title"></div>
-    <div class="survey__community-total--points">community points</div>
-  </div>
-  <div class="survey__user-total">
-    <p>My Total pts</p>
-    <div class="survey__user-total--title"></div>
-    <div class="survey__user-total--points">...</div>
+    <div class="survey__community-total--title">Community</div>
+    <div class="survey__community-total--points">____</div>
   </div>
   <div class="survey__affiliation-total">
-    <p>My Affiliation pts</p>
-    <div class="survey__affiliation-total--title"></div>
-    <div class="survey__affiliation-total--points">...</div>
+    <div class="survey__affiliation-total--title">Affiliation</div>
+    <div class="survey__affiliation-total--points">____</div>
+  </div>
+  <div class="survey__category-total">
+    <div class="survey__category-total--title">Category</div>
+    <div class="survey__category-total--points">____</div>
+  </div>
+  <div class="survey__user-total">
+    <div class="survey__user-total--title"><%= current_user.first_name %>'s total:</div>
+    <div class="survey__user-total--points">____</div>
   </div>
 </div>
