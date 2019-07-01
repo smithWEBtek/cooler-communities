@@ -5,13 +5,7 @@ class Response < ApplicationRecord
   has_one :affiliation, through: :user
 
   def self.yard
-    total = 0
-    self.all.each do |r| 
-      if r.question.category_id == 1
-        total += r.points if !r.points.nil?
-      end
-    end
-    total
+    self.all.select {|r| r.question.category_id == 1}
   end
   
   def self.water
