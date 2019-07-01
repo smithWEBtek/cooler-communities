@@ -27,8 +27,8 @@ Rails.application.routes.draw do
   get '/img_url/:id', to: 'static#img_url'
   
   post '/users', to: 'users#update'
-  
   root 'surveys#survey'
+  get '/user_summary/:id', to: 'users#user_summary'
   
   get '/community_total', to: 'responses#community_total'
   get '/category_total/:id', to: 'responses#category_total'
