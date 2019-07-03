@@ -1,7 +1,11 @@
 <% if @user == current_user %>
   <div class="user__account">
     <h3>My Account</h3>
-    <%= link_to "Edit my info", edit_user_path(@user) %>
+    <%= link_to "Edit Info", edit_user_path(@user) %>
+    <span class="main-nav__link-separator"> | </span>
+    <%= link_to "PDF Summary", "/user_summary_pdf/#{@user.id}.pdf", class: 'main-nav__link' %>
+    <span class="main-nav__link-separator"> | </span>
+    <%= link_to "CSV Summary", "/user_summary_csv/#{@user.id}.csv", class: 'main-nav__link' %>
     <hr>
     <p>username: <%= @user.username %></p>
     <p>email: <%= @user.email %></p>

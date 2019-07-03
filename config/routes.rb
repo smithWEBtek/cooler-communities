@@ -18,8 +18,11 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
 
   get '/summary', to: 'surveys#summary'
-  get '/user_summary', to: 'users#user_summary'
-  get '/users_report', to: 'users#users_report'
+ 
+  get '/user_summary_pdf/:id', to: 'users#user_summary_pdf'
+  get '/user_summary_csv/:id', to: 'users#user_summary_csv'
+  
+  get '/all_users_summary_csv', to: 'users#all_users_summary_csv'
   get '/reset_password/:id', to: 'users#reset_password'
 
   get '/about', to: 'static#about'
@@ -28,7 +31,6 @@ Rails.application.routes.draw do
   
   post '/users', to: 'users#update'
   root 'surveys#survey'
-  get '/user_summary/:id', to: 'users#user_summary'
   
   get '/community_total', to: 'responses#community_total'
   get '/category_total/:id', to: 'responses#category_total'

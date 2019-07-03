@@ -3,10 +3,6 @@ require 'csv'
 class User < ApplicationRecord
   validates :username, uniqueness: true
   has_secure_password
-  # validates :password,
-  #   presence: { on: [:create, :update] },
-  #   length: { minimum: 6 }
-
   has_many :responses
   has_many :questions, through: :responses
   has_many :user_surveys
@@ -59,9 +55,28 @@ class User < ApplicationRecord
       csv << attributes
 
       all.each do |user|
-        # csv << user.attributes.values_at(*attributes)
+        # csv << user.attributes.values_at(*attributes) #alternate way
         csv << attributes.map{|attr| user.send(attr)}
       end
+    end
+  end
+
+  def user_to_csv
+    attributes = ["username",
+      "first_name",
+      "last_name",
+      "email",
+      "phone",
+      "address",
+      "city",
+      "state_abbr",
+      "zipcode",
+      "admin",
+      "affiliation_name"]
+
+    file = CSV.generate(headers: true) do |csv|
+      csv << self.attributes.values_at(*attributes)
+      # csv << attributes.map{|attr| user.send(attr)} #alternate way
     end
   end
 
