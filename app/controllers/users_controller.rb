@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize_admin, only: [:destroy]
-  before_action :set_user, only: [:export_csv, :show, :edit, :update, :destroy, :reset_password, :user_summary]
+  before_action :set_user, only: [:export_csv, :show, :edit, :update, :destroy, :reset_password, :user_summary_pdf, :user_summary_csv]
   before_action :require_login, only: [:show]
 
   def index
@@ -75,15 +75,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user)
     end
   end
-
-  def users_report
-    @users = User.all
-    respond_to do |format|
-      format.html
-      format.csv { send_data @users.to_csv, filename: "users_report_#{Date.today}.csv" }
-    end
-  end
-
+ 
   def reset_password
     if current_user && current_user.admin?
       @user.reset_password
@@ -94,7 +86,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_summary
+  def user_summary_pdf
     @date = DateTime.new
 
     respond_to do |format|
@@ -109,6 +101,29 @@ class UsersController < ApplicationController
             zoom: 1,
             dpi: 75
         end
+    end
+  end
+
+  def users_report
+    @users = User.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @users.to_csv, filename: "users_report_#{Date.today}.csv" }
+    end
+  end
+
+  def all_users_summary_csv
+    @users = User.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @users.to_csv, filename: "AllUsers_#{Date.today}.csv" }
+    end
+  end
+
+  def user_summary_csv
+    respond_to do |format|
+      format.html
+      format.csv { send_data @user.user_to_csv, filename: "SurveySummary_#{@user.full_name}_#{Date.today}.csv" }
     end
   end
 
