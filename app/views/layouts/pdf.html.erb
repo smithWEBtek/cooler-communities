@@ -4,15 +4,19 @@
 <head>
   <title>PDFs - Ruby on Rails</title>
   <link rel="stylesheet" href="../../assets/stylesheets/cooler.css" />
+  <%= wicked_pdf_stylesheet_link_tag "../../assets/stylesheets/cooler.css" -%>
+  <%= wicked_pdf_stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= wicked_pdf_javascript_include_tag "application", "data-turbolinks-track" => true %>
 </head>
 
 <body>
   <%= yield %>
 
-  <p>Community total: <%= Response.community_total %></p>
-  <p>Affiliation Group (<%= @user.affiliation.name %>) total: <%= Response.affiliation_total(@user.affiliation_id) %></p>
-  <p><%= @user.full_name %> total: <%= @user.total_points %></p>
-  <hr />
+  <div class="summary__totals">
+    <p>Community total: <%= Response.community_total %></p>
+    <p>Affiliation Group (<%= @user.affiliation.name %>) total: <%= Response.affiliation_total(@user.affiliation_id) %></p>
+    <p><%= @user.full_name %> total: <%= @user.total_points %></p>
+  </div>
 
   <p>Community Totals by Category</p>
   <table class="pretty-table">
@@ -39,7 +43,6 @@
       <td><%= Response.category_total(9) %></td>
     </tr>
   </table>
-  <hr />
 
   <p><%= @user.full_name %>'s responses today: </p>
   <table class="pretty-table">
@@ -60,11 +63,6 @@
     </tr>
     <% end %>
   </table>
-  
-  <hr />
-
-  
-  <hr />
 </body>
 
 </html>
