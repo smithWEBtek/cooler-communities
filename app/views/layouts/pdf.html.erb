@@ -2,8 +2,11 @@
 <html>
 
 <head>
-  <title>PDFs - Ruby on Rails</title>
+  <title>Survey Summary</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <link rel="shortcut icon" href="#" />
   <link rel="stylesheet" href="../../assets/stylesheets/cooler.css" />
+
   <%= wicked_pdf_stylesheet_link_tag "../../assets/stylesheets/cooler.css" -%>
   <%= wicked_pdf_stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= wicked_pdf_javascript_include_tag "application", "data-turbolinks-track" => true %>
