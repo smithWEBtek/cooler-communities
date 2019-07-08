@@ -1,34 +1,37 @@
 $(() => {
-  loadCurrentUserData()
+  getCurrentUserId();
+  loadSurvey();
 });
 
-// user data -----------------------------------------------------------
-function loadCurrentUserData() {
+function getCurrentUserId() {
   $.ajax({
     method: 'get',
     url: '/current_user_id',
     dataType: 'json'
   }).done(function (id) {
-    $.ajax({
-      url: `/users/${id}`,
-      dataType: 'json'
-    }).done(function (data) {
-      loadSurvey();
-      loadUserData(data);
-    })
+    getResponses(id)
   })
 }
 
-// load survey and handlers -------------------------------------------------
+function getResponses(id) {
+  $.ajax({
+    url: `/user_response_data/${id}`
+  }).done(function (user_data) {
+    loadSurvey()
+    loadUserResponses(user_data)
+  });
+}
+
 function loadSurvey() {
   surveyJSON.pages.map(page => {
     let categorySurvey = new Survey.Model(page);
     let categorySurveyDiv = $(`#${page.name}`)
     let categoryTabsDiv = $('.survey__category-tabs');
     let category = page.name;
+
     categorySurveyDiv.Survey({
       model: categorySurvey,
-      onComplete: saveCategoryResults,
+      listenForCategoryComplete: saveCategoryResults,
       category
     });
 
@@ -46,11 +49,13 @@ function loadSurvey() {
   loadCommunityPoints();
 }
 
-function loadUserData(data) {
-  const responseCategories = data.responses.map(r => r.category.name);
-  const uniqueResponseCategories = [...new Set(responseCategories)]
-  console.log('uniqueResponseCategories: ', uniqueResponseCategories)
-  debugger;
+function loadUserResponses(data) {
+  // for each named tab/category, add completed class if data contains questions from that tab/category
+  let categoryIds = data.questions.map(q => q.category_id);
+  let uniqueCategoryIds = [...new Set(categoryIds)]
+
+  // debugger;
+  // currentTab.classList.add('survey__category-tab-completed');
 }
 
 function categoryTabHandler(imageId) {
@@ -63,7 +68,7 @@ function categoryTabHandler(imageId) {
 
     categoryViewDiv.css('display', 'inline');
     tabSelected(currentTab);
-    tabCompleted(currentTab);
+    listenForCategoryComplete(currentTab);
   })
 }
 
@@ -84,7 +89,7 @@ function tabSelected(currentTab) {
   // })
 }
 
-function tabCompleted(currentTab) {
+function listenForCategoryComplete(currentTab) {
   $('input.sv_complete_btn').on('click', function (event) {
     event.preventDefault();
     currentTab.classList.add('survey__category-tab-completed');

@@ -83,7 +83,7 @@ const surveyJSON = {
           ]
         }
       ],
-      "title": "Yard / Landscaping"
+      "title": "Yard/Landscaping"
     },
     {
       "name": "water",
@@ -159,7 +159,7 @@ const surveyJSON = {
           ]
         }
       ],
-      "title": "Solar Power"
+      "title": "Solar-power"
     },
     {
       "name": "lighting",
@@ -482,11 +482,10 @@ const surveyJSON = {
             "sometimes",
             "rarely",
             "never"
-          ],
-          "colCount": 1
+          ]
         }
       ],
-      "title": "Reuse / Recycle"
+      "title": "Reduce/Reuse"
     },
     {
       "name": "heating_cooling",
