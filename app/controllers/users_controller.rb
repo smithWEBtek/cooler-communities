@@ -127,6 +127,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def current_user_id
+    render json: current_user.id
+  end
+
   private
   
   def set_user

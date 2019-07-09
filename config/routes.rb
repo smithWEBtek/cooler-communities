@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/sessions', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  get '/current_user_id', to: 'users#current_user_id'
 
   get '/summary', to: 'surveys#summary'
- 
   get '/user_summary_pdf/:id', to: 'users#user_summary_pdf'
   get '/user_summary_csv/:id', to: 'users#user_summary_csv'
   

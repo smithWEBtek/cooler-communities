@@ -1,54 +1,37 @@
 $(() => {
+  getCurrentUserId();
   loadSurvey();
-  loadCurrentUserData()
 });
 
-
-// user data -----------------------------------------------------------
-function loadCurrentUserData() {
+function getCurrentUserId() {
   $.ajax({
     method: 'get',
     url: '/current_user_id',
     dataType: 'json'
   }).done(function (id) {
-    $.ajax({
-      url: `/users/${id}`,
-      dataType: 'json'
-    }).done(function (data) {
-      let completedTabs = [...new Set(data.responses.map(r => r.category.name))].filter(obj => obj);
-      completedTabs.forEach(name => {
-        let tab = document.getElementById(name)
-        console.log('name: ', name)
-
-        tab.classList.add('survey__category-tab-completed')
-      })
-      console.log('completedTabs: ', completedTabs)
-
-      let remainingTabs = Array.from(document.getElementsByClassName('survey__category-tab')).map(tab => {
-        if (!completedTabs.includes(tab.id)) {
-          return tab.id
-        }
-      }).filter(obj => obj)
-      console.log('remainingTabs: ', remainingTabs)
-
-      processTabs(completedTabs, remainingTabs)
-    })
+    getResponses(id)
   })
-  loadCommunityPoints();
-  // loadAffiliationPoints();
-  // loadUserPoints();
 }
 
-// load survey and handlers -------------------------------------------------
+function getResponses(id) {
+  $.ajax({
+    url: `/user_response_data/${id}`
+  }).done(function (user_data) {
+    loadSurvey()
+    loadUserResponses(user_data)
+  });
+}
+
 function loadSurvey() {
   surveyJSON.pages.map(page => {
     let categorySurvey = new Survey.Model(page);
     let categorySurveyDiv = $(`#${page.name}`)
     let categoryTabsDiv = $('.survey__category-tabs');
     let category = page.name;
+
     categorySurveyDiv.Survey({
       model: categorySurvey,
-      onComplete: saveCategoryResults,
+      listenForCategoryComplete: saveCategoryResults,
       category
     });
 
@@ -63,6 +46,16 @@ function loadSurvey() {
       categoryTabHandler(page.name);
     })
   })
+  loadCommunityPoints();
+}
+
+function loadUserResponses(data) {
+  // for each named tab/category, add completed class if data contains questions from that tab/category
+  let categoryIds = data.questions.map(q => q.category_id);
+  let uniqueCategoryIds = [...new Set(categoryIds)]
+
+  // debugger;
+  // currentTab.classList.add('survey__category-tab-completed');
 }
 
 function categoryTabHandler(imageId) {
@@ -74,21 +67,33 @@ function categoryTabHandler(imageId) {
     $('.summary__body').css('display', 'inline');
 
     categoryViewDiv.css('display', 'inline');
-    currentTab.classList.add('survey__category-tab-selected')
-
-    $('input.sv_complete_btn').on('click', function (event) {
-      event.preventDefault();
-      currentTab.classList.add('survey__category-tab-completed');
-    })
+    tabSelected(currentTab);
+    listenForCategoryComplete(currentTab);
   })
 }
 
-function processTabs(completedTabs, remainingTabs) {
-  // remainingTabs are clickable until 1 gets clicked
-  // completedTabs remain gray and unclickable
-  // when a remaining tab is clicked, the rest of the remaining tags become unclickable
-  // upon "complete click" remaining incomplete tabs become clickable again
-  // 
+function tabSelected(currentTab) {
+  currentTab.classList.add('survey__category-tab-selected')
+  // let unselectedTabs = Array.from(document.getElementsByClassName('survey__category-tab'));
+  // let unselectedCategories = Array.from(document.getElementsByClassName('survey__category-view'));
+
+  // unselectedCategories.forEach(category => {
+  //   category.style.display = "none"
+  // });
+
+  // unselectedTabs.forEach(tab => {
+  //   if (tab.id != currentTab.id) {
+  //     tab.classList.remove('survey__category-tab-selected')
+  //     $('.survey__category-view').css('display', 'none');
+  //   }
+  // })
+}
+
+function listenForCategoryComplete(currentTab) {
+  $('input.sv_complete_btn').on('click', function (event) {
+    event.preventDefault();
+    currentTab.classList.add('survey__category-tab-completed');
+  })
 }
 
 function saveCategoryResults(results) {

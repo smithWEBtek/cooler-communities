@@ -235,3 +235,34 @@ modify Rails database
 [] incorporate multi-selects, booleans, slider value
 [] implement js slider nouslide widget in surveyjs
 [] 
+
+===============================================================================
+
+190707  Survey State
+
+[] Upon successful login
+  - if user.surveys.count == 1
+    - RESUME SURVEY button appears
+    - javascript loads existing set of user.responses
+      - Completed tabs are dark gray
+      - Uncompleted tabs are clearn
+      - Active tab is green
+    - Survey instructions appear
+    - Complete each section once. COMPLETE button saves existing reponses, without further editing
+  - else
+    - START SURVEY button appears
+    - Survey instructions appear
+    - Complete each section once. COMPLETE button saves existing reponses, without further editing
+    - 
+  - Provide a CANCEL button, if the user wishes to not complete a section in progress n
+  - COMPLETE CATEGORY button
+  - COMPLETE SURVEY button
+
+[] User can take 1 Survey 
+[] Survey state is saved and recalled upon login
+[] Once a category survey section is complete, it is saved and not editable
+[] Admin can reset a user's answers to blank, to start survey over
+[] While a category survey section is active: 
+  - the other tabs are unclickable
+  - any completed tabs are dark gray and complete, also unclickable
+  - when the complete button is clicked, the category is tallied and points boxes are updated

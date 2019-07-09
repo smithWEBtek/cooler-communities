@@ -5,11 +5,11 @@ Released under the MIT license
  */
 
 
-(function() {
+(function () {
   var context = this;
 
-  (function() {
-    (function() {
+  (function () {
+    (function () {
       this.Rails = {
         linkClickSelector: 'a[data-confirm], a[data-method], a[data-remote]:not([disabled]), a[data-disable-with], a[data-disable]',
         buttonClickSelector: {
@@ -31,28 +31,28 @@ Released under the MIT license
 
   var Rails = context.Rails;
 
-  (function() {
-    (function() {
+  (function () {
+    (function () {
       var nonce;
 
       nonce = null;
 
-      Rails.loadCSPNonce = function() {
+      Rails.loadCSPNonce = function () {
         var ref;
         return nonce = (ref = document.querySelector("meta[name=csp-nonce]")) != null ? ref.content : void 0;
       };
 
-      Rails.cspNonce = function() {
+      Rails.cspNonce = function () {
         return nonce != null ? nonce : Rails.loadCSPNonce();
       };
 
     }).call(this);
-    (function() {
+    (function () {
       var expando, m;
 
       m = Element.prototype.matches || Element.prototype.matchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.msMatchesSelector || Element.prototype.oMatchesSelector || Element.prototype.webkitMatchesSelector;
 
-      Rails.matches = function(element, selector) {
+      Rails.matches = function (element, selector) {
         if (selector.exclude != null) {
           return m.call(element, selector.selector) && !m.call(element, selector.exclude);
         } else {
@@ -62,41 +62,41 @@ Released under the MIT license
 
       expando = '_ujsData';
 
-      Rails.getData = function(element, key) {
+      Rails.getData = function (element, key) {
         var ref;
         return (ref = element[expando]) != null ? ref[key] : void 0;
       };
 
-      Rails.setData = function(element, key, value) {
+      Rails.setData = function (element, key, value) {
         if (element[expando] == null) {
           element[expando] = {};
         }
         return element[expando][key] = value;
       };
 
-      Rails.$ = function(selector) {
+      Rails.$ = function (selector) {
         return Array.prototype.slice.call(document.querySelectorAll(selector));
       };
 
     }).call(this);
-    (function() {
+    (function () {
       var $, csrfParam, csrfToken;
 
       $ = Rails.$;
 
-      csrfToken = Rails.csrfToken = function() {
+      csrfToken = Rails.csrfToken = function () {
         var meta;
         meta = document.querySelector('meta[name=csrf-token]');
         return meta && meta.content;
       };
 
-      csrfParam = Rails.csrfParam = function() {
+      csrfParam = Rails.csrfParam = function () {
         var meta;
         meta = document.querySelector('meta[name=csrf-param]');
         return meta && meta.content;
       };
 
-      Rails.CSRFProtection = function(xhr) {
+      Rails.CSRFProtection = function (xhr) {
         var token;
         token = csrfToken();
         if (token != null) {
@@ -104,19 +104,19 @@ Released under the MIT license
         }
       };
 
-      Rails.refreshCSRFTokens = function() {
+      Rails.refreshCSRFTokens = function () {
         var param, token;
         token = csrfToken();
         param = csrfParam();
         if ((token != null) && (param != null)) {
-          return $('form input[name="' + param + '"]').forEach(function(input) {
+          return $('form input[name="' + param + '"]').forEach(function (input) {
             return input.value = token;
           });
         }
       };
 
     }).call(this);
-    (function() {
+    (function () {
       var CustomEvent, fire, matches, preventDefault;
 
       matches = Rails.matches;
@@ -124,7 +124,7 @@ Released under the MIT license
       CustomEvent = window.CustomEvent;
 
       if (typeof CustomEvent !== 'function') {
-        CustomEvent = function(event, params) {
+        CustomEvent = function (event, params) {
           var evt;
           evt = document.createEvent('CustomEvent');
           evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
@@ -132,12 +132,12 @@ Released under the MIT license
         };
         CustomEvent.prototype = window.Event.prototype;
         preventDefault = CustomEvent.prototype.preventDefault;
-        CustomEvent.prototype.preventDefault = function() {
+        CustomEvent.prototype.preventDefault = function () {
           var result;
           result = preventDefault.call(this);
           if (this.cancelable && !this.defaultPrevented) {
             Object.defineProperty(this, 'defaultPrevented', {
-              get: function() {
+              get: function () {
                 return true;
               }
             });
@@ -146,7 +146,7 @@ Released under the MIT license
         };
       }
 
-      fire = Rails.fire = function(obj, name, data) {
+      fire = Rails.fire = function (obj, name, data) {
         var event;
         event = new CustomEvent(name, {
           bubbles: true,
@@ -157,15 +157,15 @@ Released under the MIT license
         return !event.defaultPrevented;
       };
 
-      Rails.stopEverything = function(e) {
+      Rails.stopEverything = function (e) {
         fire(e.target, 'ujs:everythingStopped');
         e.preventDefault();
         e.stopPropagation();
         return e.stopImmediatePropagation();
       };
 
-      Rails.delegate = function(element, selector, eventType, handler) {
-        return element.addEventListener(eventType, function(e) {
+      Rails.delegate = function (element, selector, eventType, handler) {
+        return element.addEventListener(eventType, function (e) {
           var target;
           target = e.target;
           while (!(!(target instanceof Element) || matches(target, selector))) {
@@ -179,7 +179,7 @@ Released under the MIT license
       };
 
     }).call(this);
-    (function() {
+    (function () {
       var AcceptHeaders, CSRFProtection, createXHR, cspNonce, fire, prepareOptions, processResponse;
 
       cspNonce = Rails.cspNonce, CSRFProtection = Rails.CSRFProtection, fire = Rails.fire;
@@ -193,10 +193,10 @@ Released under the MIT license
         script: 'text/javascript, application/javascript, application/ecmascript, application/x-ecmascript'
       };
 
-      Rails.ajax = function(options) {
+      Rails.ajax = function (options) {
         var xhr;
         options = prepareOptions(options);
-        xhr = createXHR(options, function() {
+        xhr = createXHR(options, function () {
           var ref, response;
           response = processResponse((ref = xhr.response) != null ? ref : xhr.responseText, xhr.getResponseHeader('Content-Type'));
           if (Math.floor(xhr.status / 100) === 2) {
@@ -218,7 +218,7 @@ Released under the MIT license
         }
       };
 
-      prepareOptions = function(options) {
+      prepareOptions = function (options) {
         options.url = options.url || location.href;
         options.type = options.type.toUpperCase();
         if (options.type === 'GET' && options.data) {
@@ -238,7 +238,7 @@ Released under the MIT license
         return options;
       };
 
-      createXHR = function(options, done) {
+      createXHR = function (options, done) {
         var xhr;
         xhr = new XMLHttpRequest();
         xhr.open(options.type, options.url, true);
@@ -251,7 +251,7 @@ Released under the MIT license
         }
         CSRFProtection(xhr);
         xhr.withCredentials = !!options.withCredentials;
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             return done(xhr);
           }
@@ -259,13 +259,13 @@ Released under the MIT license
         return xhr;
       };
 
-      processResponse = function(response, type) {
+      processResponse = function (response, type) {
         var parser, script;
         if (typeof response === 'string' && typeof type === 'string') {
           if (type.match(/\bjson\b/)) {
             try {
               response = JSON.parse(response);
-            } catch (error) {}
+            } catch (error) { }
           } else if (type.match(/\b(?:java|ecma)script\b/)) {
             script = document.createElement('script');
             script.setAttribute('nonce', cspNonce());
@@ -276,17 +276,17 @@ Released under the MIT license
             type = type.replace(/;.+/, '');
             try {
               response = parser.parseFromString(response, type);
-            } catch (error) {}
+            } catch (error) { }
           }
         }
         return response;
       };
 
-      Rails.href = function(element) {
+      Rails.href = function (element) {
         return element.href;
       };
 
-      Rails.isCrossDomain = function(url) {
+      Rails.isCrossDomain = function (url) {
         var e, originAnchor, urlAnchor;
         originAnchor = document.createElement('a');
         originAnchor.href = location.href;
@@ -301,28 +301,28 @@ Released under the MIT license
       };
 
     }).call(this);
-    (function() {
+    (function () {
       var matches, toArray;
 
       matches = Rails.matches;
 
-      toArray = function(e) {
+      toArray = function (e) {
         return Array.prototype.slice.call(e);
       };
 
-      Rails.serializeElement = function(element, additionalParam) {
+      Rails.serializeElement = function (element, additionalParam) {
         var inputs, params;
         inputs = [element];
         if (matches(element, 'form')) {
           inputs = toArray(element.elements);
         }
         params = [];
-        inputs.forEach(function(input) {
+        inputs.forEach(function (input) {
           if (!input.name || input.disabled) {
             return;
           }
           if (matches(input, 'select')) {
-            return toArray(input.options).forEach(function(option) {
+            return toArray(input.options).forEach(function (option) {
               if (option.selected) {
                 return params.push({
                   name: input.name,
@@ -340,7 +340,7 @@ Released under the MIT license
         if (additionalParam) {
           params.push(additionalParam);
         }
-        return params.map(function(param) {
+        return params.map(function (param) {
           if (param.name != null) {
             return (encodeURIComponent(param.name)) + "=" + (encodeURIComponent(param.value));
           } else {
@@ -349,9 +349,9 @@ Released under the MIT license
         }).join('&');
       };
 
-      Rails.formElements = function(form, selector) {
+      Rails.formElements = function (form, selector) {
         if (matches(form, 'form')) {
-          return toArray(form.elements).filter(function(el) {
+          return toArray(form.elements).filter(function (el) {
             return matches(el, selector);
           });
         } else {
@@ -360,18 +360,18 @@ Released under the MIT license
       };
 
     }).call(this);
-    (function() {
+    (function () {
       var allowAction, fire, stopEverything;
 
       fire = Rails.fire, stopEverything = Rails.stopEverything;
 
-      Rails.handleConfirm = function(e) {
+      Rails.handleConfirm = function (e) {
         if (!allowAction(this)) {
           return stopEverything(e);
         }
       };
 
-      allowAction = function(element) {
+      allowAction = function (element) {
         var answer, callback, message;
         message = element.getAttribute('data-confirm');
         if (!message) {
@@ -381,19 +381,19 @@ Released under the MIT license
         if (fire(element, 'confirm')) {
           try {
             answer = confirm(message);
-          } catch (error) {}
+          } catch (error) { }
           callback = fire(element, 'confirm:complete', [answer]);
         }
         return answer && callback;
       };
 
     }).call(this);
-    (function() {
+    (function () {
       var disableFormElement, disableFormElements, disableLinkElement, enableFormElement, enableFormElements, enableLinkElement, formElements, getData, matches, setData, stopEverything;
 
       matches = Rails.matches, getData = Rails.getData, setData = Rails.setData, stopEverything = Rails.stopEverything, formElements = Rails.formElements;
 
-      Rails.handleDisabledElement = function(e) {
+      Rails.handleDisabledElement = function (e) {
         var element;
         element = this;
         if (element.disabled) {
@@ -401,7 +401,7 @@ Released under the MIT license
         }
       };
 
-      Rails.enableElement = function(e) {
+      Rails.enableElement = function (e) {
         var element;
         element = e instanceof Event ? e.target : e;
         if (matches(element, Rails.linkDisableSelector)) {
@@ -413,7 +413,7 @@ Released under the MIT license
         }
       };
 
-      Rails.disableElement = function(e) {
+      Rails.disableElement = function (e) {
         var element;
         element = e instanceof Event ? e.target : e;
         if (matches(element, Rails.linkDisableSelector)) {
@@ -425,7 +425,7 @@ Released under the MIT license
         }
       };
 
-      disableLinkElement = function(element) {
+      disableLinkElement = function (element) {
         var replacement;
         replacement = element.getAttribute('data-disable-with');
         if (replacement != null) {
@@ -436,7 +436,7 @@ Released under the MIT license
         return setData(element, 'ujs:disabled', true);
       };
 
-      enableLinkElement = function(element) {
+      enableLinkElement = function (element) {
         var originalText;
         originalText = getData(element, 'ujs:enable-with');
         if (originalText != null) {
@@ -447,11 +447,11 @@ Released under the MIT license
         return setData(element, 'ujs:disabled', null);
       };
 
-      disableFormElements = function(form) {
+      disableFormElements = function (form) {
         return formElements(form, Rails.formDisableSelector).forEach(disableFormElement);
       };
 
-      disableFormElement = function(element) {
+      disableFormElement = function (element) {
         var replacement;
         replacement = element.getAttribute('data-disable-with');
         if (replacement != null) {
@@ -467,11 +467,11 @@ Released under the MIT license
         return setData(element, 'ujs:disabled', true);
       };
 
-      enableFormElements = function(form) {
+      enableFormElements = function (form) {
         return formElements(form, Rails.formEnableSelector).forEach(enableFormElement);
       };
 
-      enableFormElement = function(element) {
+      enableFormElement = function (element) {
         var originalText;
         originalText = getData(element, 'ujs:enable-with');
         if (originalText != null) {
@@ -487,12 +487,12 @@ Released under the MIT license
       };
 
     }).call(this);
-    (function() {
+    (function () {
       var stopEverything;
 
       stopEverything = Rails.stopEverything;
 
-      Rails.handleMethod = function(e) {
+      Rails.handleMethod = function (e) {
         var csrfParam, csrfToken, form, formContent, href, link, method;
         link = this;
         method = link.getAttribute('data-method');
@@ -519,19 +519,19 @@ Released under the MIT license
       };
 
     }).call(this);
-    (function() {
+    (function () {
       var ajax, fire, getData, isCrossDomain, isRemote, matches, serializeElement, setData, stopEverything,
         slice = [].slice;
 
       matches = Rails.matches, getData = Rails.getData, setData = Rails.setData, fire = Rails.fire, stopEverything = Rails.stopEverything, ajax = Rails.ajax, isCrossDomain = Rails.isCrossDomain, serializeElement = Rails.serializeElement;
 
-      isRemote = function(element) {
+      isRemote = function (element) {
         var value;
         value = element.getAttribute('data-remote');
         return (value != null) && value !== 'false';
       };
 
-      Rails.handleRemote = function(e) {
+      Rails.handleRemote = function (e) {
         var button, data, dataType, element, method, url, withCredentials;
         element = this;
         if (!isRemote(element)) {
@@ -575,7 +575,7 @@ Released under the MIT license
           url: url,
           data: data,
           dataType: dataType,
-          beforeSend: function(xhr, options) {
+          beforeSend: function (xhr, options) {
             if (fire(element, 'ajax:beforeSend', [xhr, options])) {
               return fire(element, 'ajax:send', [xhr]);
             } else {
@@ -583,17 +583,17 @@ Released under the MIT license
               return false;
             }
           },
-          success: function() {
+          success: function () {
             var args;
             args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
             return fire(element, 'ajax:success', args);
           },
-          error: function() {
+          error: function () {
             var args;
             args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
             return fire(element, 'ajax:error', args);
           },
-          complete: function() {
+          complete: function () {
             var args;
             args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
             return fire(element, 'ajax:complete', args);
@@ -604,7 +604,7 @@ Released under the MIT license
         return stopEverything(e);
       };
 
-      Rails.formSubmitButtonClick = function(e) {
+      Rails.formSubmitButtonClick = function (e) {
         var button, form;
         button = this;
         form = button.form;
@@ -622,7 +622,7 @@ Released under the MIT license
         return setData(form, 'ujs:submit-button-formmethod', button.getAttribute('formmethod'));
       };
 
-      Rails.preventInsignificantClick = function(e) {
+      Rails.preventInsignificantClick = function (e) {
         var data, insignificantMetaClick, link, metaClick, method, primaryMouseKey;
         link = this;
         method = (link.getAttribute('data-method') || 'GET').toUpperCase();
@@ -636,7 +636,7 @@ Released under the MIT license
       };
 
     }).call(this);
-    (function() {
+    (function () {
       var $, CSRFProtection, delegate, disableElement, enableElement, fire, formSubmitButtonClick, getData, handleConfirm, handleDisabledElement, handleMethod, handleRemote, loadCSPNonce, preventInsignificantClick, refreshCSRFTokens;
 
       fire = Rails.fire, delegate = Rails.delegate, getData = Rails.getData, $ = Rails.$, refreshCSRFTokens = Rails.refreshCSRFTokens, CSRFProtection = Rails.CSRFProtection, loadCSPNonce = Rails.loadCSPNonce, enableElement = Rails.enableElement, disableElement = Rails.disableElement, handleDisabledElement = Rails.handleDisabledElement, handleConfirm = Rails.handleConfirm, preventInsignificantClick = Rails.preventInsignificantClick, handleRemote = Rails.handleRemote, formSubmitButtonClick = Rails.formSubmitButtonClick, handleMethod = Rails.handleMethod;
@@ -646,24 +646,24 @@ Released under the MIT license
           throw new Error('If you load both jquery_ujs and rails-ujs, use rails-ujs only.');
         }
         jQuery.rails = Rails;
-        jQuery.ajaxPrefilter(function(options, originalOptions, xhr) {
+        jQuery.ajaxPrefilter(function (options, originalOptions, xhr) {
           if (!options.crossDomain) {
             return CSRFProtection(xhr);
           }
         });
       }
 
-      Rails.start = function() {
+      Rails.start = function () {
         if (window._rails_loaded) {
           throw new Error('rails-ujs has already been loaded!');
         }
-        window.addEventListener('pageshow', function() {
-          $(Rails.formEnableSelector).forEach(function(el) {
+        window.addEventListener('pageshow', function () {
+          $(Rails.formEnableSelector).forEach(function (el) {
             if (getData(el, 'ujs:disabled')) {
               return enableElement(el);
             }
           });
-          return $(Rails.linkDisableSelector).forEach(function(el) {
+          return $(Rails.linkDisableSelector).forEach(function (el) {
             if (getData(el, 'ujs:disabled')) {
               return enableElement(el);
             }
@@ -690,8 +690,8 @@ Released under the MIT license
         delegate(document, Rails.formSubmitSelector, 'submit', handleDisabledElement);
         delegate(document, Rails.formSubmitSelector, 'submit', handleConfirm);
         delegate(document, Rails.formSubmitSelector, 'submit', handleRemote);
-        delegate(document, Rails.formSubmitSelector, 'submit', function(e) {
-          return setTimeout((function() {
+        delegate(document, Rails.formSubmitSelector, 'submit', function (e) {
+          return setTimeout((function () {
             return disableElement(e);
           }), 13);
         });
@@ -719,22 +719,22 @@ Released under the MIT license
     define(Rails);
   }
 }).call(this);
-(function(global, factory) {
-  typeof exports === "object" && typeof module !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define([ "exports" ], factory) : factory(global.ActiveStorage = {});
-})(this, function(exports) {
+(function (global, factory) {
+  typeof exports === "object" && typeof module !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define(["exports"], factory) : factory(global.ActiveStorage = {});
+})(this, function (exports) {
   "use strict";
   function createCommonjsModule(fn, module) {
     return module = {
       exports: {}
     }, fn(module, module.exports), module.exports;
   }
-  var sparkMd5 = createCommonjsModule(function(module, exports) {
-    (function(factory) {
+  var sparkMd5 = createCommonjsModule(function (module, exports) {
+    (function (factory) {
       {
         module.exports = factory();
       }
-    })(function(undefined) {
-      var hex_chr = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" ];
+    })(function (undefined) {
+      var hex_chr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
       function md5cycle(x, k) {
         var a = x[0], b = x[1], c = x[2], d = x[3];
         a += (b & c | ~b & d) + k[0] - 680876936 | 0;
@@ -885,13 +885,13 @@ Released under the MIT license
         return md5blks;
       }
       function md51(s) {
-        var n = s.length, state = [ 1732584193, -271733879, -1732584194, 271733878 ], i, length, tail, tmp, lo, hi;
+        var n = s.length, state = [1732584193, -271733879, -1732584194, 271733878], i, length, tail, tmp, lo, hi;
         for (i = 64; i <= n; i += 64) {
           md5cycle(state, md5blk(s.substring(i - 64, i)));
         }
         s = s.substring(i - 64);
         length = s.length;
-        tail = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+        tail = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         for (i = 0; i < length; i += 1) {
           tail[i >> 2] |= s.charCodeAt(i) << (i % 4 << 3);
         }
@@ -912,13 +912,13 @@ Released under the MIT license
         return state;
       }
       function md51_array(a) {
-        var n = a.length, state = [ 1732584193, -271733879, -1732584194, 271733878 ], i, length, tail, tmp, lo, hi;
+        var n = a.length, state = [1732584193, -271733879, -1732584194, 271733878], i, length, tail, tmp, lo, hi;
         for (i = 64; i <= n; i += 64) {
           md5cycle(state, md5blk_array(a.subarray(i - 64, i)));
         }
         a = i - 64 < n ? a.subarray(i - 64) : new Uint8Array(0);
         length = a.length;
-        tail = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+        tail = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         for (i = 0; i < length; i += 1) {
           tail[i >> 2] |= a[i] << (i % 4 << 3);
         }
@@ -952,9 +952,9 @@ Released under the MIT license
         }
         return x.join("");
       }
-      if (hex(md51("hello")) !== "5d41402abc4b2a76b9719d911017c592") ;
+      if (hex(md51("hello")) !== "5d41402abc4b2a76b9719d911017c592");
       if (typeof ArrayBuffer !== "undefined" && !ArrayBuffer.prototype.slice) {
-        (function() {
+        (function () {
           function clamp(val, length) {
             val = val | 0 || 0;
             if (val < 0) {
@@ -962,7 +962,7 @@ Released under the MIT license
             }
             return Math.min(val, length);
           }
-          ArrayBuffer.prototype.slice = function(from, to) {
+          ArrayBuffer.prototype.slice = function (from, to) {
             var length = this.byteLength, begin = clamp(from, length), end = length, num, target, targetArray, sourceArray;
             if (to !== undefined) {
               end = clamp(to, length);
@@ -1011,11 +1011,11 @@ Released under the MIT license
       function SparkMD5() {
         this.reset();
       }
-      SparkMD5.prototype.append = function(str) {
+      SparkMD5.prototype.append = function (str) {
         this.appendBinary(toUtf8(str));
         return this;
       };
-      SparkMD5.prototype.appendBinary = function(contents) {
+      SparkMD5.prototype.appendBinary = function (contents) {
         this._buff += contents;
         this._length += contents.length;
         var length = this._buff.length, i;
@@ -1025,8 +1025,8 @@ Released under the MIT license
         this._buff = this._buff.substring(i - 64);
         return this;
       };
-      SparkMD5.prototype.end = function(raw) {
-        var buff = this._buff, length = buff.length, i, tail = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], ret;
+      SparkMD5.prototype.end = function (raw) {
+        var buff = this._buff, length = buff.length, i, tail = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], ret;
         for (i = 0; i < length; i += 1) {
           tail[i >> 2] |= buff.charCodeAt(i) << (i % 4 << 3);
         }
@@ -1038,31 +1038,31 @@ Released under the MIT license
         this.reset();
         return ret;
       };
-      SparkMD5.prototype.reset = function() {
+      SparkMD5.prototype.reset = function () {
         this._buff = "";
         this._length = 0;
-        this._hash = [ 1732584193, -271733879, -1732584194, 271733878 ];
+        this._hash = [1732584193, -271733879, -1732584194, 271733878];
         return this;
       };
-      SparkMD5.prototype.getState = function() {
+      SparkMD5.prototype.getState = function () {
         return {
           buff: this._buff,
           length: this._length,
           hash: this._hash
         };
       };
-      SparkMD5.prototype.setState = function(state) {
+      SparkMD5.prototype.setState = function (state) {
         this._buff = state.buff;
         this._length = state.length;
         this._hash = state.hash;
         return this;
       };
-      SparkMD5.prototype.destroy = function() {
+      SparkMD5.prototype.destroy = function () {
         delete this._hash;
         delete this._buff;
         delete this._length;
       };
-      SparkMD5.prototype._finish = function(tail, length) {
+      SparkMD5.prototype._finish = function (tail, length) {
         var i = length, tmp, lo, hi;
         tail[i >> 2] |= 128 << (i % 4 << 3);
         if (i > 55) {
@@ -1079,17 +1079,17 @@ Released under the MIT license
         tail[15] = hi;
         md5cycle(this._hash, tail);
       };
-      SparkMD5.hash = function(str, raw) {
+      SparkMD5.hash = function (str, raw) {
         return SparkMD5.hashBinary(toUtf8(str), raw);
       };
-      SparkMD5.hashBinary = function(content, raw) {
+      SparkMD5.hashBinary = function (content, raw) {
         var hash = md51(content), ret = hex(hash);
         return raw ? hexToBinaryString(ret) : ret;
       };
-      SparkMD5.ArrayBuffer = function() {
+      SparkMD5.ArrayBuffer = function () {
         this.reset();
       };
-      SparkMD5.ArrayBuffer.prototype.append = function(arr) {
+      SparkMD5.ArrayBuffer.prototype.append = function (arr) {
         var buff = concatenateArrayBuffers(this._buff.buffer, arr, true), length = buff.length, i;
         this._length += arr.byteLength;
         for (i = 64; i <= length; i += 64) {
@@ -1098,8 +1098,8 @@ Released under the MIT license
         this._buff = i - 64 < length ? new Uint8Array(buff.buffer.slice(i - 64)) : new Uint8Array(0);
         return this;
       };
-      SparkMD5.ArrayBuffer.prototype.end = function(raw) {
-        var buff = this._buff, length = buff.length, tail = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], i, ret;
+      SparkMD5.ArrayBuffer.prototype.end = function (raw) {
+        var buff = this._buff, length = buff.length, tail = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], i, ret;
         for (i = 0; i < length; i += 1) {
           tail[i >> 2] |= buff[i] << (i % 4 << 3);
         }
@@ -1111,36 +1111,36 @@ Released under the MIT license
         this.reset();
         return ret;
       };
-      SparkMD5.ArrayBuffer.prototype.reset = function() {
+      SparkMD5.ArrayBuffer.prototype.reset = function () {
         this._buff = new Uint8Array(0);
         this._length = 0;
-        this._hash = [ 1732584193, -271733879, -1732584194, 271733878 ];
+        this._hash = [1732584193, -271733879, -1732584194, 271733878];
         return this;
       };
-      SparkMD5.ArrayBuffer.prototype.getState = function() {
+      SparkMD5.ArrayBuffer.prototype.getState = function () {
         var state = SparkMD5.prototype.getState.call(this);
         state.buff = arrayBuffer2Utf8Str(state.buff);
         return state;
       };
-      SparkMD5.ArrayBuffer.prototype.setState = function(state) {
+      SparkMD5.ArrayBuffer.prototype.setState = function (state) {
         state.buff = utf8Str2ArrayBuffer(state.buff, true);
         return SparkMD5.prototype.setState.call(this, state);
       };
       SparkMD5.ArrayBuffer.prototype.destroy = SparkMD5.prototype.destroy;
       SparkMD5.ArrayBuffer.prototype._finish = SparkMD5.prototype._finish;
-      SparkMD5.ArrayBuffer.hash = function(arr, raw) {
+      SparkMD5.ArrayBuffer.hash = function (arr, raw) {
         var hash = md51_array(new Uint8Array(arr)), ret = hex(hash);
         return raw ? hexToBinaryString(ret) : ret;
       };
       return SparkMD5;
     });
   });
-  var classCallCheck = function(instance, Constructor) {
+  var classCallCheck = function (instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   };
-  var createClass = function() {
+  var createClass = function () {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
         var descriptor = props[i];
@@ -1150,21 +1150,21 @@ Released under the MIT license
         Object.defineProperty(target, descriptor.key, descriptor);
       }
     }
-    return function(Constructor, protoProps, staticProps) {
+    return function (Constructor, protoProps, staticProps) {
       if (protoProps) defineProperties(Constructor.prototype, protoProps);
       if (staticProps) defineProperties(Constructor, staticProps);
       return Constructor;
     };
   }();
   var fileSlice = File.prototype.slice || File.prototype.mozSlice || File.prototype.webkitSlice;
-  var FileChecksum = function() {
-    createClass(FileChecksum, null, [ {
+  var FileChecksum = function () {
+    createClass(FileChecksum, null, [{
       key: "create",
       value: function create(file, callback) {
         var instance = new FileChecksum(file);
         instance.create(callback);
       }
-    } ]);
+    }]);
     function FileChecksum(file) {
       classCallCheck(this, FileChecksum);
       this.file = file;
@@ -1172,17 +1172,17 @@ Released under the MIT license
       this.chunkCount = Math.ceil(this.file.size / this.chunkSize);
       this.chunkIndex = 0;
     }
-    createClass(FileChecksum, [ {
+    createClass(FileChecksum, [{
       key: "create",
       value: function create(callback) {
         var _this = this;
         this.callback = callback;
         this.md5Buffer = new sparkMd5.ArrayBuffer();
         this.fileReader = new FileReader();
-        this.fileReader.addEventListener("load", function(event) {
+        this.fileReader.addEventListener("load", function (event) {
           return _this.fileReaderDidLoad(event);
         });
-        this.fileReader.addEventListener("error", function(event) {
+        this.fileReader.addEventListener("error", function (event) {
           return _this.fileReaderDidError(event);
         });
         this.readNextChunk();
@@ -1216,7 +1216,7 @@ Released under the MIT license
           return false;
         }
       }
-    } ]);
+    }]);
     return FileChecksum;
   }();
   function getMetaValue(name) {
@@ -1264,7 +1264,7 @@ Released under the MIT license
       return [].slice.call(value);
     }
   }
-  var BlobRecord = function() {
+  var BlobRecord = function () {
     function BlobRecord(file, checksum, url) {
       var _this = this;
       classCallCheck(this, BlobRecord);
@@ -1282,14 +1282,14 @@ Released under the MIT license
       this.xhr.setRequestHeader("Accept", "application/json");
       this.xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
       this.xhr.setRequestHeader("X-CSRF-Token", getMetaValue("csrf-token"));
-      this.xhr.addEventListener("load", function(event) {
+      this.xhr.addEventListener("load", function (event) {
         return _this.requestDidLoad(event);
       });
-      this.xhr.addEventListener("error", function(event) {
+      this.xhr.addEventListener("error", function (event) {
         return _this.requestDidError(event);
       });
     }
-    createClass(BlobRecord, [ {
+    createClass(BlobRecord, [{
       key: "create",
       value: function create(callback) {
         this.callback = callback;
@@ -1340,10 +1340,10 @@ Released under the MIT license
           return JSON.parse(response);
         }
       }
-    } ]);
+    }]);
     return BlobRecord;
   }();
-  var BlobUpload = function() {
+  var BlobUpload = function () {
     function BlobUpload(blob) {
       var _this = this;
       classCallCheck(this, BlobUpload);
@@ -1356,14 +1356,14 @@ Released under the MIT license
       for (var key in headers) {
         this.xhr.setRequestHeader(key, headers[key]);
       }
-      this.xhr.addEventListener("load", function(event) {
+      this.xhr.addEventListener("load", function (event) {
         return _this.requestDidLoad(event);
       });
-      this.xhr.addEventListener("error", function(event) {
+      this.xhr.addEventListener("error", function (event) {
         return _this.requestDidError(event);
       });
     }
-    createClass(BlobUpload, [ {
+    createClass(BlobUpload, [{
       key: "create",
       value: function create(callback) {
         this.callback = callback;
@@ -1384,11 +1384,11 @@ Released under the MIT license
       value: function requestDidError(event) {
         this.callback('Error storing "' + this.file.name + '". Status: ' + this.xhr.status);
       }
-    } ]);
+    }]);
     return BlobUpload;
   }();
   var id = 0;
-  var DirectUpload = function() {
+  var DirectUpload = function () {
     function DirectUpload(file, url, delegate) {
       classCallCheck(this, DirectUpload);
       this.id = ++id;
@@ -1396,24 +1396,24 @@ Released under the MIT license
       this.url = url;
       this.delegate = delegate;
     }
-    createClass(DirectUpload, [ {
+    createClass(DirectUpload, [{
       key: "create",
       value: function create(callback) {
         var _this = this;
-        FileChecksum.create(this.file, function(error, checksum) {
+        FileChecksum.create(this.file, function (error, checksum) {
           if (error) {
             callback(error);
             return;
           }
           var blob = new BlobRecord(_this.file, checksum, _this.url);
           notify(_this.delegate, "directUploadWillCreateBlobWithXHR", blob.xhr);
-          blob.create(function(error) {
+          blob.create(function (error) {
             if (error) {
               callback(error);
             } else {
               var upload = new BlobUpload(blob);
               notify(_this.delegate, "directUploadWillStoreFileWithXHR", upload.xhr);
-              upload.create(function(error) {
+              upload.create(function (error) {
                 if (error) {
                   callback(error);
                 } else {
@@ -1424,7 +1424,7 @@ Released under the MIT license
           });
         });
       }
-    } ]);
+    }]);
     return DirectUpload;
   }();
   function notify(object, methodName) {
@@ -1435,7 +1435,7 @@ Released under the MIT license
       return object[methodName].apply(object, messages);
     }
   }
-  var DirectUploadController = function() {
+  var DirectUploadController = function () {
     function DirectUploadController(input, file) {
       classCallCheck(this, DirectUploadController);
       this.input = input;
@@ -1443,7 +1443,7 @@ Released under the MIT license
       this.directUpload = new DirectUpload(this.file, this.url, this);
       this.dispatch("initialize");
     }
-    createClass(DirectUploadController, [ {
+    createClass(DirectUploadController, [{
       key: "start",
       value: function start(callback) {
         var _this = this;
@@ -1452,7 +1452,7 @@ Released under the MIT license
         hiddenInput.name = this.input.name;
         this.input.insertAdjacentElement("beforebegin", hiddenInput);
         this.dispatch("start");
-        this.directUpload.create(function(error, attributes) {
+        this.directUpload.create(function (error, attributes) {
           if (error) {
             hiddenInput.parentNode.removeChild(hiddenInput);
             _this.dispatchError(error);
@@ -1507,7 +1507,7 @@ Released under the MIT license
         this.dispatch("before-storage-request", {
           xhr: xhr
         });
-        xhr.upload.addEventListener("progress", function(event) {
+        xhr.upload.addEventListener("progress", function (event) {
           return _this2.uploadRequestDidProgress(event);
         });
       }
@@ -1516,19 +1516,19 @@ Released under the MIT license
       get: function get$$1() {
         return this.input.getAttribute("data-direct-upload-url");
       }
-    } ]);
+    }]);
     return DirectUploadController;
   }();
   var inputSelector = "input[type=file][data-direct-upload-url]:not([disabled])";
-  var DirectUploadsController = function() {
+  var DirectUploadsController = function () {
     function DirectUploadsController(form) {
       classCallCheck(this, DirectUploadsController);
       this.form = form;
-      this.inputs = findElements(form, inputSelector).filter(function(input) {
+      this.inputs = findElements(form, inputSelector).filter(function (input) {
         return input.files.length;
       });
     }
-    createClass(DirectUploadsController, [ {
+    createClass(DirectUploadsController, [{
       key: "start",
       value: function start(callback) {
         var _this = this;
@@ -1536,7 +1536,7 @@ Released under the MIT license
         var startNextController = function startNextController() {
           var controller = controllers.shift();
           if (controller) {
-            controller.start(function(error) {
+            controller.start(function (error) {
               if (error) {
                 callback(error);
                 _this.dispatch("end");
@@ -1556,8 +1556,8 @@ Released under the MIT license
       key: "createDirectUploadControllers",
       value: function createDirectUploadControllers() {
         var controllers = [];
-        this.inputs.forEach(function(input) {
-          toArray$1(input.files).forEach(function(file) {
+        this.inputs.forEach(function (input) {
+          toArray$1(input.files).forEach(function (file) {
             var controller = new DirectUploadController(input, file);
             controllers.push(controller);
           });
@@ -1572,7 +1572,7 @@ Released under the MIT license
           detail: detail
         });
       }
-    } ]);
+    }]);
     return DirectUploadsController;
   }();
   var processingAttribute = "data-direct-uploads-processing";
@@ -1612,7 +1612,7 @@ Released under the MIT license
       event.preventDefault();
       form.setAttribute(processingAttribute, "");
       inputs.forEach(disable);
-      controller.start(function(error) {
+      controller.start(function (error) {
         form.removeAttribute(processingAttribute);
         if (error) {
           inputs.forEach(enable);
@@ -1658,11 +1658,11 @@ Released under the MIT license
     value: true
   });
 });
-(function() {
+(function () {
   var context = this;
 
-  (function() {
-    (function() {
+  (function () {
+    (function () {
       var slice = [].slice;
 
       this.ActionCable = {
@@ -1678,19 +1678,19 @@ Released under the MIT license
         },
         WebSocket: window.WebSocket,
         logger: window.console,
-        createConsumer: function(url) {
+        createConsumer: function (url) {
           var ref;
           if (url == null) {
             url = (ref = this.getConfig("url")) != null ? ref : this.INTERNAL.default_mount_path;
           }
           return new ActionCable.Consumer(this.createWebSocketURL(url));
         },
-        getConfig: function(name) {
+        getConfig: function (name) {
           var element;
           element = document.head.querySelector("meta[name='action-cable-" + name + "']");
           return element != null ? element.getAttribute("content") : void 0;
         },
-        createWebSocketURL: function(url) {
+        createWebSocketURL: function (url) {
           var a;
           if (url && !/^wss?:/i.test(url)) {
             a = document.createElement("a");
@@ -1702,13 +1702,13 @@ Released under the MIT license
             return url;
           }
         },
-        startDebugging: function() {
+        startDebugging: function () {
           return this.debugging = true;
         },
-        stopDebugging: function() {
+        stopDebugging: function () {
           return this.debugging = null;
         },
-        log: function() {
+        log: function () {
           var messages, ref;
           messages = 1 <= arguments.length ? slice.call(arguments, 0) : [];
           if (this.debugging) {
@@ -1723,11 +1723,11 @@ Released under the MIT license
 
   var ActionCable = context.ActionCable;
 
-  (function() {
-    (function() {
-      var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  (function () {
+    (function () {
+      var bind = function (fn, me) { return function () { return fn.apply(me, arguments); }; };
 
-      ActionCable.ConnectionMonitor = (function() {
+      ActionCable.ConnectionMonitor = (function () {
         var clamp, now, secondsSince;
 
         ConnectionMonitor.pollInterval = {
@@ -1743,7 +1743,7 @@ Released under the MIT license
           this.reconnectAttempts = 0;
         }
 
-        ConnectionMonitor.prototype.start = function() {
+        ConnectionMonitor.prototype.start = function () {
           if (!this.isRunning()) {
             this.startedAt = now();
             delete this.stoppedAt;
@@ -1753,7 +1753,7 @@ Released under the MIT license
           }
         };
 
-        ConnectionMonitor.prototype.stop = function() {
+        ConnectionMonitor.prototype.stop = function () {
           if (this.isRunning()) {
             this.stoppedAt = now();
             this.stopPolling();
@@ -1762,52 +1762,52 @@ Released under the MIT license
           }
         };
 
-        ConnectionMonitor.prototype.isRunning = function() {
+        ConnectionMonitor.prototype.isRunning = function () {
           return (this.startedAt != null) && (this.stoppedAt == null);
         };
 
-        ConnectionMonitor.prototype.recordPing = function() {
+        ConnectionMonitor.prototype.recordPing = function () {
           return this.pingedAt = now();
         };
 
-        ConnectionMonitor.prototype.recordConnect = function() {
+        ConnectionMonitor.prototype.recordConnect = function () {
           this.reconnectAttempts = 0;
           this.recordPing();
           delete this.disconnectedAt;
           return ActionCable.log("ConnectionMonitor recorded connect");
         };
 
-        ConnectionMonitor.prototype.recordDisconnect = function() {
+        ConnectionMonitor.prototype.recordDisconnect = function () {
           this.disconnectedAt = now();
           return ActionCable.log("ConnectionMonitor recorded disconnect");
         };
 
-        ConnectionMonitor.prototype.startPolling = function() {
+        ConnectionMonitor.prototype.startPolling = function () {
           this.stopPolling();
           return this.poll();
         };
 
-        ConnectionMonitor.prototype.stopPolling = function() {
+        ConnectionMonitor.prototype.stopPolling = function () {
           return clearTimeout(this.pollTimeout);
         };
 
-        ConnectionMonitor.prototype.poll = function() {
-          return this.pollTimeout = setTimeout((function(_this) {
-            return function() {
+        ConnectionMonitor.prototype.poll = function () {
+          return this.pollTimeout = setTimeout((function (_this) {
+            return function () {
               _this.reconnectIfStale();
               return _this.poll();
             };
           })(this), this.getPollInterval());
         };
 
-        ConnectionMonitor.prototype.getPollInterval = function() {
+        ConnectionMonitor.prototype.getPollInterval = function () {
           var interval, max, min, ref;
           ref = this.constructor.pollInterval, min = ref.min, max = ref.max;
           interval = 5 * Math.log(this.reconnectAttempts + 1);
           return Math.round(clamp(interval, min, max) * 1000);
         };
 
-        ConnectionMonitor.prototype.reconnectIfStale = function() {
+        ConnectionMonitor.prototype.reconnectIfStale = function () {
           if (this.connectionIsStale()) {
             ActionCable.log("ConnectionMonitor detected stale connection. reconnectAttempts = " + this.reconnectAttempts + ", pollInterval = " + (this.getPollInterval()) + " ms, time disconnected = " + (secondsSince(this.disconnectedAt)) + " s, stale threshold = " + this.constructor.staleThreshold + " s");
             this.reconnectAttempts++;
@@ -1820,19 +1820,19 @@ Released under the MIT license
           }
         };
 
-        ConnectionMonitor.prototype.connectionIsStale = function() {
+        ConnectionMonitor.prototype.connectionIsStale = function () {
           var ref;
           return secondsSince((ref = this.pingedAt) != null ? ref : this.startedAt) > this.constructor.staleThreshold;
         };
 
-        ConnectionMonitor.prototype.disconnectedRecently = function() {
+        ConnectionMonitor.prototype.disconnectedRecently = function () {
           return this.disconnectedAt && secondsSince(this.disconnectedAt) < this.constructor.staleThreshold;
         };
 
-        ConnectionMonitor.prototype.visibilityDidChange = function() {
+        ConnectionMonitor.prototype.visibilityDidChange = function () {
           if (document.visibilityState === "visible") {
-            return setTimeout((function(_this) {
-              return function() {
+            return setTimeout((function (_this) {
+              return function () {
                 if (_this.connectionIsStale() || !_this.connection.isOpen()) {
                   ActionCable.log("ConnectionMonitor reopening stale connection on visibilitychange. visbilityState = " + document.visibilityState);
                   return _this.connection.reopen();
@@ -1842,15 +1842,15 @@ Released under the MIT license
           }
         };
 
-        now = function() {
+        now = function () {
           return new Date().getTime();
         };
 
-        secondsSince = function(time) {
+        secondsSince = function (time) {
           return (now() - time) / 1000;
         };
 
-        clamp = function(number, min, max) {
+        clamp = function (number, min, max) {
           return Math.max(min, Math.min(max, number));
         };
 
@@ -1859,17 +1859,17 @@ Released under the MIT license
       })();
 
     }).call(this);
-    (function() {
+    (function () {
       var i, message_types, protocols, ref, supportedProtocols, unsupportedProtocol,
         slice = [].slice,
-        bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-        indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+        bind = function (fn, me) { return function () { return fn.apply(me, arguments); }; },
+        indexOf = [].indexOf || function (item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
       ref = ActionCable.INTERNAL, message_types = ref.message_types, protocols = ref.protocols;
 
       supportedProtocols = 2 <= protocols.length ? slice.call(protocols, 0, i = protocols.length - 1) : (i = 0, []), unsupportedProtocol = protocols[i++];
 
-      ActionCable.Connection = (function() {
+      ActionCable.Connection = (function () {
         Connection.reopenDelay = 500;
 
         function Connection(consumer) {
@@ -1880,7 +1880,7 @@ Released under the MIT license
           this.disconnected = true;
         }
 
-        Connection.prototype.send = function(data) {
+        Connection.prototype.send = function (data) {
           if (this.isOpen()) {
             this.webSocket.send(JSON.stringify(data));
             return true;
@@ -1889,7 +1889,7 @@ Released under the MIT license
           }
         };
 
-        Connection.prototype.open = function() {
+        Connection.prototype.open = function () {
           if (this.isActive()) {
             ActionCable.log("Attempted to open WebSocket, but existing socket is " + (this.getState()));
             return false;
@@ -1905,7 +1905,7 @@ Released under the MIT license
           }
         };
 
-        Connection.prototype.close = function(arg) {
+        Connection.prototype.close = function (arg) {
           var allowReconnect, ref1;
           allowReconnect = (arg != null ? arg : {
             allowReconnect: true
@@ -1918,7 +1918,7 @@ Released under the MIT license
           }
         };
 
-        Connection.prototype.reopen = function() {
+        Connection.prototype.reopen = function () {
           var error;
           ActionCable.log("Reopening WebSocket, current state is " + (this.getState()));
           if (this.isActive()) {
@@ -1936,31 +1936,31 @@ Released under the MIT license
           }
         };
 
-        Connection.prototype.getProtocol = function() {
+        Connection.prototype.getProtocol = function () {
           var ref1;
           return (ref1 = this.webSocket) != null ? ref1.protocol : void 0;
         };
 
-        Connection.prototype.isOpen = function() {
+        Connection.prototype.isOpen = function () {
           return this.isState("open");
         };
 
-        Connection.prototype.isActive = function() {
+        Connection.prototype.isActive = function () {
           return this.isState("open", "connecting");
         };
 
-        Connection.prototype.isProtocolSupported = function() {
+        Connection.prototype.isProtocolSupported = function () {
           var ref1;
           return ref1 = this.getProtocol(), indexOf.call(supportedProtocols, ref1) >= 0;
         };
 
-        Connection.prototype.isState = function() {
+        Connection.prototype.isState = function () {
           var ref1, states;
           states = 1 <= arguments.length ? slice.call(arguments, 0) : [];
           return ref1 = this.getState(), indexOf.call(states, ref1) >= 0;
         };
 
-        Connection.prototype.getState = function() {
+        Connection.prototype.getState = function () {
           var ref1, state, value;
           for (state in WebSocket) {
             value = WebSocket[state];
@@ -1971,7 +1971,7 @@ Released under the MIT license
           return null;
         };
 
-        Connection.prototype.installEventHandlers = function() {
+        Connection.prototype.installEventHandlers = function () {
           var eventName, handler;
           for (eventName in this.events) {
             handler = this.events[eventName].bind(this);
@@ -1979,15 +1979,15 @@ Released under the MIT license
           }
         };
 
-        Connection.prototype.uninstallEventHandlers = function() {
+        Connection.prototype.uninstallEventHandlers = function () {
           var eventName;
           for (eventName in this.events) {
-            this.webSocket["on" + eventName] = function() {};
+            this.webSocket["on" + eventName] = function () { };
           }
         };
 
         Connection.prototype.events = {
-          message: function(event) {
+          message: function (event) {
             var identifier, message, ref1, type;
             if (!this.isProtocolSupported()) {
               return;
@@ -2007,7 +2007,7 @@ Released under the MIT license
                 return this.subscriptions.notify(identifier, "received", message);
             }
           },
-          open: function() {
+          open: function () {
             ActionCable.log("WebSocket onopen event, using '" + (this.getProtocol()) + "' subprotocol");
             this.disconnected = false;
             if (!this.isProtocolSupported()) {
@@ -2017,7 +2017,7 @@ Released under the MIT license
               });
             }
           },
-          close: function(event) {
+          close: function (event) {
             ActionCable.log("WebSocket onclose event");
             if (this.disconnected) {
               return;
@@ -2028,7 +2028,7 @@ Released under the MIT license
               willAttemptReconnect: this.monitor.isRunning()
             });
           },
-          error: function() {
+          error: function () {
             return ActionCable.log("WebSocket onerror event");
           }
         };
@@ -2038,16 +2038,16 @@ Released under the MIT license
       })();
 
     }).call(this);
-    (function() {
+    (function () {
       var slice = [].slice;
 
-      ActionCable.Subscriptions = (function() {
+      ActionCable.Subscriptions = (function () {
         function Subscriptions(consumer) {
           this.consumer = consumer;
           this.subscriptions = [];
         }
 
-        Subscriptions.prototype.create = function(channelName, mixin) {
+        Subscriptions.prototype.create = function (channelName, mixin) {
           var channel, params, subscription;
           channel = channelName;
           params = typeof channel === "object" ? channel : {
@@ -2057,7 +2057,7 @@ Released under the MIT license
           return this.add(subscription);
         };
 
-        Subscriptions.prototype.add = function(subscription) {
+        Subscriptions.prototype.add = function (subscription) {
           this.subscriptions.push(subscription);
           this.consumer.ensureActiveConnection();
           this.notify(subscription, "initialized");
@@ -2065,7 +2065,7 @@ Released under the MIT license
           return subscription;
         };
 
-        Subscriptions.prototype.remove = function(subscription) {
+        Subscriptions.prototype.remove = function (subscription) {
           this.forget(subscription);
           if (!this.findAll(subscription.identifier).length) {
             this.sendCommand(subscription, "unsubscribe");
@@ -2073,7 +2073,7 @@ Released under the MIT license
           return subscription;
         };
 
-        Subscriptions.prototype.reject = function(identifier) {
+        Subscriptions.prototype.reject = function (identifier) {
           var i, len, ref, results, subscription;
           ref = this.findAll(identifier);
           results = [];
@@ -2086,9 +2086,9 @@ Released under the MIT license
           return results;
         };
 
-        Subscriptions.prototype.forget = function(subscription) {
+        Subscriptions.prototype.forget = function (subscription) {
           var s;
-          this.subscriptions = (function() {
+          this.subscriptions = (function () {
             var i, len, ref, results;
             ref = this.subscriptions;
             results = [];
@@ -2103,7 +2103,7 @@ Released under the MIT license
           return subscription;
         };
 
-        Subscriptions.prototype.findAll = function(identifier) {
+        Subscriptions.prototype.findAll = function (identifier) {
           var i, len, ref, results, s;
           ref = this.subscriptions;
           results = [];
@@ -2116,7 +2116,7 @@ Released under the MIT license
           return results;
         };
 
-        Subscriptions.prototype.reload = function() {
+        Subscriptions.prototype.reload = function () {
           var i, len, ref, results, subscription;
           ref = this.subscriptions;
           results = [];
@@ -2127,7 +2127,7 @@ Released under the MIT license
           return results;
         };
 
-        Subscriptions.prototype.notifyAll = function() {
+        Subscriptions.prototype.notifyAll = function () {
           var args, callbackName, i, len, ref, results, subscription;
           callbackName = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
           ref = this.subscriptions;
@@ -2139,7 +2139,7 @@ Released under the MIT license
           return results;
         };
 
-        Subscriptions.prototype.notify = function() {
+        Subscriptions.prototype.notify = function () {
           var args, callbackName, i, len, results, subscription, subscriptions;
           subscription = arguments[0], callbackName = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
           if (typeof subscription === "string") {
@@ -2155,7 +2155,7 @@ Released under the MIT license
           return results;
         };
 
-        Subscriptions.prototype.sendCommand = function(subscription, command) {
+        Subscriptions.prototype.sendCommand = function (subscription, command) {
           var identifier;
           identifier = subscription.identifier;
           return this.consumer.send({
@@ -2169,8 +2169,8 @@ Released under the MIT license
       })();
 
     }).call(this);
-    (function() {
-      ActionCable.Subscription = (function() {
+    (function () {
+      ActionCable.Subscription = (function () {
         var extend;
 
         function Subscription(consumer, params, mixin) {
@@ -2182,7 +2182,7 @@ Released under the MIT license
           extend(this, mixin);
         }
 
-        Subscription.prototype.perform = function(action, data) {
+        Subscription.prototype.perform = function (action, data) {
           if (data == null) {
             data = {};
           }
@@ -2190,7 +2190,7 @@ Released under the MIT license
           return this.send(data);
         };
 
-        Subscription.prototype.send = function(data) {
+        Subscription.prototype.send = function (data) {
           return this.consumer.send({
             command: "message",
             identifier: this.identifier,
@@ -2198,11 +2198,11 @@ Released under the MIT license
           });
         };
 
-        Subscription.prototype.unsubscribe = function() {
+        Subscription.prototype.unsubscribe = function () {
           return this.consumer.subscriptions.remove(this);
         };
 
-        extend = function(object, properties) {
+        extend = function (object, properties) {
           var key, value;
           if (properties != null) {
             for (key in properties) {
@@ -2218,29 +2218,29 @@ Released under the MIT license
       })();
 
     }).call(this);
-    (function() {
-      ActionCable.Consumer = (function() {
+    (function () {
+      ActionCable.Consumer = (function () {
         function Consumer(url) {
           this.url = url;
           this.subscriptions = new ActionCable.Subscriptions(this);
           this.connection = new ActionCable.Connection(this);
         }
 
-        Consumer.prototype.send = function(data) {
+        Consumer.prototype.send = function (data) {
           return this.connection.send(data);
         };
 
-        Consumer.prototype.connect = function() {
+        Consumer.prototype.connect = function () {
           return this.connection.open();
         };
 
-        Consumer.prototype.disconnect = function() {
+        Consumer.prototype.disconnect = function () {
           return this.connection.close({
             allowReconnect: false
           });
         };
 
-        Consumer.prototype.ensureActiveConnection = function() {
+        Consumer.prototype.ensureActiveConnection = function () {
           if (!this.connection.isActive()) {
             return this.connection.open();
           }
@@ -2266,7 +2266,7 @@ Released under the MIT license
 
 
 
-(function() {
+(function () {
   this.App || (this.App = {});
 
   App.cable = ActionCable.createConsumer();
@@ -2499,7 +2499,7 @@ const pointsJSON = {
     "yes": 3428
   }
 }
-;
+  ;
 $(() => {
   loadSurvey();
 });
@@ -2580,7 +2580,7 @@ function saveCategoryResults(results) {
     loadCategoryPoints(data.category.id);
     loadAffiliationPoints(data.user.affiliation_id);
     loadCommunityPoints();
-    surveyMessage(data.category.name, data.user_total_points)
+    surveyMessage(data.category.title, data.user_total_points)
   })
 }
 
@@ -3224,7 +3224,7 @@ const surveyJSON = {
   ],
   "questionStartIndex": "1"
 }
-;
+  ;
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
