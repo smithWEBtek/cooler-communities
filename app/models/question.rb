@@ -29,14 +29,14 @@ class Question < ApplicationRecord
           survey_id: 1,
           question_key: row[0],
           airtable_id: row[1],
-          category_id: Category.find_or_create_by(name: row[2]).id,
+          category_id: Category.find_or_create_by(title: row[2]).id,
           question_text: row[3],
           question_type: row[4], 
           answer_key: self.build_answer_key(row)
         }
         
         new_question = Question.new(question_data)
-        category = new_question.category.name
+        category = new_question.category.title
         question_key = new_question.question_key
         answer_key = new_question.answer_key
         points[question_key] = {} if !points[question_key] || !points[category].nil? 

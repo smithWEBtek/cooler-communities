@@ -47,7 +47,8 @@
   <p><%= @user.full_name %>'s responses today: </p>
   <table class="pretty-table">
     <tr>
-      <th scope="col2">category</th>
+      <th scope="col2">category title</th>
+      <th scope="col2">category name</th>
       <th scope="col2">question_key</th>
       <th scope="col2">question_text</th>
       <th scope="col2">answer</th>
@@ -55,6 +56,7 @@
     </tr>
     <% @user.responses.each do |r| %>
     <tr scope="row">
+      <td><%= r.category.title %></td>
       <td><%= r.category.name %></td>
       <td><%= r.question.question_key %></td>
       <td><%= r.question.question_text %></td>
