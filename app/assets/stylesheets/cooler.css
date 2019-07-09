@@ -274,18 +274,28 @@ fieldset {
   grid-row-end: 3;
 }
 
-.survey__category-tab-selected {
+/*  survey tabs UX ***************************************************/
+.uncompleted {
+  background-color: none;
+}
+
+.unclickable {
+  pointer-events: none;
+}
+
+.selected {
   background-color: rgb(207, 240, 207);
   border: .1rem solid #1ab394;
 }
 
-.survey__category-tab-completed {
+.completed {
   background-color: #98a3a1;
   border-left: .2rem solid #616c6a;
   border-right: .2rem solid #616c6a;
   border-top: .1rem solid #616c6a;
   pointer-events: none;
 }
+
 
 .survey__about {
   background-color: rgb(216, 245, 207);
