@@ -3,7 +3,6 @@ $(() => {
   loadCurrentUserData()
 });
 
-
 // user data -----------------------------------------------------------
 function loadCurrentUserData() {
   $.ajax({
@@ -18,20 +17,14 @@ function loadCurrentUserData() {
       let completedTabs = [...new Set(data.responses.map(r => r.category.name))].filter(obj => obj);
       completedTabs.forEach(name => {
         let tab = document.getElementById(name)
-        console.log('name: ', name)
-
-        tab.classList.add('survey__category-tab-completed')
+        tab.classList.add('completed')
       })
-      console.log('completedTabs: ', completedTabs)
-
-      let remainingTabs = Array.from(document.getElementsByClassName('survey__category-tab')).map(tab => {
+      let unCompletedTabs = Array.from(document.getElementsByClassName('survey__category-tab')).map(tab => {
         if (!completedTabs.includes(tab.id)) {
           return tab.id
         }
       }).filter(obj => obj)
-      console.log('remainingTabs: ', remainingTabs)
-
-      processTabs(completedTabs, remainingTabs)
+      processTabs(completedTabs, unCompletedTabs)
     })
   })
   loadCommunityPoints();
@@ -74,21 +67,38 @@ function categoryTabHandler(imageId) {
     $('.summary__body').css('display', 'inline');
 
     categoryViewDiv.css('display', 'inline');
-    currentTab.classList.add('survey__category-tab-selected')
+    currentTab.classList.add('selected')
 
     $('input.sv_complete_btn').on('click', function (event) {
       event.preventDefault();
-      currentTab.classList.add('survey__category-tab-completed');
+      currentTab.classList.add('completed');
     })
   })
 }
 
-function processTabs(completedTabs, remainingTabs) {
-  // remainingTabs are clickable until 1 gets clicked
+function processTabs(completedTabs, unCompletedTabs) {
+  let remainginUncompletedTabs = [];
   // completedTabs remain gray and unclickable
-  // when a remaining tab is clicked, the rest of the remaining tags become unclickable
-  // upon "complete click" remaining incomplete tabs become clickable again
-  // 
+  completedTabs.forEach(tab => {
+    document.getElementById(tab).classList.add('completed');
+  })
+
+  // unCompletedTabs are clickable until 1 gets clicked
+  unCompletedTabs.forEach(tab => {
+    let categoryTab = document.getElementById(tab)
+    categoryTab.classList.add('uncompleted');
+
+    // when a remaining tab is clicked, the rest of the remaining tags become unclickable
+    categoryTab.addEventListener('click', function (event) {
+      event.preventDefault();
+      categoryTab.classList.add('selected')
+      remainginUncompletedTabs = unCompletedTabs.filter(tab => tab != document.getElementsByClassName('selected')[0].id);
+      remainginUncompletedTabs.forEach(tab => {
+        let categoryTab = document.getElementById(tab);
+        categoryTab.classList.add('unclickable')
+      })
+    })
+  })
 }
 
 function saveCategoryResults(results) {
@@ -143,7 +153,6 @@ function msgCategoryComplete(categoryName, points) {
     </div>
   `)
   $('#survey__message')[0].css('display', 'inline');
-  // msgNextCategory(currentCategory, nextCategory);
 }
 
 function msgSurveyStart(user_id) {
