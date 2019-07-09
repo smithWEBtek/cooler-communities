@@ -284,6 +284,7 @@ fieldset {
   border-left: .2rem solid #616c6a;
   border-right: .2rem solid #616c6a;
   border-top: .1rem solid #616c6a;
+  pointer-events: none;
 }
 
 .survey__about {

@@ -107,7 +107,7 @@ function saveCategoryResults(results) {
     loadCategoryPoints(data.category.id);
     loadAffiliationPoints(data.user.affiliation_id);
     loadCommunityPoints();
-    surveyMessage(data.category.name, data.user_total_points)
+    surveyMessage(data.category.title, data.user_total_points)
   })
 }
 

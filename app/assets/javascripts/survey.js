@@ -1,6 +1,8 @@
 $(() => {
+  loadSurvey();
   loadCurrentUserData()
 });
+
 
 // user data -----------------------------------------------------------
 function loadCurrentUserData() {
@@ -13,10 +15,28 @@ function loadCurrentUserData() {
       url: `/users/${id}`,
       dataType: 'json'
     }).done(function (data) {
-      loadSurvey();
-      loadUserData(data);
+      let completedTabs = [...new Set(data.responses.map(r => r.category.name))].filter(obj => obj);
+      completedTabs.forEach(name => {
+        let tab = document.getElementById(name)
+        console.log('name: ', name)
+
+        tab.classList.add('survey__category-tab-completed')
+      })
+      console.log('completedTabs: ', completedTabs)
+
+      let remainingTabs = Array.from(document.getElementsByClassName('survey__category-tab')).map(tab => {
+        if (!completedTabs.includes(tab.id)) {
+          return tab.id
+        }
+      }).filter(obj => obj)
+      console.log('remainingTabs: ', remainingTabs)
+
+      processTabs(completedTabs, remainingTabs)
     })
   })
+  loadCommunityPoints();
+  // loadAffiliationPoints();
+  // loadUserPoints();
 }
 
 // load survey and handlers -------------------------------------------------
@@ -43,14 +63,6 @@ function loadSurvey() {
       categoryTabHandler(page.name);
     })
   })
-  loadCommunityPoints();
-}
-
-function loadUserData(data) {
-  const responseCategories = data.responses.map(r => r.category.name);
-  const uniqueResponseCategories = [...new Set(responseCategories)]
-  console.log('uniqueResponseCategories: ', uniqueResponseCategories)
-  debugger;
 }
 
 function categoryTabHandler(imageId) {
@@ -62,33 +74,21 @@ function categoryTabHandler(imageId) {
     $('.summary__body').css('display', 'inline');
 
     categoryViewDiv.css('display', 'inline');
-    tabSelected(currentTab);
-    tabCompleted(currentTab);
+    currentTab.classList.add('survey__category-tab-selected')
+
+    $('input.sv_complete_btn').on('click', function (event) {
+      event.preventDefault();
+      currentTab.classList.add('survey__category-tab-completed');
+    })
   })
 }
 
-function tabSelected(currentTab) {
-  currentTab.classList.add('survey__category-tab-selected')
-  // let unselectedTabs = Array.from(document.getElementsByClassName('survey__category-tab'));
-  // let unselectedCategories = Array.from(document.getElementsByClassName('survey__category-view'));
-
-  // unselectedCategories.forEach(category => {
-  //   category.style.display = "none"
-  // });
-
-  // unselectedTabs.forEach(tab => {
-  //   if (tab.id != currentTab.id) {
-  //     tab.classList.remove('survey__category-tab-selected')
-  //     $('.survey__category-view').css('display', 'none');
-  //   }
-  // })
-}
-
-function tabCompleted(currentTab) {
-  $('input.sv_complete_btn').on('click', function (event) {
-    event.preventDefault();
-    currentTab.classList.add('survey__category-tab-completed');
-  })
+function processTabs(completedTabs, remainingTabs) {
+  // remainingTabs are clickable until 1 gets clicked
+  // completedTabs remain gray and unclickable
+  // when a remaining tab is clicked, the rest of the remaining tags become unclickable
+  // upon "complete click" remaining incomplete tabs become clickable again
+  // 
 }
 
 function saveCategoryResults(results) {
@@ -102,7 +102,7 @@ function saveCategoryResults(results) {
     loadCategoryPoints(data.category.id);
     loadAffiliationPoints(data.user.affiliation_id);
     loadCommunityPoints();
-    surveyMessage(data.category.name, data.user_total_points)
+    surveyMessage(data.category.title, data.user_total_points)
   })
 }
 

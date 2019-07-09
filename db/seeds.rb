@@ -1,12 +1,10 @@
 def display_model_counts
   puts "**********************************************************"
-  puts "**********************************************************"
   puts "States: #{State.count}"
   puts "Affiliations: #{Affiliation.count}"
   puts "Users: #{User.count}"
   puts "Questions: #{Question.count}"
   puts "Surveys: #{Survey.count}"
-  puts "**********************************************************"
   puts "**********************************************************"
 end
 
@@ -17,6 +15,7 @@ def main
   User.import_users_csv
   Question.import_airtable_cooler_csv
   display_model_counts
+  Category.create_category_names
 end
 
 main
