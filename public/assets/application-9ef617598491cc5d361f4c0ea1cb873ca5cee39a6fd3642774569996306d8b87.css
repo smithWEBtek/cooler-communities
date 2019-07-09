@@ -1,0 +1,491 @@
+
+html {
+  background-color: rgba(250, 253, 255, 0.767);
+}
+
+body {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  height: auto;
+  font-size: .8rem;
+}
+
+td {
+  border: .01rem solid #616c6a;
+  font-size: .8rem;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+.privacy-notice {
+  background-color: rgba(222, 247, 226, 0.687);
+  border: 2px dashed rgba(36, 134, 64, 0.529);
+  margin: 1rem;
+  padding: 1rem;
+  width: 90%;
+  border-radius: 1rem;
+}
+
+/* messages ***********************************/
+.alert {
+  color: red;
+}
+
+.message__thankyou {
+  background-color: rgba(207, 226, 235, 0.667);
+  border: 1px solid rgb(122, 124, 129);
+  border-radius: .5rem;
+  padding: .5rem;
+  margin-top: .3rem;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+.flash_style {
+  font-weight: bold;
+  color: #cc3300;
+  font-style: italic;
+}
+
+.survey__message {
+  display: 'none';
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  padding: 0 2rem;
+}
+
+.welcome-message {
+  background-color: rgb(223, 238, 195);
+}
+
+/* admin nav *********************************************/
+.admin-nav {
+  background-color: rgb(232, 244, 218);
+  border: 2px solid green;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-top: .25rem;
+}
+
+a.admin-nav-link {
+  color: rgb(119, 119, 119);
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+/* main nav *********************************************/
+.main-nav {
+  background-color: rgba(199, 233, 249, 0.667);
+  border: 2px solid rgb(20, 77, 20);
+  border-radius: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 2rem;
+  padding: .7rem;
+}
+
+.main-nav__header {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  color: rgb(83, 80, 80);
+  font-size: 1.7rem;
+  font-weight: 400;
+  text-decoration: none;
+  margin-bottom: 1rem;
+}
+
+.main-nav__header:hover {
+  font-weight: 450;
+  cursor: pointer;
+}
+
+.main-nav__links {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 2;
+  margin: 0 .2rem;
+}
+
+.main-nav__link {
+  color: rgb(119, 119, 119);
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.main-nav__link-separator {
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgb(119, 119, 119);
+  padding: 0 1rem;
+}
+
+/* form__registration *************************************/
+.form__registration {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.form__registration-required {
+  background-color: rgb(224, 224, 224);
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  border-radius: 1rem;
+  border: 1px solid gray;
+  padding: 1rem;
+  width: auto;
+}
+
+.form__registration-optional {
+  background-color: rgb(224, 224, 224);
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+fieldset {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.set-user-type {
+  margin-top: 2rem;
+  background-color: rgb(232, 217, 217); 
+  width: 11rem;
+  border: 1px solid red;
+  border-radius: .5rem;
+  padding: .5rem;
+}
+.form__registration-submit {
+  margin-top: 2rem;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+/* form__login *************************************/
+.form__login {
+  width: 7rem;
+  padding: .5rem;
+  border: 2px solid gray;
+  border-radius: 1rem;
+}
+
+.form__login {
+  background-color: rgb(240, 230, 232);
+  width: 7rem;
+  padding: .5rem;
+  margin-top: 2rem;
+}
+
+/* eventbrite *********************************************/
+.eventbrite {
+  background-color: aliceblue;
+}
+
+.eventbrite__title {
+  color: red;
+}
+
+.eventbrite__confirmation-link {
+  text-decoration: none;
+  color: green;
+}
+
+/* survey *********************************************/
+.survey {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: .5rem;
+}
+
+.survey__category-tabs {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.survey__category-tab {
+  border-radius: 50% 0 0 50%;
+  border-left: .2rem solid #98a3a1;
+  border-top: .1rem solid #98a3a1;
+  display: block;
+  height: 5rem;
+  margin-bottom: .3rem;
+  padding: .5rem 0 .5rem .5rem;
+  width: auto;
+}
+
+.survey__category-tab-image {
+  display: block;
+  height: 3rem;
+  padding-left: 1.2rem;
+  padding-top: .5rem;
+  z-index: 11;
+  cursor: pointer;
+}
+
+.survey__display {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  /* border-left: .2rem solid #1ab394; */
+  /* border-top: .1rem solid #1ab394; */
+}
+
+.survey__category-view {
+  /* border-left: .2rem solid #1ab394; */
+  display: none;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.survey__category-tab-selected {
+  background-color: rgb(207, 240, 207);
+  border: .1rem solid #1ab394;
+}
+
+.survey__category-tab-completed {
+  background-color: #98a3a1;
+  border-left: .2rem solid #616c6a;
+  border-right: .2rem solid #616c6a;
+  border-top: .1rem solid #616c6a;
+  pointer-events: none;
+}
+
+.survey__about {
+  background-color: rgb(216, 245, 207);
+}
+
+.sv_header {
+  border-bottom: 0;
+}
+
+.sv_main.sv_body {
+  border-top: 0;
+}
+
+/* survey summary *********************************************/
+.summary {
+  background-color: aliceblue;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  margin: 2rem;
+}
+
+.summary__header {
+  background-color: rgb(229, 250, 229); 
+  border: 2px solid rgb(64, 66, 68);
+  border-radius: .5rem;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  padding-left: .5rem;
+  margin-bottom: .5rem;
+}
+
+.summary__totals {
+  background-color: rgb(211, 226, 243);
+  border: 2px solid rgb(64, 66, 68);
+  border-radius: .5rem;
+  padding-left: .5rem;
+}
+
+.summary__body {
+  background-color: rgb(149, 186, 228);
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  font-size: 1.3rem;
+}
+
+.sv_body.sv_completed_page {
+  display: none;
+}
+
+/* survey points *********************************************/
+.survey__points {
+  color: rgb(81, 77, 77);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  margin-bottom: .5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.survey__category-total {
+  background-color: rgba(239, 239, 239, 0.687);
+  border: .09rem solid rgba(99, 99, 99, 0.829);
+  border-radius: .5rem;
+  box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
+  grid-column-start: 2;
+  grid-row-start: 1;
+  padding: .5rem;
+  width: 7rem;
+}
+
+.survey__category-total--points {
+ color: green;
+}
+
+.survey__community-total {
+  background-color: rgba(239, 239, 239, 0.687);
+  border-radius: .5rem;
+  border: .09rem solid rgba(99, 99, 99, 0.829);
+  box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
+  grid-column-start: 1;
+  grid-row-start: 1;
+  padding: .5rem;
+  width: 7rem;
+}
+
+.survey__community-total--points {
+  color: green;
+ }
+
+.survey__user-total {
+  background-color: rgba(239, 239, 239, 0.687);
+  border-radius: .5rem;
+  border: .09rem solid rgba(99, 99, 99, 0.829);
+  box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
+  grid-column-start: 4;
+  grid-row-start: 1;
+  padding: .5rem;
+  width: 7rem;
+}
+
+.survey__user-total--points {
+  color: green;
+ }
+
+.survey__affiliation-total {
+  background-color: rgba(239, 239, 239, 0.687);
+  border: .09rem solid rgba(99, 99, 99, 0.829);
+  border-radius: .5rem;
+  box-shadow: .1rem .1rem .1rem .05rem rgba(161, 161, 167, 0.829);
+  grid-column-start: 3;
+  grid-row-start: 1;
+  padding: .5rem;
+  width: 7rem;
+}
+ 
+.survey__affiliation-total--points {
+  color: green;
+ }
+.table {
+  margin: 1rem;
+}
+
+.pretty-table {
+  padding: 0;
+  margin: 0;
+  border-collapse: collapse;
+  border: 1px solid #333;
+  font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.9em;
+  color: #000;
+  background: #e6eff8 url("widget-table-bg.jpg") top left repeat-x;
+}
+
+.pretty-table caption {
+  caption-side: bottom;
+  font-size: 0.9em;
+  font-style: italic;
+  text-align: right;
+  padding: 0.5em 0;
+}
+
+.pretty-table th,
+.pretty-table td {
+  border: 1px dotted #666;
+  padding: 0.5em;
+  text-align: left;
+  color: #28313a;
+}
+
+.pretty-table th[scope=col] {
+  color: #000;
+  background-color: #8fadcc;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  border-bottom: 2px solid #333;
+  border-right: 2px solid #333;
+}
+
+.pretty-table th+th[scope=col] {
+  color: #fff;
+  background-color: #7d98b3;
+  border-right: 1px dotted #666;
+}
+
+.pretty-table th[scope=row] {
+  background-color: #b8cfe5;
+  border-right: 2px solid #333;
+}
+
+.pretty-table tr.alt th,
+.pretty-table tr.alt td {
+  color: #2a4763;
+}
+
+.pretty-table tr:hover th[scope=row],
+.pretty-table tr:hover td {
+  background-color: #d1c8c8;
+  color: #fff;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
