@@ -1,7 +1,7 @@
 $(() => {
-  loadSurvey();
+  loadSurvey()
   loadCurrentUserData()
-});
+})
 
 // user data -----------------------------------------------------------
 function loadCurrentUserData() {
@@ -14,7 +14,7 @@ function loadCurrentUserData() {
       url: `/users/${id}`,
       dataType: 'json'
     }).done(function (data) {
-      let completedTabs = [...new Set(data.responses.map(r => r.category.name))].filter(obj => obj);
+      let completedTabs = [...new Set(data.responses.map(r => r.category.name))].filter(obj => obj)
       completedTabs.forEach(name => {
         let tab = document.getElementById(name)
         tab.classList.add('completed')
@@ -27,23 +27,21 @@ function loadCurrentUserData() {
       processTabs(completedTabs, unCompletedTabs)
     })
   })
-  loadCommunityPoints();
-  // loadAffiliationPoints();
-  // loadUserPoints();
+  loadCommunityPoints()
 }
 
 // load survey and handlers -------------------------------------------------
 function loadSurvey() {
   surveyJSON.pages.map(page => {
-    let categorySurvey = new Survey.Model(page);
+    let categorySurvey = new Survey.Model(page)
     let categorySurveyDiv = $(`#${page.name}`)
-    let categoryTabsDiv = $('.survey__category-tabs');
-    let category = page.name;
+    let categoryTabsDiv = $('.survey__category-tabs')
+    let category = page.name
     categorySurveyDiv.Survey({
       model: categorySurvey,
       onComplete: saveCategoryResults,
       category
-    });
+    })
 
     $.ajax({
       url: `/img_url/${category}`,
@@ -53,52 +51,65 @@ function loadSurvey() {
         <div class="category-image">
           <img id="${page.name}" src="${response.url}" class="survey__category-tab survey__category-tab-image" />
         </div>`)
-      categoryTabHandler(page.name);
+      categoryTabHandler(page.name)
     })
   })
 }
 
 function categoryTabHandler(imageId) {
   $(`#${imageId}`).on('click', function (event) {
-    event.preventDefault();
-    let currentTab = document.getElementById(event.currentTarget.id);
-    let categoryViewDiv = $(`div#${event.currentTarget.id}`);
-    $('.survey__category-view').css('display', 'none');
-    $('.summary__body').css('display', 'inline');
+    event.preventDefault()
+    let currentTab = document.getElementById(event.currentTarget.id)
+    let categoryViewDiv = $(`div#${event.currentTarget.id}`)
+    $('.survey__category-view').css('display', 'none')
+    $('.summary__body').css('display', 'inline')
+    // $('div.landing-page__about').html(event.currentTarget.id)
 
-    categoryViewDiv.css('display', 'inline');
+    categoryViewDiv.css('display', 'inline')
     currentTab.classList.add('selected')
+    $('.sv_complete_btn').css("float", "left")
 
     $('input.sv_complete_btn').on('click', function (event) {
-      event.preventDefault();
-      currentTab.classList.add('completed');
+      event.preventDefault()
+      currentTab.classList.add('completed')
     })
   })
 }
 
+function continueSurvey() {
+  if ($('img.completed').length == 9) {
+    surveyMessage('Thank you for your participation! You can download a PDF of your results by clicking on <strong>Account | PDF Summary</strong>.')
+  } else {
+    $('div.landing-page__about').html('<button><strong>CONTINUE SURVEY</strong></button>').on('click', function (event) {
+      event.preventDefault()
+    })
+  }
+}
+
 function processTabs(completedTabs, unCompletedTabs) {
-  let remainginUncompletedTabs = [];
+  let remainginUncompletedTabs = []
   // completedTabs remain gray and unclickable
   completedTabs.forEach(tab => {
-    document.getElementById(tab).classList.add('completed');
+    document.getElementById(tab).classList.add('completed')
   })
 
   // unCompletedTabs are clickable until 1 gets clicked
   unCompletedTabs.forEach(tab => {
     let categoryTab = document.getElementById(tab)
-    categoryTab.classList.add('uncompleted');
+    categoryTab.classList.add('uncompleted')
 
     // when a remaining tab is clicked, the rest of the remaining tags become unclickable
     categoryTab.addEventListener('click', function (event) {
-      event.preventDefault();
+      event.preventDefault()
       categoryTab.classList.add('selected')
-      remainginUncompletedTabs = unCompletedTabs.filter(tab => tab != document.getElementsByClassName('selected')[0].id);
+      remainginUncompletedTabs = unCompletedTabs.filter(tab => tab != document.getElementsByClassName('selected')[0].id)
       remainginUncompletedTabs.forEach(tab => {
-        let categoryTab = document.getElementById(tab);
+        let categoryTab = document.getElementById(tab)
         categoryTab.classList.add('unclickable')
       })
     })
   })
+  continueSurvey()
 }
 
 function saveCategoryResults(results) {
@@ -108,12 +119,13 @@ function saveCategoryResults(results) {
     dataType: 'json',
     data: dataObject,
   }).done(function (data) {
-    $('div.survey__user-total--points')[0].innerText = data.user_total_points;
-    loadCategoryPoints(data.category.id);
-    loadAffiliationPoints(data.user.affiliation_id);
-    loadCommunityPoints();
+    $('div.survey__user-total--points')[0].innerText = data.user_total_points
+    loadCategoryPoints(data.category.id)
+    loadAffiliationPoints(data.user.affiliation_id)
+    loadCommunityPoints()
     surveyMessage(data.category.title, data.user_total_points)
   })
+  location.reload()
 }
 
 // points ------------------------------------------------------------------
@@ -122,7 +134,7 @@ function loadCommunityPoints() {
     url: '/community_total',
     dataType: 'json'
   }).done(function (response) {
-    $('div.survey__community-total--points')[0].innerText = `${response.community_total}`;
+    $('div.survey__community-total--points')[0].innerText = `${response.community_total}`
   })
 }
 
@@ -131,7 +143,7 @@ function loadCategoryPoints(id) {
     url: `/category_total/${id}`,
     dataType: 'json'
   }).done(function (response) {
-    $('div.survey__category-total--points')[0].innerText = `${response.category_total}`;
+    $('div.survey__category-total--points')[0].innerText = `${response.category_total}`
   })
 }
 
@@ -140,7 +152,7 @@ function loadAffiliationPoints(id) {
     url: `/affiliation_total/${id}`,
     dataType: 'json'
   }).done(function (response) {
-    $('div.survey__affiliation-total--points')[0].innerText = `${response.affiliation_total}`;
+    $('div.survey__affiliation-total--points')[0].innerText = `${response.affiliation_total}`
   })
 }
 
@@ -152,7 +164,7 @@ function msgCategoryComplete(categoryName, points) {
       Your chosen actions will reduce Carbon Emissions by: ${points} points!
     </div>
   `)
-  $('#survey__message')[0].css('display', 'inline');
+  $('#survey__message')[0].css('display', 'inline')
 }
 
 function msgSurveyStart(user_id) {
@@ -162,11 +174,11 @@ function msgSurveyStart(user_id) {
     the value in points, equivalent to lbs. of CO2 emission or trees. CO2 and cost estimates are based on
     assumptions of average energy consumption and fuel prices, and are not intended to be exact. See notice below
     for privacy information.</p>
-    <p>Copyright &copy; 2019, Town of Concord Comprehensive Sustainable Energy Committee.</p>
+    <p>Copyright &copy 2019, Town of Concord Comprehensive Sustainable Energy Committee.</p>
     </div>
   `)
-  $('#survey__message')[0].css('display', 'inline');
-  // userSummary(user_id);
+  $('#survey__message')[0].css('display', 'inline')
+  // userSummary(user_id)
 }
 
 function msgSurveyComplete(categoryName, points) {
@@ -176,10 +188,13 @@ function msgSurveyComplete(categoryName, points) {
       Your chosen actions will reduce Carbon Emissions by: ${points} points!
     </div>
   `)
-  $('#survey__message')[0].css('display', 'inline');
-  // userSummary(user_id);
+  $('#survey__message')[0].css('display', 'inline')
+  // userSummary(user_id)
 }
 
 function surveyMessage(text) {
-  $('.survey__message').text = text;
+  $('div.landing-page__about').html(`
+    <div>
+      <h2>${text}</h2>
+    </div>`)
 }
